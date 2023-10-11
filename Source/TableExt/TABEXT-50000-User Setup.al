@@ -100,6 +100,11 @@ tableextension 50000 UserSetup extends "User Setup"
                     ERROR('Posting rights can not be assigned to a limited user.');
             end;
         }
+        field(50007; "Purchaser Profile"; Option)
+        {
+            OptionCaption = ' ,All,Honey,Packing,Other';
+            OptionMembers = " ",All,Honey,Packing,Other;
+        }
     }
 
     var

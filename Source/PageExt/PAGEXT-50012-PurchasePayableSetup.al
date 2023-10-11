@@ -20,6 +20,10 @@ pageextension 50012 PurchasePayableSetup extends "Purchases & Payables Setup"
             {
                 ApplicationArea = All;
             }
+            field("Honey Order Nos."; Rec."Honey Order Nos.")
+            {
+                ApplicationArea = all;
+            }
         }
     }
 

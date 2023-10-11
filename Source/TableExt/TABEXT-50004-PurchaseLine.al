@@ -16,17 +16,26 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
         }
         field(50001; "Deal No."; Code[20])
         {
-            TableRelation = "Deal Master" WHERE(Status = FILTER(Release));
+            TableRelation = IF ("No." = filter(' ')) "Deal Master" WHERE(Status = FILTER(Release))
+            else
+            "Deal Master" WHERE(Status = FILTER(Release), "Item Code" = field("No."));
 
             trigger OnValidate()
+            var
+                Rec_Item: Record Item;
+                DealMaster: Record "Deal Master";
             begin
                 IF Rec."Deal No." = '' THEN
                     Rec.VALIDATE("Deal Line No.", 0)
                 ELSE BEGIN
                     recDealDetails.GET(Rec."Deal No.");
-                    IF recDealDetails."Item Code" <> "No." THEN
-                        ERROR('Item code on deal and purchase line does not match.');
+                    // IF recDealDetails."Item Code" <> "No." THEN
+                    //     ERROR('Item code on deal and purchase line does not match.');
                 END;
+                if DealMaster.Get(Rec."Deal No.") then begin
+                    Rec.Validate("No.", DealMaster."Item Code");
+                    rec."Deal No." := DealMaster."No.";
+                end;
             end;
         }
         field(50002; "Packing Type"; Option)

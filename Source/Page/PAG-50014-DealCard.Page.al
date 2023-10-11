@@ -146,6 +146,8 @@ page 50014 "Deal Card"
                 Promoted = true;
 
                 trigger OnAction()
+                var
+                    UserSetup: Record "User Setup";
                 begin
                     IF NOT CONFIRM('Want to submit for Approval?', FALSE) THEN
                         EXIT;
@@ -159,7 +161,8 @@ page 50014 "Deal Card"
                     Rec.TESTFIELD("Unit Rate in Kg.");
                     Rec.TESTFIELD("Per Unit Qty. (Kg.)");
                     Rec.TESTFIELD("Item Code");
-
+                    if UserSetup.get(UserId) then
+                        Rec."Approver ID" := UserSetup."Approver ID";
                     recItem.GET(Rec."Item Code");
                     recProductGroup.GET(recItem."New Product Group Code", recItem."Item Category Code");
                     IF NOT recProductGroup."Allow Direct Purch. Order" THEN

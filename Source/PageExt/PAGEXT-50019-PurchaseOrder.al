@@ -1,5 +1,6 @@
 pageextension 50019 PurchaseOrder extends "Purchase Order"
 {
+
     layout
     {
         addafter("Vendor Invoice No.")
@@ -17,6 +18,14 @@ pageextension 50019 PurchaseOrder extends "Purchase Order"
 
     actions
     {
+        modify(Post)
+        {
+            trigger OnBeforeAction()
+            begin
+                if not CONFIRM('Do you want to Receive the selected Order?', false) then
+                    exit;
+            end;
+        }
         modify(Statistics)
         {
             trigger OnBeforeAction()
@@ -39,19 +48,29 @@ pageextension 50019 PurchaseOrder extends "Purchase Order"
                 trigger OnAction()
                 var
                     PurchasePayableSetup: Record "Purchases & Payables Setup";
+                    PurchaseHeader: Record "Purchase Header";
+                    ArchiveManagement: Codeunit ArchiveManagement;
                 begin
                     PurchasePayableSetup.get;
                     PurchasePayableSetup.TestField("Archive Orders", true);
                     rec.TestField("Short Close Comment");
                     IF NOT CONFIRM('Do you want to Short Close the selected Order?', FALSE) THEN
                         EXIT;
-                    Rec.DELETE(TRUE);
-                    CurrPage.CLOSE;
+                    Rec."Short Close" := true;
+                    Rec.Modify();
+                    ArchiveManagement.AutoArchivePurchDocument(Rec);
+                    CurrPage.Close();
                 end;
             }
         }
 
     }
+    trigger OnOpenPage()
+    begin
+        Rec.FILTERGROUP(2);
+        Rec.SetRange("Short Close", false);
+        Rec.FILTERGROUP(0);
+    end;
 
 
 

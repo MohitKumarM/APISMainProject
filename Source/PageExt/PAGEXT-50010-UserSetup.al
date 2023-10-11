@@ -42,6 +42,10 @@ pageextension 50010 UsersSetup extends "User Setup"
             {
                 ApplicationArea = all;
             }
+            field("Purchaser Profile"; Rec."Purchaser Profile")
+            {
+                ApplicationArea = all;
+            }
         }
     }
 

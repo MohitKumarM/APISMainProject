@@ -16,6 +16,59 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(50003; "Order Approval Pending"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50016; "Shipping Vendor"; Code[20])
+        {
+            TableRelation = Vendor;
+        }
+        field(50017; "Transit Insurance"; Option)
+        {
+            OptionCaption = ' ,Buyer Scope,Supplier Scope';
+            OptionMembers = " ","Buyer Scope","Supplier Scope";
+        }
+        field(50018; "Valid Till"; Date)
+        {
+        }
+        field(50005; "Freight Liability"; Option)
+        {
+            OptionCaption = ' ,Supplier,Buyer';
+            OptionMembers = " ",Supplier,Buyer;
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                TESTFIELD(Status, Status::Open);
+            end;
+        }
+        field(80002; "GST Dependency Type"; Option)
+        {
+            OptionMembers = " ","Buy-from Address","Order Address","Location Address";
+            // ValuesAllowed = " ";
+            // "Buy-from Address";
+
+            trigger OnValidate()
+            begin
+                //TaxAreaUpdate;
+            end;
+        }
+        field(50006; "Waybill No."; Code[20])
+        {
+            Caption = 'E-Way Bill';
+        }
+        field(90002; "Product Group Code"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "New Product Group".Code;
+
+        }
+        field(90003; "Short Close"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     var

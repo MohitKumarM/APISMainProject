@@ -14,6 +14,10 @@ tableextension 50003 PurchPayableSetup extends "Purchases & Payables Setup"
         {
             TableRelation = Item;
         }
+        field(50003; "Honey Order Nos."; Code[10])
+        {
+            TableRelation = "No. Series";
+        }
     }
 
     var

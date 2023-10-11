@@ -158,12 +158,23 @@ table 50000 "Deal Master"
         {
             TableRelation = "Payment Terms";
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                Rec_PaymentTerms: Record "Payment Terms";
+            begin
+                if Rec_PaymentTerms.Get(Rec."Payment Terms") then
+                    Rec."Payment Terms" := Rec_PaymentTerms.Description;
+            end;
         }
         field(50013; "Special Instruction"; Text[250])
         {
             DataClassification = ToBeClassified;
         }
         field(50014; Comment; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50015; "Approver ID"; Code[50])
         {
             DataClassification = ToBeClassified;
         }

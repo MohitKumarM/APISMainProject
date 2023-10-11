@@ -71,6 +71,7 @@ page 50007 "Deals to Approve List"
                 Caption = 'New';
                 Image = Document;
                 Promoted = true;
+                Visible = false;
 
                 trigger OnAction()
                 begin
@@ -100,6 +101,9 @@ page 50007 "Deals to Approve List"
         recUserSetup.GET(USERID);
         IF NOT recUserSetup."Allow Deal Approval" THEN
             ERROR('You are not authorized for deal approval, contact your system administrator.');
+        Rec.FILTERGROUP(2);
+        Rec.SetRange("Approver ID", UserId);
+        Rec.FILTERGROUP(0);
     end;
 
     var

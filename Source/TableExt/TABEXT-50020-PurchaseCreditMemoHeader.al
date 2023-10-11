@@ -1,4 +1,4 @@
-tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
+tableextension 50020 PurchaseCreditMemo extends "Purch. Cr. Memo Hdr."
 {
     fields
     {
@@ -38,10 +38,7 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
             OptionMembers = " ",Supplier,Buyer;
             DataClassification = ToBeClassified;
 
-            trigger OnValidate()
-            begin
-                TESTFIELD(Status, Status::Open);
-            end;
+
         }
         field(80002; "GST Dependency Type"; Option)
         {
@@ -54,7 +51,6 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
                 //TaxAreaUpdate;
             end;
         }
-
         field(50006; "Waybill No."; Code[20])
         {
             Caption = 'E-Way Bill';
@@ -65,12 +61,9 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
             TableRelation = "New Product Group".Code;
 
         }
-        field(90003; "Short Close"; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
 
     }
 
-
+    var
+        myInt: Integer;
 }

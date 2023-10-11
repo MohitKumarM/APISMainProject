@@ -1,5 +1,6 @@
 page 50006 "Sauda List Released"
 {
+    Caption = 'Deal List Released';
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;

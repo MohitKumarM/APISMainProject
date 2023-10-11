@@ -232,17 +232,24 @@ codeunit 50000 Tble83
         ReceiveInvoiceOptionsQst: Label '&Receive';
     begin
         IsHandled := true;
-        Selection := StrMenu(ReceiveInvoiceOptionsQst, DefaultOption);
+        //Selection := StrMenu(ReceiveInvoiceOptionsQst, DefaultOption);
+        Selection := 1;
         if Selection = 0 then
             Result := false;
         PurchaseHeader.Receive := Selection in [1, 3];
-        // PurchaseHeader.Invoice := Selection in [2, 3];
         if Selection <> 0 then
             Result := true;
 
     end;
 
     // Codeunit91 End
+
+    // Codeunit5063 Start
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeStorePurchDocument(var PurchHeader: Record "Purchase Header"; var IsHandled: Boolean)
+    begin
+    end;
+    // Codeunit5063 End
 
 
 

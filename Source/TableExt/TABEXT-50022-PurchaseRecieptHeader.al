@@ -1,4 +1,4 @@
-tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
+tableextension 50022 PurchaseReceiept extends "Purch. Rcpt. Header"
 {
     fields
     {
@@ -38,23 +38,12 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
             OptionMembers = " ",Supplier,Buyer;
             DataClassification = ToBeClassified;
 
-            trigger OnValidate()
-            begin
-                TESTFIELD(Status, Status::Open);
-            end;
         }
         field(80002; "GST Dependency Type"; Option)
         {
             OptionMembers = " ","Buy-from Address","Order Address","Location Address";
-            // ValuesAllowed = " ";
-            // "Buy-from Address";
 
-            trigger OnValidate()
-            begin
-                //TaxAreaUpdate;
-            end;
         }
-
         field(50006; "Waybill No."; Code[20])
         {
             Caption = 'E-Way Bill';
@@ -65,12 +54,9 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
             TableRelation = "New Product Group".Code;
 
         }
-        field(90003; "Short Close"; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
 
     }
 
-
+    var
+        myInt: Integer;
 }

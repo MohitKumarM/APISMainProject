@@ -20,6 +20,17 @@ tableextension 50022 PurchaseReceiept extends "Purch. Rcpt. Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(50005; "Freight Liability"; Option)
+        {
+            OptionCaption = ' ,Supplier,Buyer';
+            OptionMembers = " ",Supplier,Buyer;
+            DataClassification = ToBeClassified;
+
+        }
+        field(50006; "Waybill No."; Code[20])
+        {
+            Caption = 'E-Way Bill';
+        }
         field(50016; "Shipping Vendor"; Code[20])
         {
             TableRelation = Vendor;
@@ -32,21 +43,10 @@ tableextension 50022 PurchaseReceiept extends "Purch. Rcpt. Header"
         field(50018; "Valid Till"; Date)
         {
         }
-        field(50005; "Freight Liability"; Option)
-        {
-            OptionCaption = ' ,Supplier,Buyer';
-            OptionMembers = " ",Supplier,Buyer;
-            DataClassification = ToBeClassified;
-
-        }
         field(80002; "GST Dependency Type"; Option)
         {
             OptionMembers = " ","Buy-from Address","Order Address","Location Address";
 
-        }
-        field(50006; "Waybill No."; Code[20])
-        {
-            Caption = 'E-Way Bill';
         }
         field(90002; "Product Group Code"; Code[50])
         {

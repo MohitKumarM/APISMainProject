@@ -20,6 +20,18 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(50005; "Freight Liability"; Option)
+        {
+            OptionCaption = ' ,Supplier,Buyer';
+            OptionMembers = " ",Supplier,Buyer;
+            DataClassification = ToBeClassified;
+
+
+        }
+        field(50006; "Waybill No."; Code[20])
+        {
+            Caption = 'E-Way Bill';
+        }
         field(50016; "Shipping Vendor"; Code[20])
         {
             TableRelation = Vendor;
@@ -32,14 +44,6 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
         field(50018; "Valid Till"; Date)
         {
         }
-        field(50005; "Freight Liability"; Option)
-        {
-            OptionCaption = ' ,Supplier,Buyer';
-            OptionMembers = " ",Supplier,Buyer;
-            DataClassification = ToBeClassified;
-
-
-        }
         field(80002; "GST Dependency Type"; Option)
         {
             OptionMembers = " ","Buy-from Address","Order Address","Location Address";
@@ -47,10 +51,6 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
             // "Buy-from Address";
 
 
-        }
-        field(50006; "Waybill No."; Code[20])
-        {
-            Caption = 'E-Way Bill';
         }
         field(90002; "Product Group Code"; Code[50])
         {

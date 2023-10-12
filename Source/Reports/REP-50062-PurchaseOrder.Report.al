@@ -475,7 +475,7 @@
 //                   recPurchaseLine.SETRANGE("Document No.", "No.");
 //                   recPurchaseLine.SETRANGE("Line No.", recStructureLines."Document Line No.");
 //                   recPurchaseLine.FINDFIRST;
-                
+
 //                   recStructureLines.CALCFIELDS("Tax Amount");
 //                   IF recStructureLines."Tax/Charge Type" <> recStructureLines."Tax/Charge Type"::Charges THEN
 //                     IF recPurchaseLine.Quantity <> 0 THEN

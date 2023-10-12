@@ -1,4 +1,4 @@
-pageextension 50012 PurchasePayableSetup extends "Purchases & Payables Setup"
+pageextension 50012 PurchasePayableSetupN1 extends "Purchases & Payables Setup"
 {
     layout
     {
@@ -13,13 +13,22 @@ pageextension 50012 PurchasePayableSetup extends "Purchases & Payables Setup"
                 ApplicationArea = all;
             }
 
+
+        }
+        addafter(Archiving)
+        {
+            group("PO Instruction")
+            {
+                field("Purchase Order Instruction"; Rec."PO Terms & Conditions")
+                {
+                    MultiLine = true;
+                    ApplicationArea = all;
+                }
+            }
         }
         addafter("Return Order Nos.")
         {
-            field("Indent No."; Rec."Indent No.")
-            {
-                ApplicationArea = All;
-            }
+
             field("Honey Order Nos."; Rec."Honey Order Nos.")
             {
                 ApplicationArea = all;

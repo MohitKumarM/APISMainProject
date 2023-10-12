@@ -20,6 +20,22 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
         {
             DataClassification = ToBeClassified;
         }
+        field(50005; "Freight Liability"; Option)
+        {
+            OptionCaption = ' ,Supplier,Buyer';
+            OptionMembers = " ",Supplier,Buyer;
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                TESTFIELD(Status, Status::Open);
+            end;
+        }
+
+        field(50006; "Waybill No."; Code[20])
+        {
+            Caption = 'E-Way Bill';
+        }
         field(50016; "Shipping Vendor"; Code[20])
         {
             TableRelation = Vendor;
@@ -32,17 +48,6 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
         field(50018; "Valid Till"; Date)
         {
         }
-        field(50005; "Freight Liability"; Option)
-        {
-            OptionCaption = ' ,Supplier,Buyer';
-            OptionMembers = " ",Supplier,Buyer;
-            DataClassification = ToBeClassified;
-
-            trigger OnValidate()
-            begin
-                TESTFIELD(Status, Status::Open);
-            end;
-        }
         field(80002; "GST Dependency Type"; Option)
         {
             OptionMembers = " ","Buy-from Address","Order Address","Location Address";
@@ -53,11 +58,6 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
             begin
                 //TaxAreaUpdate;
             end;
-        }
-
-        field(50006; "Waybill No."; Code[20])
-        {
-            Caption = 'E-Way Bill';
         }
         field(90002; "Product Group Code"; Code[50])
         {

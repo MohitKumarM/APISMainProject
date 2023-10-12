@@ -1,13 +1,10 @@
-pageextension 50011 Item extends "Item Card"
+pageextension 50011 ItemN1 extends "Item Card"
 {
     layout
     {
         addafter(Blocked)
         {
-            field("Full Description"; Rec."Full Description")
-            {
-                ApplicationArea = all;
-            }
+
             field("New Product Group Code"; Rec."New Product Group Code")
             {
                 ApplicationArea = all;

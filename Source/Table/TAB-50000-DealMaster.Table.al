@@ -96,7 +96,7 @@ table 50000 "Deal Master"
         }
         field(17; "Item Code"; Code[20])
         {
-            TableRelation = Item;
+            TableRelation = Item."No." where("Item Category Code" = const('PACK HONEY'));
             DataClassification = ToBeClassified;
             // This trigger is added by Amar Start----
             // trigger OnValidate()

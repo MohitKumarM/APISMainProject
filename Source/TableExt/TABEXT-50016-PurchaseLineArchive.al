@@ -6,11 +6,6 @@ tableextension 50016 PurchaseLineArchive extends "Purchase Line Archive"
         {
             TableRelation = "Deal Master" WHERE(Status = FILTER(Release));
         }
-        field(50004; "Deal Line No."; Integer)
-        {
-            TableRelation = "Deal Dispatch Details"."Line No." WHERE("Sauda No." = FIELD("Deal No."),
-                                                                      "GAN Created" = FILTER(false));
-        }
         field(50002; "Packing Type"; Option)
         {
             Editable = false;
@@ -21,6 +16,11 @@ tableextension 50016 PurchaseLineArchive extends "Purchase Line Archive"
         {
             DecimalPlaces = 0 : 0;
             Editable = false;
+        }
+        field(50004; "Deal Line No."; Integer)
+        {
+            TableRelation = "Deal Dispatch Details"."Line No." WHERE("Sauda No." = FIELD("Deal No."),
+                                                                      "GAN Created" = FILTER(false));
         }
         field(50005; "Dispatched Qty. in Kg."; Decimal)
         {
@@ -42,6 +42,11 @@ tableextension 50016 PurchaseLineArchive extends "Purchase Line Archive"
         }
         field(50009; "Other Charges"; Decimal)
         {
+        }
+        field(50022; "Honey Item No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+
         }
         field(60000; "QC Completed"; Boolean)
         {

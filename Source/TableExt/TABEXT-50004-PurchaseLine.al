@@ -49,14 +49,10 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
             DecimalPlaces = 0 : 0;
             Editable = false;
         }
-        field(50005; "Dispatched Qty. in Kg."; Decimal)
-        {
-            Editable = false;
-        }
         field(50004; "Deal Line No."; Integer)
         {
             TableRelation = "Deal Dispatch Details"."Line No." WHERE("Sauda No." = FIELD("Deal No."),
-                                                                      "GAN Created" = FILTER(false));
+                                                                      "GAN Created" = const(false));
 
             trigger OnValidate()
             begin
@@ -138,6 +134,10 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
 
             end;
         }
+        field(50005; "Dispatched Qty. in Kg."; Decimal)
+        {
+            Editable = false;
+        }
         field(50006; Flora; Code[20])
         {
             Editable = false;
@@ -170,6 +170,17 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
         field(50021; "New TDS Base Amount"; Decimal)
         {
             DataClassification = ToBeClassified;
+        }
+        field(50022; "Honey Item No."; Code[20])
+        {
+            TableRelation = Item where("Item Category Code" = const('PACK HONEY'));
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                Item: Record Item;
+            begin
+                Validate("No.", "Honey Item No.");
+            end;
         }
 
     }
@@ -386,7 +397,7 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                             TaxTransValueR_ForPurchline.SetRange("Tax Type", TDSSetup_ForPurchline."Tax Type");
                             TaxTransValueR_ForPurchline.SetRange("Value Type", TaxTransValueR_ForPurchline."Value Type"::COMPONENT);
                             TaxTransValueR_ForPurchline.SetFilter(Percent, '<>%1', 0);
-                            if TaxTransValueR_ForPurchline.FindSet(false, false) then begin
+                            if TaxTransValueR_ForPurchline.FindSet() then begin
                                 if not TaxTransValueR_ForPurchline.IsEmpty() then begin
                                     if TaxTransValueR_ForPurchline."Value ID" = 1 then
                                         TaxTransValueR_ForPurchline.CalcSums(Amount);

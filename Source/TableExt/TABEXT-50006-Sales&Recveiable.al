@@ -6,6 +6,7 @@ tableextension 50006 SalesRecivableSetup extends "Sales & Receivables Setup"
         {
             Caption = 'Deal No.';
             TableRelation = "No. Series";
+
         }
     }
 

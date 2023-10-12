@@ -2,9 +2,35 @@ tableextension 50000 UserSetup extends "User Setup"
 {
     fields
     {
-        field(50000; "Department Code"; Code[20])
+
+        field(50002; "Allow Receipt"; Boolean)
         {
-            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                recUser.RESET;
+                recUser.SETRANGE("User Name", USERID);
+                recUser.FINDFIRST;
+                IF (recUser."License Type" = recUser."License Type"::"Limited User") AND ("Allow Receipt") THEN
+                    ERROR('Posting rights can not be assigned to a limited user.');
+            end;
+        }
+        field(50003; "Allow Purchase Invoice"; Boolean)
+        {
+
+            trigger OnValidate()
+            begin
+                recUser.RESET;
+                recUser.SETRANGE("User Name", USERID);
+                recUser.FINDFIRST;
+                IF (recUser."License Type" = recUser."License Type"::"Limited User") AND ("Allow Purchase Invoice") THEN
+                    ERROR('Posting rights can not be assigned to a limited user.');
+            end;
+        }
+        field(50007; "Purchaser Profile"; Option)
+        {
+            OptionCaption = ' ,All,Honey,Packing,Other';
+            OptionMembers = " ",All,Honey,Packing,Other;
         }
         field(50012; "Allow Customer Approval"; Boolean)
         {
@@ -21,20 +47,6 @@ tableextension 50000 UserSetup extends "User Setup"
             end;
         }
         field(50013; "Allow Vendor Approval"; Boolean)
-        {
-
-            trigger OnValidate()
-            begin
-                recUser.RESET;
-                recUser.SETRANGE("User Name", USERID);
-                recUser.FINDFIRST;
-                IF recUser."License Type" = recUser."License Type"::"Limited User" THEN BEGIN
-                    IF ("Allow Customer Approval") OR ("Allow Sales Order Approval") THEN
-                        ERROR('Approval rights in multiple modules can not be assigned to a limited user.');
-                END;
-            end;
-        }
-        field(50017; "Allow Deal Approval"; Boolean)
         {
 
             trigger OnValidate()
@@ -76,7 +88,7 @@ tableextension 50000 UserSetup extends "User Setup"
                 END;
             end;
         }
-        field(50002; "Allow Receipt"; Boolean)
+        field(50017; "Allow Deal Approval"; Boolean)
         {
 
             trigger OnValidate()
@@ -84,26 +96,11 @@ tableextension 50000 UserSetup extends "User Setup"
                 recUser.RESET;
                 recUser.SETRANGE("User Name", USERID);
                 recUser.FINDFIRST;
-                IF (recUser."License Type" = recUser."License Type"::"Limited User") AND ("Allow Receipt") THEN
-                    ERROR('Posting rights can not be assigned to a limited user.');
+                IF recUser."License Type" = recUser."License Type"::"Limited User" THEN BEGIN
+                    IF ("Allow Customer Approval") OR ("Allow Sales Order Approval") THEN
+                        ERROR('Approval rights in multiple modules can not be assigned to a limited user.');
+                END;
             end;
-        }
-        field(50003; "Allow Purchase Invoice"; Boolean)
-        {
-
-            trigger OnValidate()
-            begin
-                recUser.RESET;
-                recUser.SETRANGE("User Name", USERID);
-                recUser.FINDFIRST;
-                IF (recUser."License Type" = recUser."License Type"::"Limited User") AND ("Allow Purchase Invoice") THEN
-                    ERROR('Posting rights can not be assigned to a limited user.');
-            end;
-        }
-        field(50007; "Purchaser Profile"; Option)
-        {
-            OptionCaption = ' ,All,Honey,Packing,Other';
-            OptionMembers = " ",All,Honey,Packing,Other;
         }
     }
 

@@ -28,6 +28,7 @@ page 50018 "Honey Purchase Order Subform"
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
 
                     trigger OnValidate()
                     begin
@@ -35,6 +36,17 @@ page 50018 "Honey Purchase Order Subform"
                         NoOnAfterValidate;
                     end;
                 }
+                field("Honey Item No."; Rec."Honey Item No.")
+                {
+                    ApplicationArea = All;
+                    Caption = 'No.';
+                    trigger OnValidate()
+                    begin
+                        Rec.ShowShortcutDimCode(ShortcutDimCode);
+                        NoOnAfterValidate;
+                    end;
+                }
+
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = All;

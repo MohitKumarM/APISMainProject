@@ -244,13 +244,14 @@ codeunit 50000 Tble83
 
     // Codeunit91 End
 
-    // Codeunit5063 Start
-    [IntegrationEvent(false, false)]
-    local procedure OnBeforeStorePurchDocument(var PurchHeader: Record "Purchase Header"; var IsHandled: Boolean)
+    // Table39 Start
+    [EventSubscriber(ObjectType::Table, 39, 'OnValidateNoOnCopyFromTempPurchLine', '', false, false)]
+    local procedure OnValidateNoOnCopyFromTempPurchLine(var PurchLine: Record "Purchase Line"; TempPurchaseLine: Record "Purchase Line" temporary; xPurchLine: Record "Purchase Line")
     begin
+        PurchLine."Honey Item No." := TempPurchaseLine."Honey Item No.";
     end;
-    // Codeunit5063 End
 
+    // Table39 End
 
 
 

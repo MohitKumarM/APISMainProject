@@ -28,6 +28,9 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
             Editable = false;
             TableRelation = "New Product Group".Code WHERE("Item Category Code" = FILTER(''));
         }
+        field(50008; "QC To Approve"; Boolean)
+        {
+        }
         field(50010; "Vehicle No."; Code[20])
         {
         }
@@ -35,9 +38,6 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
         {
         }
         field(50012; "Purchaser Name"; Text[50])
-        {
-        }
-        field(50008; "QC To Approve"; Boolean)
         {
         }
         field(60000; "Approved Quantity"; Decimal)

@@ -14,6 +14,32 @@ tableextension 50007 InventorySetup extends "Inventory Setup"
         {
             TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("QC Entry Template"));
         }
+        field(60005; "Output Approval Template"; Code[10])
+        {
+            TableRelation = "Item Journal Template" WHERE(Type = FILTER(Output));
+        }
+        field(60006; "Output Approval Batch"; Code[10])
+        {
+            TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("Output Approval Template"));
+        }
+        field(60007; "Output Posting Template"; Code[10])
+        {
+            TableRelation = "Item Journal Template" WHERE(Type = FILTER(Output));
+        }
+        field(60008; "Output Posting Batch"; Code[10])
+        {
+            TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("Output Posting Template"));
+        }
+        field(60003; "Auto Item Journal Template"; Code[10])
+        {
+            TableRelation = "Item Journal Template" WHERE(Type = FILTER(Item));
+        }
+        field(60004; "Auto Item Journal Batch"; Code[10])
+        {
+            TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("Auto Item Journal Template"));
+        }
+
+
     }
 
     var

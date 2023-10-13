@@ -13,7 +13,7 @@ page 50003 "Quality Checks"
     SourceTable = "Quality Header";
     SourceTableView = SORTING("No.")
                       ORDER(Ascending)
-                      WHERE(Posted = FILTER(true));
+                      WHERE(Posted = const(true));
 
     layout
     {

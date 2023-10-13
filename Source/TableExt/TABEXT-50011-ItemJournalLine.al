@@ -45,6 +45,60 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         field(60000; "Temp Message Control"; Boolean)
         {
         }
+        field(50014; "Customer Code"; Text[30])
+        {
+        }
+        field(50015; "Prod. Date for Expiry Calc"; Date)
+        {
+        }
+        field(60014; "QC Required"; Boolean)
+        {
+        }
+        field(60006; "ByProduct Item Code"; Code[20])
+        {
+            TableRelation = Item;
+        }
+        field(60007; "ByProduct Qty."; Decimal)
+        {
+            MinValue = 0;
+        }
+        field(60011; "Source Template Code"; Code[20])
+        {
+            TableRelation = "Item Journal Template";
+        }
+        field(60012; "Source Batch Name"; Code[10])
+        {
+            TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("Source Template Code"));
+        }
+        field(60008; "ByProduct Entry"; Boolean)
+        {
+        }
+        field(60009; "Prod. Order Line No."; Integer)
+        {
+        }
+        field(60010; "Machine Center No."; Code[20])
+        {
+            TableRelation = "Machine Center";
+        }
+        field(70000; "Moisture (%)"; Text[10])
+        {
+        }
+        field(70001; "Color (MM)"; Text[10])
+        {
+        }
+        field(70002; "HMF (PPM)"; Text[10])
+        {
+        }
+        field(70003; TRS; Text[10])
+        {
+        }
+        field(70004; Sucrose; Text[10])
+        {
+        }
+        field(70005; FG; Text[10])
+        {
+        }
+        //Ending---
     }
 
     var

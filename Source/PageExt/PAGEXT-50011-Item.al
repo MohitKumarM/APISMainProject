@@ -9,6 +9,14 @@ pageextension 50011 ItemN1 extends "Item Card"
             {
                 ApplicationArea = all;
             }
+            field("Expiry Date Formula"; Rec."Expiry Date Formula")
+            {
+                ApplicationArea = all;
+            }
+            field("Quality Process"; Rec."Quality Process")
+            {
+                ApplicationArea = all;
+            }
         }
     }
 

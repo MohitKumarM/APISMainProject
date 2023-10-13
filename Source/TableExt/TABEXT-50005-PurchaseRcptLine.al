@@ -49,6 +49,9 @@ tableextension 50005 PurchaseReciptLine extends "Purch. Rcpt. Line"
             DataClassification = ToBeClassified;
 
         }
+        field(60001; "Pending QC Approval"; Boolean)
+        {
+        }
         field(50021; "New TDS Base Amount"; Decimal)
         {
             DataClassification = ToBeClassified;

@@ -49,6 +49,24 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
         field(60002; "Quality Checked"; Boolean)
         {
         }
+        field(70000; "Moisture (%)"; Text[10])
+        {
+        }
+        field(70001; "Color (MM)"; Text[10])
+        {
+        }
+        field(70002; "HMF (PPM)"; Text[10])
+        {
+        }
+        field(70003; TRS; Text[10])
+        {
+        }
+        field(70004; Sucrose; Text[10])
+        {
+        }
+        field(70005; FG; Text[10])
+        {
+        }
     }
 
     var

@@ -7,6 +7,7 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
             OptionCaption = ' ,Honey,Packing Material,Other';
             OptionMembers = " ",Honey,"Packing Material",Other;
         }
+
         field(50001; "Invoice Type Old"; Option)
         {
             OptionCaption = 'Trading';
@@ -35,6 +36,31 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
         {
             Caption = 'E-Way Bill';
         }
+        field(50004; "Gate Entry No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50014; "Vendor Invoice Value"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50007; "GAN Approval Pending"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50009; "GR / LR No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50010; "GR / LR Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50011; "Gate Entry Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+
         field(50016; "Shipping Vendor"; Code[20])
         {
             TableRelation = Vendor;

@@ -40,8 +40,20 @@ tableextension 50005 PurchaseReciptLine extends "Purch. Rcpt. Line"
             TableRelation = "Salesperson/Purchaser";
             /*comment by amar*/
         }
+        field(50010; "Billed Quantity"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50009; "Other Charges"; Decimal)
         {
+        }
+        field(70003; "Item Tracking Quantity Honey"; Decimal)
+        {
+            CalcFormula = Sum("Tran. Lot Tracking".Quantity WHERE("Document No." = FIELD("Document No."),
+                                                                   "Document Line No." = FIELD("Line No."),
+                                                                   "Item No." = FIELD("No.")));
+            Editable = false;
+            FieldClass = FlowField;
         }
         field(50020; "P.A.N. No."; Code[20])
         {

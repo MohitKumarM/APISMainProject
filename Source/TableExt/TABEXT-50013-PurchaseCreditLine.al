@@ -57,8 +57,20 @@ tableextension 50013 PurchaseCreditLine extends "Purch. Cr. Memo Line"
             DataClassification = ToBeClassified;
 
         }
+        field(50010; "Billed Quantity"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(60000; "QC Completed"; Boolean)
         {
+        }
+        field(70003; "Item Tracking Quantity Honey"; Decimal)
+        {
+            CalcFormula = Sum("Tran. Lot Tracking".Quantity WHERE("Document No." = FIELD("Document No."),
+                                                                   "Document Line No." = FIELD("Line No."),
+                                                                   "Item No." = FIELD("No.")));
+            Editable = false;
+            FieldClass = FlowField;
         }
 
 

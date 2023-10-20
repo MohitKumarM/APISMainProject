@@ -6,6 +6,10 @@ tableextension 50027 Customer extends Customer
         {
             TableRelation = "Standard Task";
         }
+        field(50001; "Skip TCS"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var

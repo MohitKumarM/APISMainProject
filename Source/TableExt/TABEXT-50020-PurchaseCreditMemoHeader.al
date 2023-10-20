@@ -61,6 +61,30 @@ tableextension 50020 PurchaseCreditMemo extends "Purch. Cr. Memo Hdr."
             TableRelation = "New Product Group".Code;
 
         }
+        field(50007; "GAN Approval Pending"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50009; "GR / LR No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50010; "GR / LR Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50011; "Gate Entry Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50004; "Gate Entry No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50014; "Vendor Invoice Value"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 

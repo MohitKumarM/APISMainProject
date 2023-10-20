@@ -161,6 +161,18 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
             // TableRelation = "New Product Group".Code WHERE("Item Category Code" = FIELD("Item Category Code"));
             TableRelation = "New Product Group".Code WHERE("Item Category Code" = filter(''));
         }
+        field(50010; "Billed Quantity"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(70003; "Item Tracking Quantity Honey"; Decimal)
+        {
+            CalcFormula = Sum("Tran. Lot Tracking".Quantity WHERE("Document No." = FIELD("Document No."),
+                                                                   "Document Line No." = FIELD("Line No."),
+                                                                   "Item No." = FIELD("No.")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
         field(50020; "P.A.N. No."; Code[20])
         {
             Caption = 'P.A.N. No.';

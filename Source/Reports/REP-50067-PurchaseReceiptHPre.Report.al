@@ -1,7 +1,8 @@
 report 50067 "Purchase Receipt H-Pre"
 {
     //     DefaultLayout = RDLC;
-    //     RDLCLayout = './src/Report Layout/PurchaseReceiptHPre.rdl';
+
+    //RDLCLayout = '.\ReportLayouts\PurchaseReceiptHPre.rdl';
     //     PreviewMode = PrintLayout;
     //     UsageCategory = ReportsAndAnalysis;
     //     ApplicationArea = All;

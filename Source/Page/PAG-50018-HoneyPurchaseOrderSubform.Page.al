@@ -6,7 +6,7 @@ page 50018 "Honey Purchase Order Subform"
     LinksAllowed = false;
     MultipleNewLines = true;
     PageType = ListPart;
-    SourceTable = 39;
+    SourceTable = "Purchase Line";
     ApplicationArea = All;
     SourceTableView = WHERE("Document Type" = FILTER(Order));
 
@@ -312,7 +312,7 @@ page 50018 "Honey Purchase Order Subform"
 
     trigger OnDeleteRecord(): Boolean
     var
-        ReservePurchLine: Codeunit 99000834;
+        ReservePurchLine: Codeunit "Purch. Line-Reserve";
     begin
         IF (Rec.Quantity <> 0) AND Rec.ItemExists(Rec."No.") THEN BEGIN
             COMMIT;
@@ -330,13 +330,13 @@ page 50018 "Honey Purchase Order Subform"
 
     var
         DocumentTotals: Codeunit "Document Totals";
-        TransferExtendedText: Codeunit 378;
-        ItemAvailFormsMgt: Codeunit 353;
+        TransferExtendedText: Codeunit "Transfer Extended Text";
+        ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
         ShortcutDimCode: array[8] of Code[20];
         UpdateAllowedVar: Boolean;
         Text000: Label 'Unable to execute this function while in view only mode.';
-        PurchHeader: Record 38;
-        PurchPriceCalcMgt: Codeunit 7010;
+        PurchHeader: Record "Purchase Header";
+        PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the purchase order has been invoiced.';
 
 
@@ -362,8 +362,8 @@ page 50018 "Honey Purchase Order Subform"
 
     procedure OpenSalesOrderForm()
     var
-        SalesHeader: Record 36;
-        SalesOrder: Page 42;
+        SalesHeader: Record "Sales Header";
+        SalesOrder: Page "Sales Order";
     begin
         Rec.TESTFIELD("Sales Order No.");
         SalesHeader.SETRANGE("No.", Rec."Sales Order No.");
@@ -386,7 +386,7 @@ page 50018 "Honey Purchase Order Subform"
 
     procedure ShowTracking()
     var
-        TrackingForm: Page 99000822;
+        TrackingForm: Page "Order Tracking";
     begin
         TrackingForm.SetPurchLine(Rec);
         TrackingForm.RUNMODAL;
@@ -395,8 +395,8 @@ page 50018 "Honey Purchase Order Subform"
 
     procedure OpenSpecOrderSalesOrderForm()
     var
-        SalesHeader: Record 36;
-        SalesOrder: Page 42;
+        SalesHeader: Record "Sales Header";
+        SalesOrder: Page "Sales Order";
     begin
         Rec.TESTFIELD("Special Order Sales No.");
         SalesHeader.SETRANGE("No.", Rec."Special Order Sales No.");

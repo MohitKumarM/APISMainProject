@@ -4,6 +4,10 @@ pageextension 50017 ItemLedgerEntry extends "Item Ledger Entries"
     {
         addafter(Quantity)
         {
+            field("MRP Price"; Rec."MRP Price")
+            {
+                ApplicationArea = all;
+            }
             field("Deal No."; Rec."Deal No.")
             {
                 ApplicationArea = all;

@@ -6,6 +6,10 @@ codeunit 50000 Tble83
     end;
     // Table83 Start
 
+    var
+        MRPPrice: Decimal;
+        ModifyRun: Boolean;
+
     [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnAfterCopyItemJnlLineFromPurchLine', '', false, false)]
     local procedure OnAfterCopyItemJnlLineFromPurchLine(var ItemJnlLine: Record "Item Journal Line"; PurchLine: Record "Purchase Line")
     var
@@ -43,6 +47,7 @@ codeunit 50000 Tble83
         NewItemLedgEntry."Vehicle No." := ItemJournalLine."Vehicle No.";
         NewItemLedgEntry."Purchaser Code" := ItemJournalLine."Purchaser Code";
         NewItemLedgEntry."Purchaser Name" := ItemJournalLine."Purchaser Name";
+        NewItemLedgEntry."MRP Price" := ItemJournalLine."MRP Price"; // 
     end;
     // Codeunit22 End
 
@@ -225,7 +230,7 @@ codeunit 50000 Tble83
         //Iappc - 12 Jan 16 - Honey Price Validation End
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 91, 'OnBeforeSelectPostOrderOption', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post (Yes/No)", 'OnBeforeSelectPostOrderOption', '', false, false)]
     local procedure OnBeforeSelectPostOrderOption(var PurchaseHeader: Record "Purchase Header"; DefaultOption: Integer; var Result: Boolean; var IsHandled: Boolean)
     var
         Selection: Integer;
@@ -245,13 +250,108 @@ codeunit 50000 Tble83
     // Codeunit91 End
 
     // Table39 Start
-    [EventSubscriber(ObjectType::Table, 39, 'OnValidateNoOnCopyFromTempPurchLine', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"Purchase Line", 'OnValidateNoOnCopyFromTempPurchLine', '', false, false)]
     local procedure OnValidateNoOnCopyFromTempPurchLine(var PurchLine: Record "Purchase Line"; TempPurchaseLine: Record "Purchase Line" temporary; xPurchLine: Record "Purchase Line")
     begin
         PurchLine."Honey Item No." := TempPurchaseLine."Honey Item No.";
     end;
 
+
+
+    /// Quantiy To receive as per the GAN condition
+
+
+    [EventSubscriber(ObjectType::Table, Database::"Purchase Line", 'OnValidateQuantityOnBeforeDropShptCheck', '', true, true)]
+    local procedure "Purchase Line_OnValidateQuantityOnBeforeDropShptCheck"
+    (
+        var PurchaseLine: Record "Purchase Line";
+        xPurchaseLine: Record "Purchase Line";
+        CallingFieldNo: Integer;
+        var IsHandled: Boolean
+    )
+    var
+        decTempQty: Decimal;
+        Item: Record Item;
+        recItemCategory: Record "Item Category";
+    begin
+        //Uncomment by Shivam 11-07-23
+        //Iappc - Gan Tolarance Adjustment
+        IF (PurchaseLine.Type = PurchaseLine.Type::Item) AND (PurchaseLine."Document Type" = PurchaseLine."Document Type"::Order) THEN BEGIN
+            PurchaseLine."Dispatched Qty. in Kg." := PurchaseLine.Quantity;
+            Item.GET(PurchaseLine."No.");
+            IF recItemCategory.GET(Item."Item Category Code") THEN
+                decTempQty := PurchaseLine.Quantity + (PurchaseLine.Quantity * recItemCategory."GAN Tolerance %" / 100)
+            ELSE
+                decTempQty := PurchaseLine.Quantity;
+        END ELSE BEGIN
+            decTempQty := PurchaseLine.Quantity;
+            PurchaseLine."Dispatched Qty. in Kg." := PurchaseLine.Quantity;
+        END;
+
+        IF (PurchaseLine.Type = PurchaseLine.Type::Item) AND (PurchaseLine."Document Type" <> PurchaseLine."Document Type"::"Credit Memo") THEN
+            PurchaseLine.Quantity := ROUND(decTempQty, 1, '<');
+        //Iappc - Gan Tolarance Adjustment
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Purchase Line", 'OnValidateOverReceiptQuantity', '', true, true)]
+    local procedure OnValidateOverReceiptQuantity(var PurchaseLine: Record "Purchase Line"; xPurchaseLine: Record "Purchase Line"; CalledByFieldNo: Integer; var Handled: Boolean)
+    begin
+        Handled := true;
+
+    end;
+
     // Table39 End
+
+    // ********** Item Tracking Specification to Item Ledger Entry Field Flow ************** Start
+
+    // Page6510 Start
+    [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnRegisterChangeOnChangeTypeInsertOnBeforeInsertReservEntry', '', false, false)]
+    local procedure OnRegisterChangeOnChangeTypeInsertOnBeforeInsertReservEntry(var TrackingSpecification: Record "Tracking Specification"; var OldTrackingSpecification: Record "Tracking Specification"; var NewTrackingSpecification: Record "Tracking Specification"; FormRunMode: Option)
+    begin
+        ModifyRun := false;
+        MRPPrice := NewTrackingSpecification."MRP Price";
+    end;
+
+    // Page6510 End
+    // Codeunit99000830 Start
+    [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnAfterSetDates', '', false, false)]
+    local procedure OnAfterSetDates(var ReservationEntry: Record "Reservation Entry")
+    begin
+        ReservationEntry."MRP Price" := MRPPrice;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnCreateReservEntryExtraFields', '', false, false)]
+    local procedure OnCreateReservEntryExtraFields(var InsertReservEntry: Record "Reservation Entry"; OldTrackingSpecification: Record "Tracking Specification"; NewTrackingSpecification: Record "Tracking Specification")
+    begin
+        InsertReservEntry."MRP Price" := NewTrackingSpecification."MRP Price";
+    end;
+    // Codeunit99000830 End
+
+    // Page6510 Start
+    [EventSubscriber(ObjectType::Page, 6510, 'OnAfterEntriesAreIdentical', '', false, false)]
+    local procedure OnAfterEntriesAreIdentical(ReservEntry1: Record "Reservation Entry"; ReservEntry2: Record "Reservation Entry"; var IdenticalArray: array[2] of Boolean)
+    begin
+        IdenticalArray[2] := (ReservEntry1."MRP Price" = ReservEntry2."MRP Price");
+    end;
+
+    [EventSubscriber(ObjectType::Page, 6510, 'OnAfterCopyTrackingSpec', '', false, false)]
+    local procedure OnAfterCopyTrackingSpec(var SourceTrackingSpec: Record "Tracking Specification"; var DestTrkgSpec: Record "Tracking Specification")
+    begin
+        if ModifyRun = false then
+            SourceTrackingSpec."MRP Price" := DestTrkgSpec."MRP Price"
+        else
+            DestTrkgSpec."MRP Price" := SourceTrackingSpec."MRP Price";
+    end;
+
+    [EventSubscriber(ObjectType::Page, 6510, 'OnAfterMoveFields', '', false, false)]
+    local procedure OnAfterMoveFields(var TrkgSpec: Record "Tracking Specification"; var ReservEntry: Record "Reservation Entry")
+    begin
+        ReservEntry."MRP Price" := TrkgSpec."MRP Price";
+    end;
+    // Page6510 End
+
+    // ********** Item Tracking Specification to Item Ledger Entry Field Flow ************** End
+
 
 
 

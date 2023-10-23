@@ -2,6 +2,10 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
 {
     fields
     {
+        field(50000; "MRP Price"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50001; "Deal No."; Code[20])
         {
             TableRelation = "Deal Master" WHERE(Status = FILTER(Release));

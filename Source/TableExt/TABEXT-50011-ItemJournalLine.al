@@ -2,6 +2,10 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
 {
     fields
     {
+        field(50000; "MRP Price"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50001; "Deal No."; Code[20])
         {
             TableRelation = "Deal Master" WHERE(Status = FILTER(Release));

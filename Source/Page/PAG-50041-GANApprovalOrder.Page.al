@@ -1,6 +1,6 @@
-page 50017 "Honey Purchase Order"
+page 50041 "GAN Approval Order"
 {
-    // Caption = 'Purchase Order';
+    Caption = 'GAN Approval Order';
     DeleteAllowed = false;
     InsertAllowed = false;
     LinksAllowed = false;
@@ -15,9 +15,64 @@ page 50017 "Honey Purchase Order"
     {
         area(content)
         {
+            group("GAN Details")
+            {
+                Caption = 'GAN Details';
+                field("Vendor Invoice No."; Rec."Vendor Invoice No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Posting Date"; Rec."Posting Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("Gate Entry No."; Rec."Gate Entry No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Gate Entry Date"; Rec."Gate Entry Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("Waybill No."; Rec."Waybill No.")
+                {
+                }
+                field("GR / LR No."; Rec."GR / LR No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("GR / LR Date"; Rec."GR / LR Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("Invoice Type"; Rec."Invoice Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("GST Dependency Type"; Rec."GST Dependency Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("GST Vendor Type"; Rec."GST Vendor Type")
+                {
+                    ApplicationArea = All;
+                }
+                field("Document Date"; Rec."Document Date")
+                {
+                }
+                field("Posting No. Series"; Rec."Posting No. Series")
+                {
+                    ApplicationArea = All;
+                }
+                field("Receiving No. Series"; Rec."Receiving No. Series")
+                {
+                    ApplicationArea = All;
+                }
+            }
             group(General)
             {
                 Caption = 'General';
+                Editable = false;
                 group("Buy from Vendor")
                 {
                     Caption = 'Buy from Vendor';
@@ -32,7 +87,6 @@ page 50017 "Honey Purchase Order"
                                 CurrPage.UPDATE;
                         end;
                     }
-
                     field("Buy-from Vendor No."; Rec."Buy-from Vendor No.")
                     {
                         Importance = Promoted;
@@ -78,27 +132,14 @@ page 50017 "Honey Purchase Order"
                 group("General ")
                 {
                     Caption = 'General ';
-                    field("Shipping Vendor"; Rec."Shipping Vendor")
-                    {
-                        ApplicationArea = All;
-                    }
                     field("Location Code"; Rec."Location Code")
                     {
-                        Importance = Promoted;
                         ApplicationArea = All;
+                        Importance = Promoted;
                     }
                     field("Order Date"; Rec."Order Date")
                     {
                         Importance = Promoted;
-                        ApplicationArea = All;
-                    }
-                    field("Order Type"; Rec."Order Type")
-                    {
-                        ApplicationArea = All;
-                        Importance = Promoted;
-                    }
-                    field("Document Date"; Rec."Document Date")
-                    {
                         ApplicationArea = All;
                     }
                     // field(Structure; Rec.Structure)
@@ -120,7 +161,6 @@ page 50017 "Honey Purchase Order"
                     }
                     field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                     {
-                        Visible = false;
                         ApplicationArea = All;
 
                         trigger OnValidate()
@@ -133,15 +173,7 @@ page 50017 "Honey Purchase Order"
                         Importance = Promoted;
                         ApplicationArea = All;
                     }
-                    field("Shipping Agent Code"; Rec."Shipping Agent Code")
-                    {
-                        ApplicationArea = All;
-                    }
-                    field("Valid Till"; Rec."Valid Till")
-                    {
-                        ApplicationArea = All;
-                    }
-                    field("Transit Insurance"; Rec."Transit Insurance")
+                    field("Shipment Method Code"; Rec."Shipment Method Code")
                     {
                         ApplicationArea = All;
                     }
@@ -165,157 +197,21 @@ page 50017 "Honey Purchase Order"
                             CLEAR(ChangeExchangeRate);
                         end;
                     }
-                    // field("C Form"; Rec."C Form")
-                    // {
-                    //     ApplicationArea = All;
-                    // }
-                    // field("Form Code"; Rec."Form Code")
-                    // {
-                    //     Importance = Promoted;
-                    //     ApplicationArea = All;
-                    // }
                     field(Status; Rec.Status)
                     {
                         Importance = Promoted;
                         ApplicationArea = All;
-                        Enabled = true;
                     }
-                    field("Product Group Code"; Rec."Product Group Code")
-                    {
-                        ApplicationArea = all;
-                    }
-                    field("Posting No. Series"; Rec."Posting No. Series")
-                    {
-                        ApplicationArea = All;
-                    }
-                    field("Receiving No. Series"; Rec."Receiving No. Series")
-                    {
-                        ApplicationArea = All;
-                    }
-                    field("Waybill No."; Rec."Waybill No.")
-                    {
-                        ApplicationArea = All;
-                    }
-                    field("Freight Liability"; Rec."Freight Liability")
-                    {
-                        ApplicationArea = All;
-                    }
-                    field("GST Dependency Type"; Rec."GST Dependency Type")
-                    {
-                        ApplicationArea = All;
-                    }
-                    field("GST Vendor Type"; Rec."GST Vendor Type")
-                    {
-                        ApplicationArea = All;
-                    }
+
+                    // field("Job Queue Status"; Rec."Job Queue Status")
+                    // {
+                    //     ApplicationArea = All;
+                    // }
                 }
             }
-            part(PurchLines; "Honey Purchase Order Subform")
+            part(PurchLines; "Honey GAN Order Subform")
             {
                 SubPageLink = "Document No." = FIELD("No.");
-            }
-        }
-        area(factboxes)
-        {
-            part(TaxInformation; "Tax Information Factbox")
-            {
-                Provider = PurchLines;
-                SubPageLink = "Table ID Filter" = const(39), "Document Type Filter" = field("Document Type"), "Document No. Filter" = field("Document No."), "Line No. Filter" = field("Line No.");
-                ApplicationArea = Basic, Suite;
-            }
-            part(PurchaseDocCheckFactbox; "Purch. Doc. Check Factbox")
-            {
-                ApplicationArea = All;
-                Caption = 'Document Check';
-                Visible = PurchaseDocCheckFactboxVisible;
-                SubPageLink = "No." = FIELD("No."),
-                              "Document Type" = FIELD("Document Type");
-            }
-            part("Attached Documents"; "Document Attachment Factbox")
-            {
-                ApplicationArea = All;
-                Caption = 'Attachments';
-                SubPageLink = "Table ID" = CONST(38),
-                              "No." = FIELD("No."),
-                              "Document Type" = FIELD("Document Type");
-            }
-            part(Control23; "Pending Approval FactBox")
-            {
-                ApplicationArea = Suite;
-                SubPageLink = "Table ID" = CONST(38),
-                              "Document Type" = FIELD("Document Type"),
-                              "Document No." = FIELD("No."),
-                              Status = const(Open);
-                Visible = OpenApprovalEntriesExistForCurrUser;
-            }
-            part(Control1903326807; "Item Replenishment FactBox")
-            {
-                ApplicationArea = Suite;
-                Provider = PurchLines;
-                SubPageLink = "No." = FIELD("No.");
-                Visible = false;
-            }
-            part(ApprovalFactBox; "Approval FactBox")
-            {
-                ApplicationArea = Suite;
-                Visible = false;
-            }
-            part(Control1901138007; "Vendor Details FactBox")
-            {
-                ApplicationArea = Suite;
-                SubPageLink = "No." = FIELD("Buy-from Vendor No."),
-                              "Date Filter" = field("Date Filter");
-                Visible = false;
-            }
-            part(Control1904651607; "Vendor Statistics FactBox")
-            {
-                ApplicationArea = Suite;
-                SubPageLink = "No." = FIELD("Pay-to Vendor No."),
-                              "Date Filter" = field("Date Filter");
-            }
-            part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
-            {
-                ApplicationArea = Suite;
-                ShowFilter = false;
-                Visible = false;
-            }
-            part(Control1903435607; "Vendor Hist. Buy-from FactBox")
-            {
-                ApplicationArea = Suite;
-                SubPageLink = "No." = FIELD("Buy-from Vendor No."),
-                              "Date Filter" = field("Date Filter");
-            }
-            part(Control1906949207; "Vendor Hist. Pay-to FactBox")
-            {
-                ApplicationArea = Suite;
-                SubPageLink = "No." = FIELD("Pay-to Vendor No."),
-                              "Date Filter" = field("Date Filter");
-                Visible = false;
-            }
-            part(Control3; "Purchase Line FactBox")
-            {
-                ApplicationArea = Suite;
-                Provider = PurchLines;
-                SubPageLink = "Document Type" = FIELD("Document Type"),
-                              "Document No." = FIELD("Document No."),
-                              "Line No." = FIELD("Line No.");
-            }
-            part(WorkflowStatus; "Workflow Status FactBox")
-            {
-                ApplicationArea = Suite;
-                Editable = false;
-                Enabled = false;
-                ShowFilter = false;
-                Visible = ShowWorkflowStatus;
-            }
-            systempart(Control1900383207; Links)
-            {
-                ApplicationArea = RecordLinks;
-                Visible = false;
-            }
-            systempart(Control1905767507; Notes)
-            {
-                ApplicationArea = Notes;
             }
         }
     }
@@ -351,28 +247,26 @@ page 50017 "Honey Purchase Order"
                     PromotedCategory = Process;
                     PromotedIsBig = true;
                     ShortCutKey = 'F7';
-                    Visible = true;
+                    Visible = false;
 
-                    trigger OnAction()
-                    begin
-                        Rec.OpenPurchaseOrderStatistics();
-                        CurrPage.PurchLines.Page.ForceTotalsCalculation();
-                        // PurchSetup.GET;
-                        // IF PurchSetup."Calc. Inv. Discount" THEN BEGIN
-                        //     Rec.CalcInvDiscForHeader;
-                        //     COMMIT;
-                        // END;
-                        // IF Structure <> '' THEN BEGIN
-                        //     PurchLine.CalculateStructures(Rec);
-                        //     PurchLine.AdjustStructureAmounts(Rec);
-                        //     PurchLine.UpdatePurchLines(Rec);
-                        //     PurchLine.CalculateTDS(Rec);
-                        // END ELSE
-                        //     PurchLine.CalculateTDS(Rec);
+                    // trigger OnAction()
+                    // begin
+                    //     PurchSetup.GET;
+                    //     IF PurchSetup."Calc. Inv. Discount" THEN BEGIN
+                    //         Rec.CalcInvDiscForHeader;
+                    //         COMMIT;
+                    //     END;
+                    //     IF Structure <> '' THEN BEGIN
+                    //         PurchLine.CalculateStructures(Rec);
+                    //         PurchLine.AdjustStructureAmounts(Rec);
+                    //         PurchLine.UpdatePurchLines(Rec);
+                    //         PurchLine.CalculateTDS(Rec);
+                    //     END ELSE
+                    //         PurchLine.CalculateTDS(Rec);
 
-                        // COMMIT;
-                        // PAGE.RUNMODAL(PAGE::"Purchase Order Statistics", Rec);
-                    end;
+                    //     COMMIT;
+                    //     PAGE.RUNMODAL(PAGE::"Purchase Order Statistics", Rec);
+                    // end;
                 }
                 action("Co&mments")
                 {
@@ -491,73 +385,53 @@ page 50017 "Honey Purchase Order"
                         // PurchLine.CalculateTDS(Rec);
                     end;
                 }
-                action("Submit for GAN Creation")
+            }
+            group("P&osting")
+            {
+                Caption = 'P&osting';
+                Image = Post;
+                action(Post1)
                 {
-                    Caption = 'Submit for GAN Creation';
-                    Image = SendTo;
+                    Caption = 'P&ost';
+                    Ellipsis = true;
+                    Image = PostOrder;
                     Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    ShortCutKey = 'F9';
 
                     trigger OnAction()
                     begin
-                        Rec.TESTFIELD("Buy-from Vendor No.");
-                        Rec.TESTFIELD("Location Code");
-                        Rec.TESTFIELD("Shortcut Dimension 1 Code");
+                        CheckQtyToReceive();
 
-                        IF NOT CONFIRM('Do you want to submit the order for GAN creation?', FALSE) THEN
-                            EXIT;
+                        Post(CODEUNIT::"Purch.-Post (Yes/No)");
 
-                        PurchLine.RESET;
-                        PurchLine.SETRANGE("Document Type", Rec."Document Type");
-                        PurchLine.SETRANGE("Document No.", Rec."No.");
-                        IF PurchLine.FINDFIRST THEN
-                            REPEAT
-                                PurchLine.TESTFIELD(Type, PurchLine.Type::Item);
-                                PurchLine.TESTFIELD("No.");
-
-                                recProductGroup.GET(PurchLine."New Product Group Code", PurchLine."Item Category Code");
-                                IF NOT recProductGroup."Allow Direct Purch. Order" THEN
-                                    ERROR('Selected Item is not allowed in direct purchase order.');
-
-                                PurchLine.TESTFIELD("Location Code");
-                                PurchLine.TESTFIELD(Quantity);
-                                PurchLine.TESTFIELD("Deal No.");
-                                PurchLine.TESTFIELD("Deal Line No.");
-                                PurchLine.TESTFIELD("Dispatched Qty. in Kg.");
-                                PurchLine.TESTFIELD(Quantity);
-                                PurchLine.TESTFIELD("Packing Type");
-                                PurchLine.TESTFIELD("Qty. in Pack");
-                            UNTIL PurchLine.NEXT = 0 ELSE
-                            ERROR('Nothing to Submit.');
-
-                        Rec."Order Approval Pending" := TRUE;
+                        Rec."GAN Approval Pending" := false;
                         Rec.MODIFY;
-
-                        MESSAGE('The Order is successfully submitted for GAN Creation.');
                         CurrPage.CLOSE;
                     end;
                 }
-                action("Short Closed")
+                action("Sent Back")
                 {
-                    Caption = 'Short Closed';
-                    Image = Close;
+                    Image = Reject;
                     Promoted = true;
-                    PromotedCategory = Process;
-                    ApplicationArea = all;
+
                     trigger OnAction()
                     var
-                        PurchasePayableSetup: Record "Purchases & Payables Setup";
-                        PurchaseHeader: Record "Purchase Header";
+                        usersetup: Record "User Setup";
                     begin
+                        if usersetup.Get(UserId) then begin
+                            if usersetup."Allow Send Back Deal" then begin
+                                IF NOT CONFIRM('Do you want to return the GAN for correction?', FALSE) THEN
+                                    EXIT;
 
-                        PurchasePayableSetup.get;
-                        PurchasePayableSetup.TestField("Archive Orders", true);
-                        rec.TestField("Short Close Comment");
-                        IF NOT CONFIRM('Do you want to Short Close the selected Order?', FALSE) THEN
-                            EXIT;
-                        Rec."Short Close" := true;
-                        Rec.Modify();
-                        ArchiveManagement.AutoArchivePurchDocument(Rec);
-                        CurrPage.Close();
+                                Rec."GAN Approval Pending" := false;
+                                Rec.MODIFY;
+                                CurrPage.CLOSE;
+                            end else
+                                if usersetup."Allow Send Back Deal" = false then
+                                    Error('You are not allowed to Send back the PO %1', Rec."No.");
+                        end;
                     end;
                 }
             }
@@ -574,31 +448,49 @@ page 50017 "Honey Purchase Order"
                     PromotedCategory = Process;
 
                     trigger OnAction()
+                    var
+                        recPurchHeader: Record "Purchase Header";
                     begin
-                        //DocPrint.PrintPurchHeader(Rec);
+                        DocPrint.PrintPurchHeader(Rec);
                         recPurchHeader.RESET;
                         recPurchHeader.SETRANGE("Document Type", Rec."Document Type"::Order);
                         recPurchHeader.SETRANGE("No.", Rec."No.");
 
-                        REPORT.RUN(50062, TRUE, TRUE, recPurchHeader);
+                        REPORT.RUN(Report::"Purchase Receipt Pre", TRUE, TRUE, recPurchHeader);
                     end;
                 }
-                action("&Print GST")
+                action("Print GST GAN (Honey)")
                 {
-                    Caption = '&Print GST';
-                    Ellipsis = true;
+                    Caption = 'Print GST GAN (Honey)';
                     Image = Print;
                     Promoted = true;
-                    PromotedCategory = Process;
 
                     trigger OnAction()
+                    var
+                        recPurchHeader: Record "Purchase Header";
                     begin
-                        //DocPrint.PrintPurchHeader(Rec);
                         recPurchHeader.RESET;
                         recPurchHeader.SETRANGE("Document Type", Rec."Document Type"::Order);
                         recPurchHeader.SETRANGE("No.", Rec."No.");
 
-                        REPORT.RUN(50061, TRUE, TRUE, recPurchHeader);
+                        REPORT.RUN(Report::"Purchase Receipt H-Pre", TRUE, TRUE, recPurchHeader);
+                    end;
+                }
+                action("Print GST GAN (Other)")
+                {
+                    Caption = 'Print GST GAN (Other)';
+                    Image = Print;
+                    Promoted = true;
+
+                    trigger OnAction()
+                    var
+                        recPurchHeader: Record "Purchase Header";
+                    begin
+                        recPurchHeader.RESET;
+                        recPurchHeader.SETRANGE("Document Type", Rec."Document Type"::Order);
+                        recPurchHeader.SETRANGE("No.", Rec."No.");
+
+                        REPORT.RUN(Report::"Purchase Receipt Other Pre", TRUE, TRUE, recPurchHeader);
                     end;
                 }
             }
@@ -626,15 +518,12 @@ page 50017 "Honey Purchase Order"
         IF UserMgt.GetPurchasesFilter <> '' THEN BEGIN
             Rec.FILTERGROUP(2);
             Rec.SETRANGE("Responsibility Center", UserMgt.GetPurchasesFilter);
-            Rec.SetRange("Short Close", false);
             Rec.FILTERGROUP(0);
         END;
-
     end;
 
     var
         PurchSetup: Record "Purchases & Payables Setup";
-        purord: page "Purchase Order";
         ChangeExchangeRate: Page "Change Exchange Rate";
         CopyPurchDoc: Report "Copy Purchase Document";
         MoveNegPurchLines: Report "Move Negative Purchase Lines";
@@ -644,23 +533,10 @@ page 50017 "Honey Purchase Order"
         ArchiveManagement: Codeunit ArchiveManagement;
         PurchLine: Record "Purchase Line";
         // DefermentBuffer: Record 16532;
-
+        [InDataSet]
 
         JobQueueVisible: Boolean;
-        recProductGroup: Record "New Product Group";
-        recPurchHeader: Record "Purchase Header";
-        HasIncomingDocument: Boolean;
-        OpenApprovalEntriesExistForCurrUser: Boolean;
-        OpenApprovalEntriesExist: Boolean;
-        CanCancelApprovalForRecord: Boolean;
-        CanRequestApprovalForFlow: Boolean;
-        CanCancelApprovalForFlow: Boolean;
-        ShouldSearchForVendByName: Boolean;
-        PurchaseDocCheckFactboxVisible: Boolean;
-        IsPurchaseLinesEditable: Boolean;
-        IsRemitToCountyVisible: Boolean;
-        VendorInvoiceNoMandatory: Boolean;
-        ShowWorkflowStatus: Boolean;
+    // recProductGroup: Record 5723;
 
     local procedure Post(PostingCodeunitID: Integer)
     begin
@@ -699,6 +575,8 @@ page 50017 "Honey Purchase Order"
     end;
 
     local procedure ShortcutDimension2CodeOnAfterV()
+    var
+        ItemJournal: Record "Item Journal Batch";
     begin
         CurrPage.UPDATE;
     end;
@@ -713,38 +591,18 @@ page 50017 "Honey Purchase Order"
         CurrPage.UPDATE;
     end;
 
-    [IntegrationEvent(true, false)]
-    local procedure OnAfterSetControlAppearance()
-    begin
-    end;
-
-    local procedure SetControlAppearance()
+    local procedure CheckQtyToReceive()
     var
-        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-        DocumentErrorsMgt: Codeunit "Document Errors Mgt.";
-        WorkflowWebhookMgt: Codeunit "Workflow Webhook Management";
+        PurchLine: Record "Purchase Line";
     begin
-        JobQueueVisible := Rec."Job Queue Status" = Rec."Job Queue Status"::"Scheduled for Posting";
-        HasIncomingDocument := Rec."Incoming Document Entry No." <> 0;
-        SetExtDocNoMandatoryCondition();
-
-        OpenApprovalEntriesExistForCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Rec.RecordId());
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId());
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId());
-
-        WorkflowWebhookMgt.GetCanRequestAndCanCancel(Rec.RecordId(), CanRequestApprovalForFlow, CanCancelApprovalForFlow);
-        ShouldSearchForVendByName := Rec.ShouldSearchForVendorByName(Rec."Buy-from Vendor No.");
-        PurchaseDocCheckFactboxVisible := DocumentErrorsMgt.BackgroundValidationEnabled();
-        if not IsPurchaseLinesEditable then
-            IsPurchaseLinesEditable := Rec.PurchaseLinesEditable();
-
-        OnAfterSetControlAppearance();
-    end;
-
-    local procedure SetExtDocNoMandatoryCondition()
-    begin
-        PurchSetup.GetRecordOnce();
-        VendorInvoiceNoMandatory := PurchSetup."Ext. Doc. No. Mandatory";
+        PurchLine.Reset();
+        PurchLine.SetRange("Document Type", Rec."Document Type");
+        PurchLine.SetRange("Document No.", Rec."No.");
+        if PurchLine.FindSet() then
+            repeat
+                if PurchLine."Qty. to Receive" > PurchLine."Outstanding Quantity" then
+                    Error('Quatity to Receive must not be greater than Outstanding Quantity.');
+            until PurchLine.Next() = 0;
     end;
 }
 

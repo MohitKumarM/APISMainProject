@@ -260,7 +260,7 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
         TempTDSBForAppliedDoc: Decimal;
         TempQtyF: Decimal;
 
-        CodeUnit4Check: Codeunit 13;
+        CodeUnit4Check: Codeunit "Gen. Jnl.-Post Batch";
     begin
         PurchLine.SETRANGE("Document Type", PurchHeader."Document Type");
         PurchLine.SETRANGE("Document No.", PurchHeader."No.");
@@ -357,7 +357,7 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
         Team002: Label 'Previous Purchase amount of PAN %1 is %2.';
         TempTDSBForAppliedDoc: Decimal;
         TempQtyF: Decimal;
-        CodeUnit4Check: Codeunit 13;
+        CodeUnit4Check: Codeunit "Gen. Jnl.-Post Batch";
         VendledgEntry1: Record "Vendor Ledger Entry";
         TaxTransValueR_ForPurchline: Record "Tax Transaction Value";
         TDSSetup_ForPurchline: Record "TDS Setup";

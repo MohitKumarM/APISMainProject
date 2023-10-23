@@ -1,7 +1,8 @@
-page 50016 "Honey Purch. Orders"
+page 50040 "GAN Approval Others"
 {
-    CardPageID = "Honey Purchase Order";
+    CardPageID = "GAN Approval Order";
     DeleteAllowed = false;
+    Caption = 'GAN Approval Orders';
     Editable = false;
     InsertAllowed = false;
     LinksAllowed = false;
@@ -13,9 +14,8 @@ page 50016 "Honey Purch. Orders"
     SourceTableView = SORTING("Document Type", "No.")
                       ORDER(Ascending)
                       WHERE("Document Type" = FILTER(Order),
-                            Status = FILTER(Open),
-                            "Order Type" = FILTER(Honey),
-                            "Order Approval Pending" = FILTER(false));
+                            "GAN Approval Pending" = FILTER(true),
+                            "Order Type" = FILTER(Other));
 
     layout
     {
@@ -57,36 +57,8 @@ page 50016 "Honey Purch. Orders"
 
     actions
     {
-        area(processing)
+        area(navigation)
         {
-            action(New)
-            {
-                Caption = 'New';
-                Image = Document;
-                Promoted = true;
-
-                trigger OnAction()
-                begin
-                    recPurchSetup.GET;
-                    recPurchSetup.TESTFIELD("Honey Order Nos.");
-
-                    cdOrderCode := cuNoSeries.GetNextNo(recPurchSetup."Honey Order Nos.", TODAY, TRUE);
-
-                    recOrder.INIT;
-                    recOrder.VALIDATE("Document Type", recOrder."Document Type"::Order);
-                    recOrder.VALIDATE("No.", cdOrderCode);
-                    recOrder."Order Type" := recOrder."Order Type"::Honey;
-                    recOrder.INSERT(TRUE);
-
-                    recOrder.RESET;
-                    recOrder.SETRANGE("Document Type", recOrder."Document Type"::Order);
-                    recOrder.SETRANGE("No.", cdOrderCode);
-
-                    CLEAR(pgHoneyOrder);
-                    pgHoneyOrder.SETTABLEVIEW(recOrder);
-                    pgHoneyOrder.RUN;
-                end;
-            }
             group(Print)
             {
                 Caption = 'Print';
@@ -103,17 +75,17 @@ page 50016 "Honey Purch. Orders"
                     var
                         recPurchHeader: Record "Purchase Header";
                     begin
-                        //DocPrint.PrintPurchHeader(Rec);
+                        // DocPrint.PrintPurchHeader(Rec);
                         recPurchHeader.RESET;
                         recPurchHeader.SETRANGE("Document Type", Rec."Document Type"::Order);
                         recPurchHeader.SETRANGE("No.", Rec."No.");
 
-                        REPORT.RUN(50062, TRUE, TRUE, recPurchHeader);
+                        REPORT.RUN(Report::"Purchase Receipt Pre", TRUE, TRUE, recPurchHeader);
                     end;
                 }
-                action("&Print GST")
+                action("Print GST GAN")
                 {
-                    Caption = '&Print GST';
+                    Caption = 'Print GST GAN';
                     Ellipsis = true;
                     Image = Print;
                     Promoted = true;
@@ -123,34 +95,16 @@ page 50016 "Honey Purch. Orders"
                     var
                         recPurchHeader: Record "Purchase Header";
                     begin
-                        //DocPrint.PrintPurchHeader(Rec);
+                        // DocPrint.PrintPurchHeader(Rec);
                         recPurchHeader.RESET;
                         recPurchHeader.SETRANGE("Document Type", Rec."Document Type"::Order);
                         recPurchHeader.SETRANGE("No.", Rec."No.");
 
-                        REPORT.RUN(50061, TRUE, TRUE, recPurchHeader);
+                        REPORT.RUN(Report::"Purchase Receipt Other Pre", TRUE, TRUE, recPurchHeader);
                     end;
                 }
             }
         }
     }
-
-    trigger OnOpenPage()
-    begin
-        recUserSetup.GET(USERID);
-        IF (recUserSetup."Purchaser Profile" <> recUserSetup."Purchaser Profile"::All) AND (recUserSetup."Purchaser Profile" <> recUserSetup."Purchaser Profile"::Honey) THEN
-            ERROR('You are not authrozed for honey purchase orders, contact your system administrator.');
-        Rec.FILTERGROUP(2);
-        Rec.SetRange("Short Close", false);
-        Rec.FILTERGROUP(0);
-    end;
-
-    var
-        recPurchSetup: Record "Purchases & Payables Setup";
-        recOrder: Record "Purchase Header";
-        cdOrderCode: Code[20];
-        cuNoSeries: Codeunit NoSeriesManagement;
-        pgHoneyOrder: Page "Honey Purchase Order";
-        recUserSetup: Record "User Setup";
 }
 

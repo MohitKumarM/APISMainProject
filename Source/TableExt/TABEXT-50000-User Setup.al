@@ -102,6 +102,17 @@ tableextension 50000 UserSetup extends "User Setup"
                 END;
             end;
         }
+        field(50023; "Allow Send Back Deal"; Boolean)
+        {
+            trigger OnValidate()
+            begin
+                recUser.RESET;
+                recUser.SETRANGE("User Name", USERID);
+                recUser.FINDFIRST;
+                IF (recUser."License Type" = recUser."License Type"::"Limited User") AND ("Allow Send Back Deal") THEN
+                    ERROR('Posting rights can not be assigned to a limited user.');
+            end;
+        }
     }
 
     var

@@ -1,7 +1,7 @@
 report 50065 "Purchase Order"
 {
     //     DefaultLayout = RDLC;
-    //     RDLCLayout = './src/Report Layout/PurchaseOrder.rdl';
+    //RDLCLayout = '.\ReportLayouts\PurchaseOrder.rdl';
     //     UsageCategory = ReportsAndAnalysis;
     //     ApplicationArea = All;
 

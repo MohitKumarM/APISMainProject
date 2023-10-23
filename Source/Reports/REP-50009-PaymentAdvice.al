@@ -150,7 +150,7 @@ report 50009 "Payment Advice"
 
             trigger OnAfterGetRecord()
             var
-                PurchInvLine: Record 123;
+                PurchInvLine: Record "Purch. Inv. Line";
                 RecTDSEntry: Record "TDS Entry";
                 RecPIComment: Record "Purch. Comment Line";
                 RecVendorLedgerEntry: Record "Vendor Ledger Entry";

@@ -43,6 +43,10 @@ pageextension 50010 UsersSetup extends "User Setup"
             {
                 ApplicationArea = all;
             }
+            field("Allow Send Back Deal"; Rec."Allow Send Back Deal")
+            {
+                ApplicationArea = all;
+            }
         }
     }
 

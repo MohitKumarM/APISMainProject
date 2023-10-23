@@ -2,6 +2,10 @@ tableextension 50026 ReservatonEntry extends "Reservation Entry"
 {
     fields
     {
+        field(50000; "MRP Price"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50002; "Packing Type"; enum "Packing Type")
         {
 

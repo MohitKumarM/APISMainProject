@@ -49,6 +49,12 @@ codeunit 50000 Tble83
         NewItemLedgEntry."Purchaser Name" := ItemJournalLine."Purchaser Name";
         NewItemLedgEntry."MRP Price" := ItemJournalLine."MRP Price"; // 
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", 'OnBeforeInsertSetupTempSplitItemJnlLine', '', false, false)]
+    local procedure OnBeforeInsertSetupTempSplitItemJnlLine(var TempTrackingSpecification: Record "Tracking Specification" temporary; var TempItemJournalLine: Record "Item Journal Line" temporary; var PostItemJnlLine: Boolean; var ItemJournalLine2: Record "Item Journal Line"; SignFactor: Integer; FloatingFactor: Decimal)
+    begin
+        TempItemJournalLine."MRP Price" := TempTrackingSpecification."MRP Price";
+    end;
     // Codeunit22 End
 
     // Codeunit90 Start

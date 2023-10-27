@@ -41,6 +41,23 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         field(50012; "Purchaser Name"; Text[50])
         {
         }
+        field(50023; "MFG. Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50020; "Tin"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50021; "Drum"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50022; "Bucket"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+
         field(50019; "New Product Group Code"; Code[20])
         {
             DataClassification = ToBeClassified;

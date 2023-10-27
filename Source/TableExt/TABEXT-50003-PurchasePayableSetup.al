@@ -18,6 +18,21 @@ tableextension 50003 PurchPayableSetup extends "Purchases & Payables Setup"
         {
             DataClassification = ToBeClassified;
         }
+        field(50005; "Tin Item"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Item;
+        }
+        field(50006; "Drum Item"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Item;
+        }
+        field(50007; "Bucket Item"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Item;
+        }
     }
 
     var

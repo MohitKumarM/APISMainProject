@@ -44,6 +44,23 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
         field(50012; "Purchaser Name"; Text[50])
         {
         }
+        field(50023; "MFG. Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50020; "Tin"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50021; "Drum"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50022; "Bucket"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+
         field(60000; "Approved Quantity"; Decimal)
         {
         }

@@ -9,6 +9,11 @@ codeunit 50000 Tble83
     var
         MRPPrice: Decimal;
         ModifyRun: Boolean;
+        MFGDate: Date;
+        Tin: Decimal;
+        Drum: Decimal;
+        Bucket: Decimal;
+
 
     [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnAfterCopyItemJnlLineFromPurchLine', '', false, false)]
     local procedure OnAfterCopyItemJnlLineFromPurchLine(var ItemJnlLine: Record "Item Journal Line"; PurchLine: Record "Purchase Line")
@@ -48,12 +53,21 @@ codeunit 50000 Tble83
         NewItemLedgEntry."Purchaser Code" := ItemJournalLine."Purchaser Code";
         NewItemLedgEntry."Purchaser Name" := ItemJournalLine."Purchaser Name";
         NewItemLedgEntry."MRP Price" := ItemJournalLine."MRP Price"; // 
+        NewItemLedgEntry."MFG. Date" := ItemJournalLine."MFG. Date";
+        NewItemLedgEntry.Tin := ItemJournalLine.Tin;
+        NewItemLedgEntry.Drum := ItemJournalLine.Drum;
+        NewItemLedgEntry.Bucket := ItemJournalLine.Bucket;
+
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", 'OnBeforeInsertSetupTempSplitItemJnlLine', '', false, false)]
     local procedure OnBeforeInsertSetupTempSplitItemJnlLine(var TempTrackingSpecification: Record "Tracking Specification" temporary; var TempItemJournalLine: Record "Item Journal Line" temporary; var PostItemJnlLine: Boolean; var ItemJournalLine2: Record "Item Journal Line"; SignFactor: Integer; FloatingFactor: Decimal)
     begin
         TempItemJournalLine."MRP Price" := TempTrackingSpecification."MRP Price";
+        TempItemJournalLine."MFG. Date" := TempTrackingSpecification."MFG. Date";
+        TempItemJournalLine.Tin := TempTrackingSpecification.Tin;
+        TempItemJournalLine.Drum := TempTrackingSpecification.Drum;
+        TempItemJournalLine.Bucket := TempTrackingSpecification.Bucket;
     end;
     // Codeunit22 End
 
@@ -316,6 +330,11 @@ codeunit 50000 Tble83
     begin
         ModifyRun := false;
         MRPPrice := NewTrackingSpecification."MRP Price";
+        MFGDate := NewTrackingSpecification."MFG. Date";
+        Tin := NewTrackingSpecification.Tin;
+        Drum := NewTrackingSpecification.Drum;
+        Bucket := NewTrackingSpecification.Bucket;
+
     end;
 
     // Page6510 End
@@ -324,35 +343,58 @@ codeunit 50000 Tble83
     local procedure OnAfterSetDates(var ReservationEntry: Record "Reservation Entry")
     begin
         ReservationEntry."MRP Price" := MRPPrice;
+        ReservationEntry."MFG. Date" := MFGDate;
+        ReservationEntry.Tin := Tin;
+        ReservationEntry.Drum := Drum;
+        ReservationEntry.Bucket := Bucket;
+
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnCreateReservEntryExtraFields', '', false, false)]
     local procedure OnCreateReservEntryExtraFields(var InsertReservEntry: Record "Reservation Entry"; OldTrackingSpecification: Record "Tracking Specification"; NewTrackingSpecification: Record "Tracking Specification")
     begin
         InsertReservEntry."MRP Price" := NewTrackingSpecification."MRP Price";
+        InsertReservEntry."MFG. Date" := NewTrackingSpecification."MFG. Date";
+        InsertReservEntry.Tin := NewTrackingSpecification.Tin;
+        InsertReservEntry.Drum := NewTrackingSpecification.Drum;
+        InsertReservEntry.Bucket := NewTrackingSpecification.Bucket;
     end;
+
     // Codeunit99000830 End
 
     // Page6510 Start
     [EventSubscriber(ObjectType::Page, 6510, 'OnAfterEntriesAreIdentical', '', false, false)]
     local procedure OnAfterEntriesAreIdentical(ReservEntry1: Record "Reservation Entry"; ReservEntry2: Record "Reservation Entry"; var IdenticalArray: array[2] of Boolean)
     begin
-        IdenticalArray[2] := (ReservEntry1."MRP Price" = ReservEntry2."MRP Price");
+        IdenticalArray[2] := ((ReservEntry1."MRP Price" = ReservEntry2."MRP Price") and (ReservEntry1."MFG. Date" = ReservEntry2."MFG. Date") and (ReservEntry1.Tin = ReservEntry2.Tin) and (ReservEntry1.Drum = ReservEntry2.Drum) and (ReservEntry1.Bucket = ReservEntry2.Bucket));
     end;
 
     [EventSubscriber(ObjectType::Page, 6510, 'OnAfterCopyTrackingSpec', '', false, false)]
     local procedure OnAfterCopyTrackingSpec(var SourceTrackingSpec: Record "Tracking Specification"; var DestTrkgSpec: Record "Tracking Specification")
     begin
-        if ModifyRun = false then
-            SourceTrackingSpec."MRP Price" := DestTrkgSpec."MRP Price"
-        else
+        if ModifyRun = false then begin
+            SourceTrackingSpec."MRP Price" := DestTrkgSpec."MRP Price";
+            SourceTrackingSpec."MFG. Date" := DestTrkgSpec."MFG. Date";
+            SourceTrackingSpec.Tin := DestTrkgSpec.Tin;
+            SourceTrackingSpec.Drum := DestTrkgSpec.Drum;
+            SourceTrackingSpec.Bucket := DestTrkgSpec.Bucket;
+        end else begin
             DestTrkgSpec."MRP Price" := SourceTrackingSpec."MRP Price";
+            DestTrkgSpec."MFG. Date" := SourceTrackingSpec."MFG. Date";
+            DestTrkgSpec.Tin := SourceTrackingSpec.Tin;
+            DestTrkgSpec.Drum := SourceTrackingSpec.Drum;
+            DestTrkgSpec.Bucket := SourceTrackingSpec.Bucket;
+        end;
     end;
 
     [EventSubscriber(ObjectType::Page, 6510, 'OnAfterMoveFields', '', false, false)]
     local procedure OnAfterMoveFields(var TrkgSpec: Record "Tracking Specification"; var ReservEntry: Record "Reservation Entry")
     begin
         ReservEntry."MRP Price" := TrkgSpec."MRP Price";
+        ReservEntry."MFG. Date" := TrkgSpec."MFG. Date";
+        ReservEntry.Tin := TrkgSpec.Tin;
+        ReservEntry.Drum := TrkgSpec.Drum;
+        ReservEntry.Bucket := TrkgSpec.Bucket;
     end;
     // Page6510 End
 

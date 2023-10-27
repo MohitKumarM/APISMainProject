@@ -8,6 +8,22 @@ pageextension 50017 ItemLedgerEntry extends "Item Ledger Entries"
             {
                 ApplicationArea = all;
             }
+            field("MFG. Date"; Rec."MFG. Date")
+            {
+                ApplicationArea = all;
+            }
+            field(Tin; Rec.Tin)
+            {
+                ApplicationArea = all;
+            }
+            field(Drum; Rec.Drum)
+            {
+                ApplicationArea = all;
+            }
+            field(Bucket; Rec.Bucket)
+            {
+                ApplicationArea = all;
+            }
             field("Deal No."; Rec."Deal No.")
             {
                 ApplicationArea = all;

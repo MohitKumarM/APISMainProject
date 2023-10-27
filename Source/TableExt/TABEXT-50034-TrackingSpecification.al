@@ -7,6 +7,23 @@ tableextension 50034 TrackingSpecfication extends "Tracking Specification"
             DataClassification = ToBeClassified;
 
         }
+        field(50023; "MFG. Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50020; "Tin"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50021; "Drum"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50022; "Bucket"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     var

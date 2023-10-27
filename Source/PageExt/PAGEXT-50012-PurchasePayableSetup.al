@@ -12,6 +12,18 @@ pageextension 50012 PurchasePayableSetupN1 extends "Purchases & Payables Setup"
             {
                 ApplicationArea = all;
             }
+            field("Tin Item"; Rec."Tin Item")
+            {
+                ApplicationArea = all;
+            }
+            field("Drum Item"; Rec."Drum Item")
+            {
+                ApplicationArea = all;
+            }
+            field("Bucket Item"; Rec."Bucket Item")
+            {
+                ApplicationArea = all;
+            }
 
 
         }

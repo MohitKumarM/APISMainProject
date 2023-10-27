@@ -6,6 +6,10 @@ tableextension 50026 ReservatonEntry extends "Reservation Entry"
         {
             DataClassification = ToBeClassified;
         }
+        field(50023; "MFG. Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50002; "Packing Type"; enum "Packing Type")
         {
 
@@ -24,6 +28,18 @@ tableextension 50026 ReservatonEntry extends "Reservation Entry"
         }
         field(50007; "Manufacturing Date"; Date)
         {
+        }
+        field(50020; "Tin"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50021; "Drum"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50022; "Bucket"; Decimal)
+        {
+            DataClassification = ToBeClassified;
         }
     }
 

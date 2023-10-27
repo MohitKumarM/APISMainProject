@@ -2,6 +2,11 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
 {
     layout
     {
+        modify("Item No.")
+        {
+            Visible = true;
+        }
+
         modify("Lot No.")
         {
             trigger OnAfterValidate()
@@ -23,10 +28,41 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
         }
         addafter("Appl.-from Item Entry")
         {
+
             field("MRP Price"; Rec."MRP Price")
             {
                 ApplicationArea = all;
 
+            }
+            field("MFG. Date"; Rec."MFG. Date")
+            {
+                ApplicationArea = all;
+                trigger OnValidate()
+                var
+                    L_Item: Record Item;
+                begin
+                    if Rec."MFG. Date" <> 0D then begin
+                        Rec.TestField("Lot No.");
+                        if L_Item.get(Rec."Item No.") then
+                            if Format(L_Item."Expiry Date Formula") <> '' then begin
+                                Rec."Expiration Date" := CalcDate(L_Item."Expiry Date Formula", Rec."MFG. Date");
+                                Rec.Modify();
+                            end;
+                    end else
+                        Clear(Rec."Expiration Date");
+                end;
+            }
+            field(Tin; Rec.Tin)
+            {
+                ApplicationArea = all;
+            }
+            field(Drum; Rec.Drum)
+            {
+                ApplicationArea = all;
+            }
+            field(Bucket; Rec.Bucket)
+            {
+                ApplicationArea = all;
             }
         }
     }
@@ -44,8 +80,14 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
-        myInt: Integer;
+
+    // TrackingSpecfiaction: Record "Tracking Specification";
     begin
-        rec.TestField("MRP Price");
+
+        /*         rec.TestField("MRP Price");
+                Rec.TestField("MFG. Date");
+                Rec.TestField("Lot No.");
+                Rec.TestField("Expiration Date"); */
+
     end;
 }

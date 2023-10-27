@@ -73,6 +73,10 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
         field(50018; "Valid Till"; Date)
         {
         }
+        field(50019; "Creation Tin&Drum&Bucket Item"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(80002; "GST Dependency Type"; Option)
         {
             OptionMembers = " ","Buy-from Address","Order Address","Location Address";

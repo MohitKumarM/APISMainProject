@@ -9,7 +9,7 @@ page 50041 "GAN Approval Order"
     RefreshOnActivate = true;
     SourceTable = "Purchase Header";
     SourceTableView = WHERE("Document Type" = FILTER(Order),
-                            Subcontracting = FILTER(false));
+                            Subcontracting = const(false));
 
     layout
     {
@@ -385,6 +385,20 @@ page 50041 "GAN Approval Order"
                         // PurchLine.CalculateTDS(Rec);
                     end;
                 }
+                action(Statistics1)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Statistics';
+                    Image = Statistics;
+                    ShortCutKey = 'F7';
+                    ToolTip = 'View statistical information, such as the value of posted entries, for the record.';
+
+                    trigger OnAction()
+                    begin
+                        rec.OpenPurchaseOrderStatistics();
+                        CurrPage.PurchLines.Page.ForceTotalsCalculation();
+                    end;
+                }
             }
             group("P&osting")
             {
@@ -605,4 +619,3 @@ page 50041 "GAN Approval Order"
             until PurchLine.Next() = 0;
     end;
 }
-

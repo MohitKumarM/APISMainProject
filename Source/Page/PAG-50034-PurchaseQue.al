@@ -10,7 +10,6 @@ page 50034 "Purchase Que"
         {
             repeater(GroupName)
             {
-
                 field("Not Invoiced"; Rec."Not Invoiced")
                 {
                     ToolTip = 'Specifies received orders that are not invoiced. The orders are displayed in the Purchase Cue on the Purchasing Agent role center, and filtered by today''s date.';
@@ -79,7 +78,6 @@ page 50034 "Purchase Que"
         }
         area(Factboxes)
         {
-
         }
     }
 
@@ -93,7 +91,6 @@ page 50034 "Purchase Que"
 
                 trigger OnAction();
                 begin
-
                 end;
             }
         }

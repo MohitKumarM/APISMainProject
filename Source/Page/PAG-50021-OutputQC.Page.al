@@ -534,7 +534,6 @@ page 50021 "Output QC"
         CurrPage.UPDATE(FALSE);
     end;
 
-
     procedure TrySetApplyToEntries()
     var
         ItemLedgerEntry: Record "Item Ledger Entry";
@@ -551,7 +550,6 @@ page 50021 "Output QC"
                             ReservationEntry.MODIFY(TRUE);
                         END;
                     UNTIL ReservationEntry.NEXT = 0;
-
             UNTIL ItemJournalLine2.NEXT = 0;
     end;
 
@@ -592,7 +590,6 @@ page 50021 "Output QC"
 
         EXIT(ItemLedgerEntry.FINDSET);
     end;
-
 
     procedure OpenQCInfo(DocNo: Code[20]; DocLineNo: Integer)
     var
@@ -726,7 +723,5 @@ page 50021 "Output QC"
                 */
             END;
         END;
-
     end;
 }
-

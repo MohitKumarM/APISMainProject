@@ -2,7 +2,6 @@ tableextension 50029 GateInwrdEntry extends "Gate Entry Line"
 {
     fields
     {
-
         modify("Source Type")
         {
             trigger OnBeforeValidate()
@@ -14,7 +13,6 @@ tableextension 50029 GateInwrdEntry extends "Gate Entry Line"
                 Clear(Description);
             end;
         }
-
         field(50000; "Party No."; Code[20])
         {
             TableRelation = if ("Source Type" = filter('Purchase Order')) Vendor
@@ -28,9 +26,7 @@ tableextension 50029 GateInwrdEntry extends "Gate Entry Line"
             if ("Source Type" = filter('Purchase Return Shipment')) Vendor
             else
             if ("Source Type" = filter('Transfer Shipment')) Location;
-
             DataClassification = ToBeClassified;
-
         }
         field(50001; "Source No.1"; Code[20])
         {
@@ -155,7 +151,6 @@ tableextension 50029 GateInwrdEntry extends "Gate Entry Line"
                 Validate("Source No.", "Source No.1");
             end;
         }
-
     }
 
     var

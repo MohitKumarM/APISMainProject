@@ -153,4 +153,3 @@ page 50016 "Honey Purch. Orders"
         pgHoneyOrder: Page "Honey Purchase Order";
         recUserSetup: Record "User Setup";
 }
-

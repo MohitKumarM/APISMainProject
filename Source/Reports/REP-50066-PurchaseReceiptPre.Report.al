@@ -1,7 +1,7 @@
 report 50066 "Purchase Receipt Pre"
 {
     //     DefaultLayout = RDLC;
-    //    
+    //
     //RDLCLayout = '.\ReportLayouts\PurchaseReceiptPre.rdl';
     //     UsageCategory = ReportsAndAnalysis;
     //     ApplicationArea = All;
@@ -421,7 +421,6 @@ report 50066 "Purchase Receipt Pre"
 
     //     requestpage
     //     {
-
     //         layout
     //         {
     //         }
@@ -468,4 +467,3 @@ report 50066 "Purchase Receipt Pre"
     //         decLineDisAmt: Decimal;
     //     // "Purch. Comment Line": Record "Purch. Comment Line";
 }
-

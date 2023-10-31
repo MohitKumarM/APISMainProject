@@ -1,6 +1,5 @@
 table 50005 "BeeKeeper VendorLedger Entries"
 {
-
     fields
     {
         field(1; "Entry No."; Integer)
@@ -115,4 +114,3 @@ table 50005 "BeeKeeper VendorLedger Entries"
     {
     }
 }
-

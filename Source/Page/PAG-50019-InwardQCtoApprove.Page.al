@@ -145,4 +145,3 @@ page 50019 "Inward QC to Approve"
         recQualityLines: Record "Quality Line";
         pgQuality: Page "Quality Check Card to Approve";
 }
-

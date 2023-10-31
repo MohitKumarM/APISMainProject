@@ -46,7 +46,6 @@ page 50018 "Honey Purchase Order Subform"
                         NoOnAfterValidate;
                     end;
                 }
-
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
@@ -54,7 +53,6 @@ page 50018 "Honey Purchase Order Subform"
                 field("Deal No."; Rec."Deal No.")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Deal Line No."; Rec."Deal Line No.")
                 {
@@ -274,7 +272,6 @@ page 50018 "Honey Purchase Order Subform"
                         // This functionality was copied from page #50. Unsupported part was commented. Please check it.
                         /*CurrPage.PurchLines.PAGE.*/
                         // ShowStrDetailsForm;
-
                     end;
                 }
                 action("E&xcise Detail")
@@ -288,7 +285,6 @@ page 50018 "Honey Purchase Order Subform"
                         // This functionality was copied from page #50. Unsupported part was commented. Please check it.
                         /*CurrPage.PurchLines.PAGE.*/
                         //ShowExcisePostingSetup;
-
                     end;
                 }
                 action("Detailed Tax")
@@ -339,18 +335,15 @@ page 50018 "Honey Purchase Order Subform"
         PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the purchase order has been invoiced.';
 
-
     procedure ApproveCalcInvDisc()
     begin
         CODEUNIT.RUN(CODEUNIT::"Purch.-Disc. (Yes/No)", Rec);
     end;
 
-
     procedure CalcInvDisc()
     begin
         CODEUNIT.RUN(CODEUNIT::"Purch.-Calc.Discount", Rec);
     end;
-
 
     procedure ExplodeBOM()
     begin
@@ -358,7 +351,6 @@ page 50018 "Honey Purchase Order Subform"
             ERROR(Text001);
         CODEUNIT.RUN(CODEUNIT::"Purch.-Explode BOM", Rec);
     end;
-
 
     procedure OpenSalesOrderForm()
     var
@@ -372,7 +364,6 @@ page 50018 "Honey Purchase Order Subform"
         SalesOrder.RUN;
     end;
 
-
     procedure InsertExtendedText(Unconditionally: Boolean)
     begin
         IF TransferExtendedText.PurchCheckIfAnyExtText(Rec, Unconditionally) THEN BEGIN
@@ -383,7 +374,6 @@ page 50018 "Honey Purchase Order Subform"
             UpdateForm(TRUE);
     end;
 
-
     procedure ShowTracking()
     var
         TrackingForm: Page "Order Tracking";
@@ -391,7 +381,6 @@ page 50018 "Honey Purchase Order Subform"
         TrackingForm.SetPurchLine(Rec);
         TrackingForm.RUNMODAL;
     end;
-
 
     procedure OpenSpecOrderSalesOrderForm()
     var
@@ -405,18 +394,15 @@ page 50018 "Honey Purchase Order Subform"
         SalesOrder.RUN;
     end;
 
-
     procedure UpdateForm(SetSaveRecord: Boolean)
     begin
         CurrPage.UPDATE(SetSaveRecord);
     end;
 
-
     procedure SetUpdateAllowed(UpdateAllowed: Boolean)
     begin
         UpdateAllowedVar := UpdateAllowed;
     end;
-
 
     procedure UpdateAllowed(): Boolean
     begin
@@ -427,14 +413,12 @@ page 50018 "Honey Purchase Order Subform"
         EXIT(TRUE);
     end;
 
-
     procedure ShowPrices()
     begin
         PurchHeader.GET(Rec."Document Type", Rec."Document No.");
         CLEAR(PurchPriceCalcMgt);
         PurchPriceCalcMgt.GetPurchLinePrice(PurchHeader, Rec);
     end;
-
 
     procedure ShowLineDisc()
     begin
@@ -457,7 +441,6 @@ page 50018 "Honey Purchase Order Subform"
         InsertExtendedText(FALSE);
     end;
 
-
     procedure ShowStrDetailsForm()
     var
     // StrOrderLineDetails: Record 13795;
@@ -474,12 +457,10 @@ page 50018 "Honey Purchase Order Subform"
         // StrOrderLineDetailsForm.RUNMODAL;
     end;
 
-
     procedure ShowExcisePostingSetup()
     begin
         // Rec.GetExcisePostingSetup;
     end;
-
 
     procedure ShowDetailedTaxEntryBuffer()
     var
@@ -499,4 +480,3 @@ page 50018 "Honey Purchase Order Subform"
         DocumentTotals.PurchaseDocTotalsNotUpToDate();
     end;
 }
-

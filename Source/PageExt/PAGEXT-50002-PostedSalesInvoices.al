@@ -30,7 +30,5 @@ pageextension 50002 PostedSalesInvoices extends "Posted Sales Invoices"
         LCustomerLedger.SetAutoCalcFields("Amount (LCY)");
         if LCustomerLedger.FindFirst() then
             AmountToCustomer := LCustomerLedger."Amount (LCY)";
-
     end;
-
 }

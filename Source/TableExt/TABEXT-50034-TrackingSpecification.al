@@ -5,7 +5,6 @@ tableextension 50034 TrackingSpecfication extends "Tracking Specification"
         field(50000; "MRP Price"; Decimal)
         {
             DataClassification = ToBeClassified;
-
         }
         field(50023; "MFG. Date"; Date)
         {
@@ -23,7 +22,6 @@ tableextension 50034 TrackingSpecfication extends "Tracking Specification"
         {
             DataClassification = ToBeClassified;
         }
-
     }
 
     var

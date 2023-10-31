@@ -1,7 +1,7 @@
 report 50027 "Purchase Receipt Other Pre"
 {
     //     DefaultLayout = RDLC;
-    //     
+    //
     //RDLCLayout = '.\ReportLayouts\PurchaseReceiptOtherPre.rdl';
     //     PreviewMode = PrintLayout;
     //     UsageCategory = ReportsAndAnalysis;
@@ -257,11 +257,9 @@ report 50027 "Purchase Receipt Other Pre"
     //             //     }
     //             //     // column(TotalGSTPer; TotalGSTPer)
     //             //     // {
-
     //             //     // }
     //             //     // column(TotalGstwithAmount; TotalGstwithAmount)
     //             //     // {
-
     //             //     // }
     //             //     // column(TotalGst; TotalGst) { }
     //             //     column(LineAmount; ("Qty. to Receive" * "Direct Unit Cost") + "Excise Amount" + decTaxAmt)
@@ -354,7 +352,6 @@ report 50027 "Purchase Receipt Other Pre"
     //             //         { }
     //             //         column(RcvQty; RcvQty) { }
 
-
     //             //         trigger OnAfterGetRecord()
     //             //         begin
     //             //             intSrNo += 1;
@@ -362,8 +359,6 @@ report 50027 "Purchase Receipt Other Pre"
     //             //                 decInvQty := ROUND("Purchase Line"."Billed Quantity" / "Purchase Line"."Qty. to Receive" * "Item Ledger Entry".Quantity, 0.01)
     //             //             ELSE
     //             //                 decInvQty := 0;
-
-
 
     //             //             txtPackingType := '';
     //             //             decPckingQty := 0;
@@ -404,7 +399,6 @@ report 50027 "Purchase Receipt Other Pre"
     //             //                 end;
     //             //             //Shivam--
     //             //         end;
-
 
     //             //     }
     //             //     // column(TotalGst; TotalGst)
@@ -449,7 +443,6 @@ report 50027 "Purchase Receipt Other Pre"
     //             //         //         NewGStCalculationasperQtytoReceive2 := NewGStCalculationasperQtytoReceive2;
     //             //         //         TotalGStCalculationasperQtytoReceive2 := TotalGStCalculationasperQtytoReceive2;
 
-
     //             //         //         IF "Purchase Line"."Billed Quantity" <> 0 THEN
     //             //         //             decInvQty := ROUND("Purchase Line"."Billed Quantity" / "Purchase Line"."Qty. to Receive" * ReservationEntry.Quantity, 0.01)
     //             //         //         ELSE
@@ -480,10 +473,7 @@ report 50027 "Purchase Receipt Other Pre"
 
     //             //         // end;
 
-
     //             //         //Shivam--
-
-
 
     //             //         decTaxPerc := 0;
     //             //         recTaxAreaLine.RESET;
@@ -518,8 +508,6 @@ report 50027 "Purchase Receipt Other Pre"
     //             //             REPEAT
     //             //                 decTareWeight += recLotTrackingEntry."Tare Weight";
     //             //             UNTIL recLotTrackingEntry.NEXT = 0;
-
-
 
     //             //         CLEAR(decGSTPerc);
     //             //         CLEAR(decGSTAmt);
@@ -570,7 +558,6 @@ report 50027 "Purchase Receipt Other Pre"
     //             //         TotalGstPer := 0;
     //             //         TotalGstPer := GSTPer1 + GSTPer2 + GSTPer3;
 
-
     //             //         QtytoReceive := 0;
     //             //         QtytoReceive := "Purchase Line"."Qty. to Receive";
 
@@ -586,12 +573,10 @@ report 50027 "Purchase Receipt Other Pre"
     //             //         TotalGStCalculationasperQtytoReceive := 0;
     //             //         TotalGStCalculationasperQtytoReceive := NewGStCalculationasperQtytoReceive + (QtytoReceive * NewUnitCost);
 
-
     //             //         // repcheck.InitTextVariable;
     //             //         // repcheck.FormatNoText(notext1, Round(TotalGStCalculationasperQtytoReceive, 0.01), "Purchase Header"."Currency Code");
 
     //             //     end;
-
 
     //             // }
     //             dataitem("Purch. Comment Line"; "Purch. Comment Line")
@@ -624,7 +609,6 @@ report 50027 "Purchase Receipt Other Pre"
     //                 end;
     //             }
 
-
     //             trigger OnPreDataItem()
     //             begin
     //                 Clear(GSTComponentCode);
@@ -643,7 +627,6 @@ report 50027 "Purchase Receipt Other Pre"
     //                 // TotalGStAmt += TotalAMt + TotalGstpercent;
     //                 // AmountSum += TotalGStAmt;
     //                 //Shivam
-
 
     //                 IF recPaymentTerm.GET("Purchase Header"."Payment Terms Code") THEN
     //                     recPaymentTerm.INIT;
@@ -782,7 +765,6 @@ report 50027 "Purchase Receipt Other Pre"
 
     //     requestpage
     //     {
-
     //         layout
     //         {
     //         }
@@ -892,7 +874,6 @@ report 50027 "Purchase Receipt Other Pre"
     //     // NewGStCalculationasperQtytoReceive2: Decimal;
     //     // TotalGStCalculationasperQtytoReceive2: Decimal;
     //     // "Purch. Comment Line": Record "Purch. Comment Line";
-
 
     //     //Shivam++ 13/07/23
     //     local procedure GetAmount(var PurHdr: Record "Purchase Header")
@@ -1036,4 +1017,3 @@ report 50027 "Purchase Receipt Other Pre"
     //     end;
     //     //Shivam--
 }
-

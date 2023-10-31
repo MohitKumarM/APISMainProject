@@ -168,4 +168,3 @@ page 50031 "Cons. Lot Tracking View"
         opDocumentType := DocumentType;
     end;
 }
-

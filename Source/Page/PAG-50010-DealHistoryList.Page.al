@@ -86,4 +86,3 @@ page 50010 "Deal History List"
     var
         decRemQuantity: Decimal;
 }
-

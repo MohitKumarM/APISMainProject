@@ -2,7 +2,6 @@ pageextension 50013 PurchaOrderSubform extends "Purchase Order Subform"
 {
     layout
     {
-
         addafter(Description)
         {
             field("Deal No."; Rec."Deal No.")
@@ -67,7 +66,6 @@ pageextension 50013 PurchaOrderSubform extends "Purchase Order Subform"
                 ApplicationArea = All;
                 Image = CreateLinesFromJob;
 
-
                 trigger OnAction()
                 var
                     PurchaseLine: Record "Purchase Line";
@@ -93,6 +91,7 @@ pageextension 50013 PurchaOrderSubform extends "Purchase Order Subform"
                     if ReserVationEntry2.FindFirst() then begin
                         Message('%1 Tin,%2 Drum,%3 Bucket', ReservationEntry.Tin, ReservationEntry.Drum, ReservationEntry.Bucket);
                         for i := 1 to 3 do begin
+                            Qty := 0;
                             if (i = 1) and (ReservationEntry.Tin <> 0) then begin
                                 Qty := ReservationEntry.Tin;
                                 PurchasePayableSetup.TestField("Tin Item");
@@ -152,7 +151,6 @@ pageextension 50013 PurchaOrderSubform extends "Purchase Order Subform"
                             PurchaseHeader.Modify();
                         end;
                     end;
-
                 end;
             }
         }
@@ -161,7 +159,6 @@ pageextension 50013 PurchaOrderSubform extends "Purchase Order Subform"
     var
         myInt: Integer;
 
-
     procedure UpdateTaxAmount()
     var
         CalculateTax: Codeunit "Calculate Tax";
@@ -169,5 +166,4 @@ pageextension 50013 PurchaOrderSubform extends "Purchase Order Subform"
         CurrPage.SaveRecord();
         CalculateTax.CallTaxEngineOnPurchaseLine(Rec, xRec);
     end;
-
 }

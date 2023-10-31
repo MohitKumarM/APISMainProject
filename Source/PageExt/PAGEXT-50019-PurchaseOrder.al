@@ -1,6 +1,5 @@
 pageextension 50019 PurchaseOrder extends "Purchase Order"
 {
-
     layout
     {
         modify("Responsibility Center")
@@ -145,7 +144,6 @@ pageextension 50019 PurchaseOrder extends "Purchase Order"
                 end;
             }
         }
-
     }
     trigger OnOpenPage()
     begin
@@ -153,8 +151,4 @@ pageextension 50019 PurchaseOrder extends "Purchase Order"
         Rec.SetRange("Short Close", false);
         Rec.FILTERGROUP(0);
     end;
-
-
-
-
 }

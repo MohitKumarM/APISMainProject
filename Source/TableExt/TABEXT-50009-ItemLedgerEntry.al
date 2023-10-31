@@ -60,7 +60,6 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
         {
             DataClassification = ToBeClassified;
         }
-
         field(60000; "Approved Quantity"; Decimal)
         {
         }

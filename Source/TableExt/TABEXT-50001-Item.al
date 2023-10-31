@@ -13,9 +13,7 @@ tableextension 50001 ItemN1 extends Item
         {
             Caption = 'Product Group Code';
             TableRelation = "New Product Group" WHERE("Item Category Code" = FIELD("Item Category Code"));
-
         }
-
     }
 
     var

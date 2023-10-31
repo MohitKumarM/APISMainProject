@@ -32,7 +32,6 @@ page 50017 "Honey Purchase Order"
                                 CurrPage.UPDATE;
                         end;
                     }
-
                     field("Buy-from Vendor No."; Rec."Buy-from Vendor No.")
                     {
                         Importance = Promoted;
@@ -629,7 +628,6 @@ page 50017 "Honey Purchase Order"
             Rec.SetRange("Short Close", false);
             Rec.FILTERGROUP(0);
         END;
-
     end;
 
     var
@@ -644,7 +642,6 @@ page 50017 "Honey Purchase Order"
         ArchiveManagement: Codeunit ArchiveManagement;
         PurchLine: Record "Purchase Line";
         // DefermentBuffer: Record 16532;
-
 
         JobQueueVisible: Boolean;
         recProductGroup: Record "New Product Group";
@@ -747,4 +744,3 @@ page 50017 "Honey Purchase Order"
         VendorInvoiceNoMandatory := PurchSetup."Ext. Doc. No. Mandatory";
     end;
 }
-

@@ -114,4 +114,3 @@ page 50007 "Deals to Approve List"
         pgSaudaCard: Page "Deal Approval Card";
         recUserSetup: Record "User Setup";
 }
-

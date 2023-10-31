@@ -5,7 +5,6 @@ report 50007 "Vendor Ledger"
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = all;
 
-
     dataset
     {
         dataitem("Company Information"; 79)
@@ -110,15 +109,12 @@ report 50007 "Vendor Ledger"
             }
             column(Instruction; PurchasePayableSetup."PO Terms & Conditions")
             {
-
             }
 
             trigger OnAfterGetRecord()
             begin
                 PurchasePayableSetup.Get();
                 IF Customer.GET("Cust. Ledger Entry"."Vendor No.") THEN;
-
-
 
                 IF "Balance Option" = "Balance Option"::Day THEN BEGIN
                     /*  CurrReport.SHOWOUTPUT :=
@@ -170,7 +166,6 @@ report 50007 "Vendor Ledger"
                 IF Balance > 0 THEN ClCr := ABS(Balance) ELSE ClDr := ABS(Balance);
                 BalanceDr := TotalDr + ClDr;
                 BalanceCr := TotalCr + ClCr;
-
             end;
 
             trigger OnPreDataItem()
@@ -182,7 +177,6 @@ report 50007 "Vendor Ledger"
 
     requestpage
     {
-
         layout
         {
             area(content)
@@ -240,4 +234,3 @@ report 50007 "Vendor Ledger"
         TotalCr: Decimal;
         DateFilter: Text[30];
 }
-

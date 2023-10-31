@@ -6,7 +6,6 @@ report 50009 "Payment Advice"
     ApplicationArea = All;
     UsageCategory = Lists;//None
 
-
     dataset
     {
         dataitem("Vendor Ledger Entry"; "Vendor Ledger Entry")
@@ -17,7 +16,6 @@ report 50009 "Payment Advice"
 
             column(CompanyName; CompanyInfo.Name)
             { }
-
             column(CompanyFullAddress; CompanyInfo.Address + CompanyInfo."Address 2" + ' , ' + CompanyInfo.City + ' - ' + CompanyInfo."Post Code")
             { }
             column(CompanyPicture; CompanyInfo.Picture)
@@ -44,7 +42,7 @@ report 50009 "Payment Advice"
             { }
             column(External_Document_No_; "External Document No.")
             { }
-            column(UTR_No_; '') // 15578 "UTR No." As Discussed With Jaideep Please Comment 
+            column(UTR_No_; '') // 15578 "UTR No." As Discussed With Jaideep Please Comment
             { }
             column(Posting_Date; "Posting Date")
             { }
@@ -52,7 +50,6 @@ report 50009 "Payment Advice"
             { }
             column(ChequeNo; ChequeNo)
             { }
-
             dataitem("Detailed Vendor Ledg. Entry"; "Detailed Vendor Ledg. Entry")
             {
                 DataItemLink = "Vendor Ledger Entry No." = FIELD("Entry No.");
@@ -111,7 +108,7 @@ report 50009 "Payment Advice"
                             ChequeNo := RecCheckLedgerEntry."UTR No."
                         else
                             ChequeNo := RecCheckLedgerEntry."Check No.";
-                end; */ // // 15578 "UTR No." As Discussed With Jaideep Please Comment 
+                end; */ // // 15578 "UTR No." As Discussed With Jaideep Please Comment
             end;
 
             trigger OnPreDataItem()
@@ -172,7 +169,7 @@ report 50009 "Payment Advice"
                     Clear(UTRNo);
                     Clear(BillAdvAmount);
 
-                    //  UTRNo := "Vendor Ledger Entry"."UTR No."; // 15578 "UTR No." As Discussed With Jaideep Please Comment 
+                    //  UTRNo := "Vendor Ledger Entry"."UTR No."; // 15578 "UTR No." As Discussed With Jaideep Please Comment
                     PaymentDate := "Vendor Ledger Entry"."Posting Date";
                     AmountPaid := "Vendor Ledger Entry".Amount;
 

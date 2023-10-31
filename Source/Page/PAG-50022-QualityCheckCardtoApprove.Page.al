@@ -581,7 +581,6 @@ page 50022 "Quality Check Card to Approve"
                     MESSAGE('Quality lines successfully posted.');
 
                     CurrPage.CLOSE;
-
                 end;
             }
             action(Print)
@@ -626,4 +625,3 @@ page 50022 "Quality Check Card to Approve"
         decQtyToAdjust: Decimal;
         recQuality: Record "Quality Header";
 }
-

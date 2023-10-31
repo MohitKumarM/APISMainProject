@@ -491,7 +491,6 @@
 
 //     requestpage
 //     {
-
 //         layout
 //         {
 //         }
@@ -704,4 +703,3 @@
 //         decNetTaxPerc := decTaxPerc;
 //     end;
 // }
-

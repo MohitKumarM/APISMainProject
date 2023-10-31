@@ -329,7 +329,6 @@ report 50067 "Purchase Receipt H-Pre"
     //                             end;
     //                         //Shivam--
 
-
     //                     end;
 
     //                     trigger OnPostDataItem()
@@ -406,7 +405,6 @@ report 50067 "Purchase Receipt H-Pre"
     //                     TotalGstPer += IGSTPer + CGSTPer + SGSTPer;
     //                     TotalAmountGST += VIGSTamt + vCGSTamt + vSGSTamt;
     //                     TotalAmountwithGST += "Line Amount" + TotalAmountGST;
-
 
     //                     // decTareWeight := 0;
     //                     // recLotTrackingEntry.RESET;
@@ -539,7 +537,6 @@ report 50067 "Purchase Receipt H-Pre"
     //         }
     //     }
 
-
     //     var
     //         TotalValue: Decimal;
     //         AQuanPack: Decimal;
@@ -609,4 +606,3 @@ report 50067 "Purchase Receipt H-Pre"
     //         QtyPercent: Decimal;
     //         VendorGSTIN: Code[20];
 }
-

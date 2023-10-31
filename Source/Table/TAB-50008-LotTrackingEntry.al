@@ -160,4 +160,3 @@ table 50008 "Lot Tracking Entry"
     {
     }
 }
-

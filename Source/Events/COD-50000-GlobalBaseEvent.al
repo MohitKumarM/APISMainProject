@@ -2,7 +2,6 @@ codeunit 50000 Tble83
 {
     trigger OnRun()
     begin
-
     end;
     // Table83 Start
 
@@ -13,7 +12,6 @@ codeunit 50000 Tble83
         Tin: Decimal;
         Drum: Decimal;
         Bucket: Decimal;
-
 
     [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnAfterCopyItemJnlLineFromPurchLine', '', false, false)]
     local procedure OnAfterCopyItemJnlLineFromPurchLine(var ItemJnlLine: Record "Item Journal Line"; PurchLine: Record "Purchase Line")
@@ -52,12 +50,11 @@ codeunit 50000 Tble83
         NewItemLedgEntry."Vehicle No." := ItemJournalLine."Vehicle No.";
         NewItemLedgEntry."Purchaser Code" := ItemJournalLine."Purchaser Code";
         NewItemLedgEntry."Purchaser Name" := ItemJournalLine."Purchaser Name";
-        NewItemLedgEntry."MRP Price" := ItemJournalLine."MRP Price"; // 
+        NewItemLedgEntry."MRP Price" := ItemJournalLine."MRP Price"; //
         NewItemLedgEntry."MFG. Date" := ItemJournalLine."MFG. Date";
         NewItemLedgEntry.Tin := ItemJournalLine.Tin;
         NewItemLedgEntry.Drum := ItemJournalLine.Drum;
         NewItemLedgEntry.Bucket := ItemJournalLine.Bucket;
-
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", 'OnBeforeInsertSetupTempSplitItemJnlLine', '', false, false)]
@@ -174,7 +171,6 @@ codeunit 50000 Tble83
 
     // Codeunit90 End
 
-
     // Codeunit91 Start
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post (Yes/No)", 'OnBeforeConfirmPost', '', false, false)]
     local procedure OnBeforeConfirmPost_Purch(var PurchaseHeader: Record "Purchase Header"; var HideDialog: Boolean; var IsHandled: Boolean; var DefaultOption: Integer)
@@ -198,7 +194,6 @@ codeunit 50000 Tble83
                 UNTIL Rec_PurchLine.NEXT = 0;
         END;
     end;
-
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post (Yes/No)", 'OnAfterConfirmPost', '', false, false)]
     local procedure OnAfterConfirmPost(var PurchaseHeader: Record "Purchase Header")
@@ -264,7 +259,6 @@ codeunit 50000 Tble83
         PurchaseHeader.Receive := Selection in [1, 3];
         if Selection <> 0 then
             Result := true;
-
     end;
 
     // Codeunit91 End
@@ -276,10 +270,7 @@ codeunit 50000 Tble83
         PurchLine."Honey Item No." := TempPurchaseLine."Honey Item No.";
     end;
 
-
-
     /// Quantiy To receive as per the GAN condition
-
 
     [EventSubscriber(ObjectType::Table, Database::"Purchase Line", 'OnValidateQuantityOnBeforeDropShptCheck', '', true, true)]
     local procedure "Purchase Line_OnValidateQuantityOnBeforeDropShptCheck"
@@ -317,14 +308,19 @@ codeunit 50000 Tble83
     local procedure OnValidateOverReceiptQuantity(var PurchaseLine: Record "Purchase Line"; xPurchaseLine: Record "Purchase Line"; CalledByFieldNo: Integer; var Handled: Boolean)
     begin
         Handled := true;
-
     end;
 
     // Table39 End
 
-    // ********** Item Tracking Specification to Item Ledger Entry Field Flow ************** Start
+
 
     // Page6510 Start
+    [IntegrationEvent(false, false)]
+    local procedure OnAssistEditLotNoOnBeforeCurrPageUdate(var TrackingSpecification: Record "Tracking Specification"; xTrackingSpecification: Record "Tracking Specification")
+    begin
+    end;
+
+
     [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnRegisterChangeOnChangeTypeInsertOnBeforeInsertReservEntry', '', false, false)]
     local procedure OnRegisterChangeOnChangeTypeInsertOnBeforeInsertReservEntry(var TrackingSpecification: Record "Tracking Specification"; var OldTrackingSpecification: Record "Tracking Specification"; var NewTrackingSpecification: Record "Tracking Specification"; FormRunMode: Option)
     begin
@@ -334,7 +330,6 @@ codeunit 50000 Tble83
         Tin := NewTrackingSpecification.Tin;
         Drum := NewTrackingSpecification.Drum;
         Bucket := NewTrackingSpecification.Bucket;
-
     end;
 
     // Page6510 End
@@ -347,7 +342,6 @@ codeunit 50000 Tble83
         ReservationEntry.Tin := Tin;
         ReservationEntry.Drum := Drum;
         ReservationEntry.Bucket := Bucket;
-
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnCreateReservEntryExtraFields', '', false, false)]
@@ -358,6 +352,23 @@ codeunit 50000 Tble83
         InsertReservEntry.Tin := NewTrackingSpecification.Tin;
         InsertReservEntry.Drum := NewTrackingSpecification.Drum;
         InsertReservEntry.Bucket := NewTrackingSpecification.Bucket;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnAfterCopyFromInsertReservEntry', '', false, false)]
+    local procedure OnAfterCopyFromInsertReservEntry(var InsertReservEntry: Record "Reservation Entry"; var ReservEntry: Record "Reservation Entry"; FromReservEntry: Record "Reservation Entry"; Status: Enum "Reservation Status"; QtyToHandleAndInvoiceIsSet: Boolean)
+    var
+        R_ReservEntry: Record "Reservation Entry";
+    begin
+
+        IF ReservEntry."Transferred from Entry No." <> 0 THEN BEGIN
+            IF R_ReservEntry.GET(ReservEntry."Transferred from Entry No.") THEN BEGIN
+                ReservEntry."MRP Price" := R_ReservEntry."MRP Price";
+                ReservEntry."MFG. Date" := R_ReservEntry."MFG. Date";
+                ReservEntry.Tin := R_ReservEntry.Tin;
+                ReservEntry.Drum := R_ReservEntry.Drum;
+                ReservEntry.Bucket := R_ReservEntry.Bucket;
+            END;
+        END;
     end;
 
     // Codeunit99000830 End
@@ -398,10 +409,95 @@ codeunit 50000 Tble83
     end;
     // Page6510 End
 
-    // ********** Item Tracking Specification to Item Ledger Entry Field Flow ************** End
 
 
+    // Codeunit99000831 Start
+    [EventSubscriber(ObjectType::Codeunit, 99000831, 'OnBeforeUpdateItemTracking', '', false, false)]
+    local procedure OnBeforeUpdateItemTracking(var ReservEntry: Record "Reservation Entry"; var TrackingSpecification: Record "Tracking Specification")
+    begin
 
+        ReservEntry."MRP Price" := TrackingSpecification."MRP Price";
+        ReservEntry."MFG. Date" := TrackingSpecification."MFG. Date";
+        ReservEntry.Tin := TrackingSpecification.Tin;
+        ReservEntry.Drum := TrackingSpecification.Drum;
+        ReservEntry.Bucket := TrackingSpecification.Bucket;
+    end;
+    // Codeunit99000831 End
 
+    // Codeunit6500 Start
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Tracking Management", 'OnAfterInitReservEntry', '', false, false)]
+    local procedure OnAfterInitReservEntry(var ReservEntry: Record "Reservation Entry"; ItemLedgerEntry: Record "Item Ledger Entry");
+    begin
 
+        ReservEntry."MRP Price" := ItemLedgerEntry."MRP Price";
+        ReservEntry."MFG. Date" := ItemLedgerEntry."MFG. Date";
+        ReservEntry.Tin := ItemLedgerEntry.Tin;
+        ReservEntry.Drum := ItemLedgerEntry.Drum;
+        ReservEntry.Bucket := ItemLedgerEntry.Bucket;
+    end;
+    // Codeunit6500 End
+
+    // Codeunit6501 Start
+    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAfterAssistEditTrackingNo', '', false, false)]
+    local procedure OnAfterAssistEditTrackingNo(var TrackingSpecification: Record "Tracking Specification"; var TempGlobalEntrySummary: Record "Entry Summary" temporary; CurrentSignFactor: Integer; MaxQuantity: Decimal)
+    var
+        //RG23D:Record RG 23 D;
+        S_Line: Record "Sales Line";
+        R_ValueEntry: Record "Value Entry";
+        ValueEntryG: Record "Value Entry";
+        ValueEntrySales: Record "Value Entry";
+        ValueEntrySCrG: Record "Value Entry";
+        CustmerG: Record Customer;
+    begin
+        TrackingSpecification."MRP Price" := TempGlobalEntrySummary."MRP Price";
+        TrackingSpecification."MFG. Date" := TempGlobalEntrySummary."MFG. Date";
+        TrackingSpecification.Tin := TempGlobalEntrySummary.Tin;
+        TrackingSpecification.Drum := TempGlobalEntrySummary.Drum;
+        TrackingSpecification.Bucket := TempGlobalEntrySummary.Bucket;
+
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnTransferItemLedgToTempRecOnBeforeInsert', '', false, false)]
+    local procedure OnTransferItemLedgToTempRecOnBeforeInsert(var TempGlobalReservEntry: Record "Reservation Entry" temporary; ItemLedgerEntry: Record "Item Ledger Entry"; TrackingSpecification: Record "Tracking Specification"; var IsHandled: Boolean)
+    begin
+
+        TempGlobalReservEntry."MRP Price" := ItemLedgerEntry."MRP Price";
+        TempGlobalReservEntry."MFG. Date" := ItemLedgerEntry."MFG. Date";
+        TempGlobalReservEntry.Tin := ItemLedgerEntry.Tin;
+        TempGlobalReservEntry.Drum := ItemLedgerEntry.Drum;
+        TempGlobalReservEntry.Bucket := ItemLedgerEntry.Bucket;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnCreateEntrySummary2OnAfterAssignTrackingFromReservEntry', '', false, false)]
+    local procedure OnCreateEntrySummary2OnAfterAssignTrackingFromReservEntry(var TempGlobalEntrySummary: Record "Entry Summary" temporary; TempReservEntry: Record "Reservation Entry" temporary);
+    begin
+        TempGlobalEntrySummary."MRP Price" := TempReservEntry."MRP Price";
+        TempGlobalEntrySummary."MFG. Date" := TempReservEntry."MFG. Date";
+        TempGlobalEntrySummary.Tin := TempReservEntry.Tin;
+        TempGlobalEntrySummary.Drum := TempReservEntry.Drum;
+        TempGlobalEntrySummary.Bucket := TempReservEntry.Bucket;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAddSelectedTrackingToDataSetOnAfterInitTrackingSpecification2', '', false, false)]
+    local procedure OnAddSelectedTrackingToDataSetOnAfterInitTrackingSpecification2(var TrackingSpecification: Record "Tracking Specification"; TempTrackingSpecification: Record "Tracking Specification" temporary)
+    begin
+        //TEAM::3333
+        TrackingSpecification."MRP Price" := TempTrackingSpecification."MRP Price";
+        TrackingSpecification."MFG. Date" := TempTrackingSpecification."MFG. Date";
+        TrackingSpecification.Tin := TempTrackingSpecification.Tin;
+        TrackingSpecification.Drum := TempTrackingSpecification.Drum;
+        TrackingSpecification.Bucket := TempTrackingSpecification.Bucket;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnBeforeTempTrackingSpecificationInsert', '', false, false)]
+    local procedure OnBeforeTempTrackingSpecificationInsert(var TempTrackingSpecification: Record "Tracking Specification" temporary; var TempEntrySummary: Record "Entry Summary" temporary)
+    begin
+        TempTrackingSpecification."MRP Price" := TempEntrySummary."MRP Price";
+        TempTrackingSpecification."MFG. Date" := TempEntrySummary."MFG. Date";
+        TempTrackingSpecification.Tin := TempEntrySummary.Tin;
+        TempTrackingSpecification.Drum := TempEntrySummary.Drum;
+        TempTrackingSpecification.Bucket := TempEntrySummary.Bucket;
+    end;
+
+    // Codeunit6501 End
 }

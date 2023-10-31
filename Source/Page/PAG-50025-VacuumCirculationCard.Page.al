@@ -51,4 +51,3 @@ page 50025 "Vacuum Circulation Card"
     var
         recProdctonOrder: Record "Production Order";
 }
-

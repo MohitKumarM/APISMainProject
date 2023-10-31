@@ -4,7 +4,6 @@ pageextension 50010 UsersSetup extends "User Setup"
     {
         addafter(PhoneNo)
         {
-
             field("Allow Customer Approval"; Rec."Allow Customer Approval")
             {
                 ApplicationArea = All;

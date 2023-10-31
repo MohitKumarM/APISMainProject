@@ -491,7 +491,6 @@ report 50065 "Purchase Order"
 
     //     requestpage
     //     {
-
     //         layout
     //         {
     //         }
@@ -704,4 +703,3 @@ report 50065 "Purchase Order"
     //         decNetTaxPerc := decTaxPerc;
     //     end;
 }
-

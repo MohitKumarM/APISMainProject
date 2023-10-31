@@ -193,7 +193,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         COMMIT;
     end;
 
-
     procedure CheckLines(var ItemJnlLine: Record "Item Journal Line")
     begin
         LineCount := 0;
@@ -226,7 +225,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         UNTIL ItemJnlLine."Line No." = StartLineNo;
         NoOfRecords := LineCount;
     end;
-
 
     procedure PostLines(var ItemJnlLine: Record "Item Journal Line"; var PhysInvtCountMgt: Codeunit "Phys. Invt. Count.-Management")
     var
@@ -331,9 +329,7 @@ codeunit 50002 "Item Jnl.-Submit Batch"
                 PhysInvtCountMgt.AddToTempItemSKUList(ItemJnlLine."Item No.", ItemJnlLine."Location Code", ItemJnlLine."Variant Code", ItemJnlLine."Phys Invt Counting Period Type");
             END;
         UNTIL ItemJnlLine.NEXT = 0;
-
     end;
-
 
     procedure HandleRecurringLine(var ItemJnlLine: Record "Item Journal Line")
     var
@@ -358,7 +354,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
             ItemJnlLine2.MODIFY;
         UNTIL ItemJnlLine2.NEXT = 0;
     end;
-
 
     procedure HandleNonRecurringLine(var ItemJnlLine: Record "Item Journal Line"; OldEntryType: Option Purchase,Sale,"Positive Adjmt.","Negative Adjmt.",Transfer,Consumption,Output," ","Assembly Consumption","Assembly Output")
     var
@@ -397,7 +392,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
             ItemJnlLine3.MODIFY;
         END;
     end;
-
 
     procedure ConstructPostingNumber(var ItemJnlLine: Record "Item Journal Line")
     begin
@@ -683,7 +677,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         END;
     end;
 
-
     procedure CheckWMSBin(ItemJnlLine: Record "Item Journal Line")
     begin
         GetLocation(ItemJnlLine."Location Code");
@@ -722,12 +715,10 @@ codeunit 50002 "Item Jnl.-Submit Batch"
                 Location.GET(LocationCode);
     end;
 
-
     procedure GetWhseRegNo(): Integer
     begin
         EXIT(WhseRegNo);
     end;
-
 
     procedure GetItemRegNo(): Integer
     begin
@@ -811,7 +802,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         EXIT(QtyinItemJnlLine);
     end;
 
-
     procedure GenerateScrapEntry(DocumentNo: Code[20]; PostingDate: Date; ScrapItem: Code[20]; ScrapLocation: Code[20]; GD1: Code[20]; GD2: Code[20]; DimSetID: Integer; ScrapQty: Decimal; ProdOrderLineNo: Integer; MachineCenterNo: Code[20])
     var
         recShipmentLines: Record "Sales Shipment Line";
@@ -849,4 +839,3 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         recItemJournal.INSERT(TRUE);
     end;
 }
-

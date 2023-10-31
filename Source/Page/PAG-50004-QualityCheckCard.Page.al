@@ -363,12 +363,11 @@ page 50004 "Quality Check Card"
                     recPurchRcptLine.SETRANGE("QC Completed", FALSE);
                     recPurchRcptLine.SETRANGE("Pending QC Approval", FALSE);
                     recPurchRcptLine.FINDFIRST;
-                    
+
                     recPurchRcptLine."Pending QC Approval" := TRUE;
                     recPurchRcptLine.MODIFY;
                     */
                     CurrPage.CLOSE;
-
                 end;
             }
             action(Print)
@@ -410,4 +409,3 @@ page 50004 "Quality Check Card"
         intEntryNo: Integer;
         recQuality: Record "Quality Header";
 }
-

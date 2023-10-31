@@ -1,6 +1,5 @@
 table 50006 "Batch Process Line"
 {
-
     fields
     {
         field(1; Type; Option)
@@ -175,4 +174,3 @@ table 50006 "Batch Process Line"
     var
         recItemLedger: Record "Item Ledger Entry";
 }
-

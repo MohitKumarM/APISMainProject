@@ -2,7 +2,6 @@ pageextension 50003 SalesInvoiceSubform extends "Sales Invoice Subform"
 {
     layout
     {
-
         modify("TCS Nature of Collection")
         {
             Visible = false;
@@ -55,13 +54,8 @@ pageextension 50003 SalesInvoiceSubform extends "Sales Invoice Subform"
                         end;
                 end;
             }
-
         }
     }
-
-
-
-
 
     actions
     {
@@ -78,5 +72,4 @@ pageextension 50003 SalesInvoiceSubform extends "Sales Invoice Subform"
         CurrPage.SaveRecord();
         CalculateTax.CallTaxEngineOnSalesLine(Rec, xRec);
     end;
-
 }

@@ -137,7 +137,6 @@ report 50063 "Inward Quality Report"
 
     requestpage
     {
-
         layout
         {
         }
@@ -161,4 +160,3 @@ report 50063 "Inward Quality Report"
         VeninvNo: code[35];
         GANDate: date;
 }
-

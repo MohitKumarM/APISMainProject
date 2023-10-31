@@ -26,7 +26,6 @@ tableextension 50005 PurchaseReciptLine extends "Purch. Rcpt. Line"
         {
             Editable = false;
         }
-
         field(50006; Flora; Code[20])
         {
             Editable = false;
@@ -59,7 +58,6 @@ tableextension 50005 PurchaseReciptLine extends "Purch. Rcpt. Line"
         {
             Caption = 'P.A.N. No.';
             DataClassification = ToBeClassified;
-
         }
         field(60001; "Pending QC Approval"; Boolean)
         {
@@ -71,12 +69,10 @@ tableextension 50005 PurchaseReciptLine extends "Purch. Rcpt. Line"
         field(50022; "Honey Item No."; Code[20])
         {
             DataClassification = ToBeClassified;
-
         }
         field(60000; "QC Completed"; Boolean)
         {
         }
-
     }
 
     var

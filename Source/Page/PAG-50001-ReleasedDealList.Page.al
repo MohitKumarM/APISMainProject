@@ -185,7 +185,7 @@ page 50001 "Released Deal List"
                     IF txtLocationName = '' THEN
                         ERROR('Location name must not be blank.');
 
-                    IF NOT CONFIRM('Do you want to submit the dispatch details against the selected sauda?', FALSE) THEN
+                    IF NOT CONFIRM('Do you want to submit the dispatch details against the selected Deal No.?', FALSE) THEN
                         EXIT;
 
                     recSaudaDetails.RESET;
@@ -354,4 +354,3 @@ page 50001 "Released Deal List"
         recPurchLine: Record "Purchase Line";
         recPurchRcptLine: Record "Purch. Rcpt. Line";
 }
-

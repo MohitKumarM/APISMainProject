@@ -131,7 +131,6 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                         Rec.VALIDATE("Purchaser Code", '');
                     END;
                 END;
-
             end;
         }
         field(50005; "Dispatched Qty. in Kg."; Decimal)
@@ -177,7 +176,6 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
         {
             Caption = 'P.A.N. No.';
             DataClassification = ToBeClassified;
-
         }
         field(50021; "New TDS Base Amount"; Decimal)
         {
@@ -194,7 +192,6 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                 Validate("No.", "Honey Item No.");
             end;
         }
-
     }
 
     var
@@ -391,7 +388,7 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                 CurrPurchLine.SETFILTER("Line No.", '<%1', PurchLine."Line No.");
                 IF CurrPurchLine.FIND('-') THEN
                     REPEAT
-                        LineWiseOrderamt := 0;//TradingTDSCalc 
+                        LineWiseOrderamt := 0;//TradingTDSCalc
                         IF OrderLineNo <> PurchLine."Line No." THEN
                             //TradingTDSCalc
                             OrderAmtB := 0;
@@ -415,7 +412,6 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                                         TaxTransValueR_ForPurchline.CalcSums(Amount);
                                 end;
                                 Tdsamt_Currpurchline := TaxTransValueR_ForPurchline.Amount;
-
                             end;
                         end;
                         //TDS_ForCurrPurchline_End
@@ -444,7 +440,6 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                         IF FinalAmt_TDS > 5000000 THEN BEGIN//TradingTDSCalc
                             PurchLine."New TDS Base Amount" := TDSBaseLCY;//TradingTDSCalc
                             OverPurchase := TRUE;//TradingTDSCalc
-
                         END;//TradingTDSCalc
                         IF NOT OverPurchase THEN BEGIN
                             //TradingTDSCalc_Open
@@ -470,11 +465,5 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                 end;///Purchline_Close
                 PurchLine.Modify();
             until PurchLine.Next() = 0;
-
     end;
-
-
-
-
-
 }

@@ -190,7 +190,7 @@ report 50060 "Deal Print"
                   CalcInvDiscForHeader;
                   COMMIT;
                 END;
-                
+
                 IF "Purchase Header".Structure <> '' THEN BEGIN
                   PurchLine.CalculateStructures("Purchase Header");
                   PurchLine.AdjustStructureAmounts("Purchase Header");
@@ -271,7 +271,6 @@ report 50060 "Deal Print"
 
                 rptCheque.InitTextVariable;
                 rptCheque.FormatNoText(NumberText, ROUND(decTotalLineAmount, 0.01), '');
-
             end;
 
             trigger OnPreDataItem()
@@ -289,7 +288,6 @@ report 50060 "Deal Print"
 
     requestpage
     {
-
         layout
         {
         }
@@ -345,4 +343,3 @@ report 50060 "Deal Print"
         recTaxDetails: Record "Tax Detail";
     // "Deal Master": Record "Deal Master";
 }
-

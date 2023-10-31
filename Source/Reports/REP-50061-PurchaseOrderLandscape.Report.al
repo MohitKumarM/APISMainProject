@@ -28,7 +28,6 @@
 //             // }
 //             dataitem("Purchase Header"; "Purchase Header")
 //             {
-
 //                 DataItemTableView = SORTING("No.")
 //                                     ORDER(Ascending);
 //                 RequestFilterFields = "No.";
@@ -64,7 +63,6 @@
 //                 }
 //                 column(Product_Group_Code; "Product Group Code")
 //                 {
-
 //                 }
 //                 column(RegOffCountry; txtRegOffCountry)
 //                 {
@@ -218,7 +216,6 @@
 //                 }
 //                 column(PGroup; PGroup)
 //                 {
-
 //                 }
 
 //                 dataitem("Purchase Line"; "Purchase Line")
@@ -299,20 +296,15 @@
 //                     column(vCGSTamt; vCGSTamt) { }
 //                     column("IGSTLine"; "VIGST%")
 //                     {
-
 //                     }
 //                     column("CGSTLine"; "vCGST%")
 //                     {
-
-
 //                     }
 //                     column("SGSTLine"; "vSGST%")
 //                     {
-
 //                     }
 //                     column(New_Product_Group_Code; "New Product Group Code")
 //                     {
-
 //                     }
 //                     column(Totalcalculatedgst; Totalcalculatedgst)
 //                     { }
@@ -606,7 +598,6 @@
 
 //     requestpage
 //     {
-
 //         layout
 //         {
 //         }
@@ -798,4 +789,3 @@
 //         //exit(decTotTaxAmt);
 //     end;
 // }
-

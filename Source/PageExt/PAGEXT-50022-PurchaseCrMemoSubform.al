@@ -46,7 +46,6 @@ pageextension 50022 PurchaseCrSubform extends "Purch. Cr. Memo Subform"
             {
                 ApplicationArea = all;
             }
-
         }
     }
 

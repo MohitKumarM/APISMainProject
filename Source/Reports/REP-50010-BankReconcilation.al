@@ -527,7 +527,6 @@ report 50086 "Bank Reconcilation"
 
     requestpage
     {
-
         layout
         {
             area(content)
@@ -572,7 +571,6 @@ report 50086 "Bank Reconcilation"
         END;
         */
         //RepAuditMgt.CreateAudit(50086)
-
     end;
 
     trigger OnPreReport()
@@ -634,7 +632,5 @@ report 50086 "Bank Reconcilation"
         ExcelBuffer.Underline := UnderLine;
         ExcelBuffer.INSERT;
          */
-
     end;
 }
-

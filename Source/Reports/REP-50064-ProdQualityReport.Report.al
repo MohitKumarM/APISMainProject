@@ -120,7 +120,6 @@ report 50064 "Prod. Quality Report"
 
     requestpage
     {
-
         layout
         {
         }
@@ -147,4 +146,3 @@ report 50064 "Prod. Quality Report"
     // "Quality Header": Record "Quality Header";
     // "Quality Line": Record "Quality Line";
 }
-

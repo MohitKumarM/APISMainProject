@@ -15,8 +15,8 @@ page 50036 "Honey GAN Creation"
                       WHERE("Document Type" = FILTER(Order),
                             Status = FILTER(Open),
                             "Order Type" = FILTER(Honey),
-                            "Order Approval Pending" = FILTER(true),
-                            "GAN Approval Pending" = FILTER(false));
+                            "Order Approval Pending" = const(true),
+                            "GAN Approval Pending" = const(false));
 
     layout
     {
@@ -153,4 +153,3 @@ page 50036 "Honey GAN Creation"
         cuNoSeries: Codeunit NoSeriesManagement;
         pgHoneyOrder: Page "Honey Purchase Order";
 }
-

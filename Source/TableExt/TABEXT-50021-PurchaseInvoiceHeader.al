@@ -25,8 +25,6 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
             OptionCaption = ' ,Supplier,Buyer';
             OptionMembers = " ",Supplier,Buyer;
             DataClassification = ToBeClassified;
-
-
         }
         field(50006; "Waybill No."; Code[20])
         {
@@ -49,14 +47,11 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
             OptionMembers = " ","Buy-from Address","Order Address","Location Address";
             // ValuesAllowed = " ";
             // "Buy-from Address";
-
-
         }
         field(90002; "Product Group Code"; Code[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = "New Product Group".Code;
-
         }
         field(50007; "GAN Approval Pending"; Boolean)
         {
@@ -82,7 +77,6 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
         {
             DataClassification = ToBeClassified;
         }
-
     }
 
     var

@@ -2,7 +2,6 @@ tableextension 50003 PurchPayableSetup extends "Purchases & Payables Setup"
 {
     fields
     {
-
         field(50002; "Raw Honey Item"; Code[20])
         {
             TableRelation = Item;

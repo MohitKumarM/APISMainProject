@@ -13,26 +13,25 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
             var
                 PriceListLine: Record "Price List Line";
             begin
-                PriceListLine.Reset();
-                PriceListLine.SetCurrentKey("Ending Date");
-                PriceListLine.SetRange("Source Type", PriceListLine."Source Type"::"All Customers");
-                PriceListLine.SetRange("Asset Type", PriceListLine."Asset Type"::Item);
-                PriceListLine.SetRange("Product No.", Rec."Item No.");
-                PriceListLine.SetRange(Status, PriceListLine.Status::Active);
-                if PriceListLine.FindLast() then begin
-                    Rec."MRP Price" := PriceListLine."MRP Price";
-                    Rec.Modify();
+                if rec."Source Type" <> 37 then begin
+                    PriceListLine.Reset();
+                    PriceListLine.SetCurrentKey("Ending Date");
+                    PriceListLine.SetRange("Source Type", PriceListLine."Source Type"::"All Customers");
+                    PriceListLine.SetRange("Asset Type", PriceListLine."Asset Type"::Item);
+                    PriceListLine.SetRange("Product No.", Rec."Item No.");
+                    PriceListLine.SetRange(Status, PriceListLine.Status::Active);
+                    if PriceListLine.FindLast() then begin
+                        Rec."MRP Price" := PriceListLine."MRP Price";
+                        Rec.Modify();
+                    end;
                 end;
             end;
-
         }
         addafter("Appl.-from Item Entry")
         {
-
             field("MRP Price"; Rec."MRP Price")
             {
                 ApplicationArea = all;
-
             }
             field("MFG. Date"; Rec."MFG. Date")
             {
@@ -54,29 +53,48 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
             }
             field(Tin; Rec.Tin)
             {
+                Editable = Item_Editable;
                 ApplicationArea = all;
             }
             field(Drum; Rec.Drum)
             {
                 ApplicationArea = all;
+                Editable = Item_Editable;
             }
             field(Bucket; Rec.Bucket)
             {
                 ApplicationArea = all;
+                Editable = Item_Editable;
             }
         }
     }
 
-
     actions
     {
-        // Add changes to page actions here
     }
 
     var
+        Item_Editable: Boolean;
+
+    trigger OnOpenPage()
+    var
         myInt: Integer;
+    begin
+        if Rec."Source Type" <> 39 then
+            Item_Editable := false
+        else
+            Item_Editable := true;
+    end;
 
+    trigger OnAfterGetRecord()
+    var
 
+    begin
+        if Rec."Source Type" <> 39 then
+            Item_Editable := false
+        else
+            Item_Editable := true;
+    end;
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
@@ -88,6 +106,5 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
                 Rec.TestField("MFG. Date");
                 Rec.TestField("Lot No.");
                 Rec.TestField("Expiration Date"); */
-
     end;
 }

@@ -31,7 +31,6 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
                 TESTFIELD(Status, Status::Open);
             end;
         }
-
         field(50006; "Waybill No."; Code[20])
         {
             Caption = 'E-Way Bill';
@@ -63,7 +62,6 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
         {
             DataClassification = ToBeClassified;
             TableRelation = "New Product Group".Code;
-
         }
         field(90003; "Short Close"; Boolean)
         {
@@ -93,8 +91,5 @@ tableextension 50019 PurchaseHedaerArchive extends "Purchase Header Archive"
         {
             DataClassification = ToBeClassified;
         }
-
     }
-
-
 }

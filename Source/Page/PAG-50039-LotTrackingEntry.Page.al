@@ -122,4 +122,3 @@ page 50039 "Lot Tracking Entry"
         opDocumentType := DocumentType;
     end;
 }
-

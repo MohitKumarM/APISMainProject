@@ -13,8 +13,6 @@ pageextension 50027 StandardTaskQltyMeasures extends "Standard Task Qlty Measure
             {
                 ApplicationArea = All;
             }
-
         }
     }
 }
-

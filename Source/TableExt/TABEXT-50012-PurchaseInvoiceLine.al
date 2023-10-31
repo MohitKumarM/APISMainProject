@@ -26,7 +26,6 @@ tableextension 50012 PurchaseInvoiceLine extends "Purch. Inv. Line"
         {
             Editable = false;
         }
-
         field(50006; Flora; Code[20])
         {
             Editable = false;
@@ -47,7 +46,6 @@ tableextension 50012 PurchaseInvoiceLine extends "Purch. Inv. Line"
         {
             Caption = 'P.A.N. No.';
             DataClassification = ToBeClassified;
-
         }
         field(50021; "New TDS Base Amount"; Decimal)
         {
@@ -56,13 +54,11 @@ tableextension 50012 PurchaseInvoiceLine extends "Purch. Inv. Line"
         field(50022; "Honey Item No."; Code[20])
         {
             DataClassification = ToBeClassified;
-
         }
         field(50010; "Billed Quantity"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-
         field(60000; "QC Completed"; Boolean)
         {
         }
@@ -74,7 +70,6 @@ tableextension 50012 PurchaseInvoiceLine extends "Purch. Inv. Line"
             Editable = false;
             FieldClass = FlowField;
         }
-
     }
 
     var

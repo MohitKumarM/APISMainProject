@@ -151,4 +151,3 @@ page 50003 "Quality Checks"
         recQualityCheck: Record "Quality Header";
         pgQuality: Page "Quality Check Card";
 }
-

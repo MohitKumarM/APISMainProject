@@ -7,7 +7,6 @@ pageextension 50024 "Inventory Posting Group Ext." extends "Inventory Posting Gr
             field("Planning Applicable"; Rec."Planning Applicable")
             {
                 ApplicationArea = All;
-
             }
         }
     }

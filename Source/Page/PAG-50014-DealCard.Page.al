@@ -204,4 +204,3 @@ page 50014 "Deal Card"
         recItem: Record Item;
         recProductGroup: Record "New Product Group";
 }
-

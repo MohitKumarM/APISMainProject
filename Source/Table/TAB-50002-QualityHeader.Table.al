@@ -29,7 +29,6 @@ table 50002 "Quality Header"
             CalcFormula = Lookup("Purch. Rcpt. Header"."Posting Date" WHERE("No." = FIELD("Document No.")));
             Editable = false;
             FieldClass = FlowField;
-
         }
         field(6; "Document Line No."; Integer)
         {
@@ -136,4 +135,3 @@ table 50002 "Quality Header"
     var
         recQualityLines: Record "Quality Line";
 }
-

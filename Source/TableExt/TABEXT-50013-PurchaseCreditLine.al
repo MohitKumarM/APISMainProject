@@ -9,7 +9,6 @@ tableextension 50013 PurchaseCreditLine extends "Purch. Cr. Memo Line"
         field(50002; "Packing Type"; Enum "Packing Type")
         {
             Editable = false;
-
         }
         field(50003; "Qty. in Pack"; Decimal)
         {
@@ -25,7 +24,6 @@ tableextension 50013 PurchaseCreditLine extends "Purch. Cr. Memo Line"
         {
             Editable = false;
         }
-
         field(50006; Flora; Code[20])
         {
             Editable = false;
@@ -46,7 +44,6 @@ tableextension 50013 PurchaseCreditLine extends "Purch. Cr. Memo Line"
         {
             Caption = 'P.A.N. No.';
             DataClassification = ToBeClassified;
-
         }
         field(50021; "New TDS Base Amount"; Decimal)
         {
@@ -55,7 +52,6 @@ tableextension 50013 PurchaseCreditLine extends "Purch. Cr. Memo Line"
         field(50022; "Honey Item No."; Code[20])
         {
             DataClassification = ToBeClassified;
-
         }
         field(50010; "Billed Quantity"; Decimal)
         {
@@ -72,8 +68,6 @@ tableextension 50013 PurchaseCreditLine extends "Purch. Cr. Memo Line"
             Editable = false;
             FieldClass = FlowField;
         }
-
-
     }
 
     var

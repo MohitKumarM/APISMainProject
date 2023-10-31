@@ -25,8 +25,6 @@ tableextension 50020 PurchaseCreditMemo extends "Purch. Cr. Memo Hdr."
             OptionCaption = ' ,Supplier,Buyer';
             OptionMembers = " ",Supplier,Buyer;
             DataClassification = ToBeClassified;
-
-
         }
         field(50006; "Waybill No."; Code[20])
         {
@@ -59,7 +57,6 @@ tableextension 50020 PurchaseCreditMemo extends "Purch. Cr. Memo Hdr."
         {
             DataClassification = ToBeClassified;
             TableRelation = "New Product Group".Code;
-
         }
         field(50007; "GAN Approval Pending"; Boolean)
         {
@@ -85,7 +82,6 @@ tableextension 50020 PurchaseCreditMemo extends "Purch. Cr. Memo Hdr."
         {
             DataClassification = ToBeClassified;
         }
-
     }
 
     var

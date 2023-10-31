@@ -84,4 +84,3 @@ page 50023 "De-Crystallizer Card"
     var
         recProdctonOrder: Record "Production Order";
 }
-

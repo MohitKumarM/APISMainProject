@@ -166,4 +166,3 @@ page 50020 "Pending Inward QC"
         pgQuality: Page "Quality Check Card";
         recItemLedger: Record "Item Ledger Entry";
 }
-

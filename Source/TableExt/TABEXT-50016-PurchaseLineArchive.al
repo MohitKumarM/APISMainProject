@@ -26,7 +26,6 @@ tableextension 50016 PurchaseLineArchive extends "Purchase Line Archive"
         {
             Editable = false;
         }
-
         field(50006; Flora; Code[20])
         {
             Editable = false;
@@ -46,7 +45,6 @@ tableextension 50016 PurchaseLineArchive extends "Purchase Line Archive"
         field(50022; "Honey Item No."; Code[20])
         {
             DataClassification = ToBeClassified;
-
         }
         field(50010; "Billed Quantity"; Decimal)
         {

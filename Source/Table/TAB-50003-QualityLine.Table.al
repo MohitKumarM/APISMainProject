@@ -90,4 +90,3 @@ table 50003 "Quality Line"
     {
     }
 }
-

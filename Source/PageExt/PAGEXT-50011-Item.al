@@ -4,7 +4,6 @@ pageextension 50011 ItemN1 extends "Item Card"
     {
         addafter(Blocked)
         {
-
             field("New Product Group Code"; Rec."New Product Group Code")
             {
                 ApplicationArea = all;

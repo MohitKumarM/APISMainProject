@@ -382,4 +382,3 @@ page 50024 "Output Quality Check Card"
         intEntryNo: Integer;
         recQCHeader: Record "Quality Header";
 }
-

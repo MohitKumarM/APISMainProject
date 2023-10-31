@@ -1,6 +1,5 @@
 table 50007 "Batch Process Header"
 {
-
     fields
     {
         field(1; Type; Option)
@@ -71,4 +70,3 @@ table 50007 "Batch Process Header"
     {
     }
 }
-

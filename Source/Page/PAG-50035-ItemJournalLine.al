@@ -11,7 +11,6 @@ page 50035 ItemJournalLine
         {
             repeater(GroupName)
             {
-
                 field(Adjustment; Rec.Adjustment)
                 {
                     ToolTip = 'Specifies the value of the Adjustment field.';
@@ -808,7 +807,6 @@ page 50035 ItemJournalLine
         }
         area(Factboxes)
         {
-
         }
     }
 
@@ -822,7 +820,6 @@ page 50035 ItemJournalLine
 
                 trigger OnAction();
                 begin
-
                 end;
             }
         }

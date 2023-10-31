@@ -48,9 +48,11 @@ page 50037 "Honey GAN Order"
                     field("Gate Entry No."; Rec."Gate Entry No.")
                     {
                         ApplicationArea = All;
+                        Visible = false;
                     }
                     field("Gate Entry Date"; Rec."Gate Entry Date")
                     {
+                        Visible = false;
                     }
                     field("Purchaser Code"; Rec."Purchaser Code")
                     {
@@ -363,6 +365,20 @@ page 50037 "Honey GAN Order"
                     begin
                         Rec.ShowDocDim;
                         CurrPage.SAVERECORD;
+                    end;
+                }
+                action(Statistics1)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Statistics';
+                    Image = Statistics;
+                    ShortCutKey = 'F7';
+                    ToolTip = 'View statistical information, such as the value of posted entries, for the record.';
+
+                    trigger OnAction()
+                    begin
+                        rec.OpenPurchaseOrderStatistics();
+                        CurrPage.PurchLines.Page.ForceTotalsCalculation();
                     end;
                 }
                 action(Statistics)
@@ -795,4 +811,3 @@ page 50037 "Honey GAN Order"
         VendorInvoiceNoMandatory := PurchSetup."Ext. Doc. No. Mandatory";
     end;
 }
-

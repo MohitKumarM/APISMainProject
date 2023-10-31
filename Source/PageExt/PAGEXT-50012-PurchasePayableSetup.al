@@ -24,8 +24,6 @@ pageextension 50012 PurchasePayableSetupN1 extends "Purchases & Payables Setup"
             {
                 ApplicationArea = all;
             }
-
-
         }
         addafter(Archiving)
         {
@@ -40,7 +38,6 @@ pageextension 50012 PurchasePayableSetupN1 extends "Purchases & Payables Setup"
         }
         addafter("Return Order Nos.")
         {
-
             field("Honey Order Nos."; Rec."Honey Order Nos.")
             {
                 ApplicationArea = all;

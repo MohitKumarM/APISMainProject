@@ -329,7 +329,6 @@ page 50038 "Honey GAN Order Subform"
                         // This functionality was copied from page #50. Unsupported part was commented. Please check it.
                         /*CurrPage.PurchLines.PAGE.*/
                         ShowStrDetailsForm;
-
                     end;
                 }
                 action("E&xcise Detail")
@@ -343,7 +342,6 @@ page 50038 "Honey GAN Order Subform"
                         // This functionality was copied from page #50. Unsupported part was commented. Please check it.
                         /*CurrPage.PurchLines.PAGE.*/
                         ShowExcisePostingSetup;
-
                     end;
                 }
                 action("Detailed Tax")
@@ -395,18 +393,15 @@ page 50038 "Honey GAN Order Subform"
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the purchase order has been invoiced.';
         recItem: Record Item;
 
-
     procedure ApproveCalcInvDisc()
     begin
         CODEUNIT.RUN(CODEUNIT::"Purch.-Disc. (Yes/No)", Rec);
     end;
 
-
     procedure CalcInvDisc()
     begin
         CODEUNIT.RUN(CODEUNIT::"Purch.-Calc.Discount", Rec);
     end;
-
 
     procedure ExplodeBOM()
     begin
@@ -414,7 +409,6 @@ page 50038 "Honey GAN Order Subform"
             ERROR(Text001);
         CODEUNIT.RUN(CODEUNIT::"Purch.-Explode BOM", Rec);
     end;
-
 
     procedure OpenSalesOrderForm()
     var
@@ -428,7 +422,6 @@ page 50038 "Honey GAN Order Subform"
         SalesOrder.RUN;
     end;
 
-
     procedure InsertExtendedText(Unconditionally: Boolean)
     begin
         IF TransferExtendedText.PurchCheckIfAnyExtText(Rec, Unconditionally) THEN BEGIN
@@ -439,7 +432,6 @@ page 50038 "Honey GAN Order Subform"
             UpdateForm(TRUE);
     end;
 
-
     procedure ShowTracking()
     var
         TrackingForm: Page "Order Tracking";
@@ -447,7 +439,6 @@ page 50038 "Honey GAN Order Subform"
         TrackingForm.SetPurchLine(Rec);
         TrackingForm.RUNMODAL;
     end;
-
 
     procedure OpenSpecOrderSalesOrderForm()
     var
@@ -461,18 +452,15 @@ page 50038 "Honey GAN Order Subform"
         SalesOrder.RUN;
     end;
 
-
     procedure UpdateForm(SetSaveRecord: Boolean)
     begin
         CurrPage.UPDATE(SetSaveRecord);
     end;
 
-
     procedure SetUpdateAllowed(UpdateAllowed: Boolean)
     begin
         UpdateAllowedVar := UpdateAllowed;
     end;
-
 
     procedure UpdateAllowed(): Boolean
     begin
@@ -483,14 +471,12 @@ page 50038 "Honey GAN Order Subform"
         EXIT(TRUE);
     end;
 
-
     procedure ShowPrices()
     begin
         PurchHeader.GET(Rec."Document Type", Rec."Document No.");
         CLEAR(PurchPriceCalcMgt);
         PurchPriceCalcMgt.GetPurchLinePrice(PurchHeader, Rec);
     end;
-
 
     procedure ShowLineDisc()
     begin
@@ -513,7 +499,6 @@ page 50038 "Honey GAN Order Subform"
         InsertExtendedText(FALSE);
     end;
 
-
     procedure ShowStrDetailsForm()
     var
     // StrOrderLineDetails: Record "13795";
@@ -530,12 +515,17 @@ page 50038 "Honey GAN Order Subform"
         // StrOrderLineDetailsForm.RUNMODAL;
     end;
 
-
     procedure ShowExcisePostingSetup()
     begin
         // Rec.GetExcisePostingSetup;
     end;
 
+    procedure ForceTotalsCalculation()
+    var
+        DocumentTotals: Codeunit "Document Totals";
+    begin
+        DocumentTotals.PurchaseDocTotalsNotUpToDate();
+    end;
 
     procedure ShowDetailedTaxEntryBuffer()
     var
@@ -550,4 +540,3 @@ page 50038 "Honey GAN Order Subform"
         // PAGE.RUNMODAL(PAGE::"Purch. Detailed Tax", DetailedTaxEntryBuffer);
     end;
 }
-

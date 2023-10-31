@@ -7,7 +7,6 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
             OptionCaption = ' ,Honey,Packing Material,Other';
             OptionMembers = " ",Honey,"Packing Material",Other;
         }
-
         field(50001; "Invoice Type Old"; Option)
         {
             OptionCaption = 'Trading';
@@ -60,7 +59,6 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
         {
             DataClassification = ToBeClassified;
         }
-
         field(50016; "Shipping Vendor"; Code[20])
         {
             TableRelation = Vendor;
@@ -92,13 +90,11 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
         {
             DataClassification = ToBeClassified;
             TableRelation = "New Product Group".Code;
-
         }
         field(90003; "Short Close"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-
     }
 
     var
@@ -128,5 +124,4 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
     begin
         Rec."Invoice Type Old" := Rec."Invoice Type Old"::Trading;
     end;
-
 }

@@ -96,4 +96,3 @@ page 50013 "Deal List"
         cuNoSeries: Codeunit NoSeriesManagement;
         pgSaudaCard: Page "Deal Card";
 }
-

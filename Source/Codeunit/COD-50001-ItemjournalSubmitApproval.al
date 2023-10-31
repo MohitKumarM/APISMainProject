@@ -47,8 +47,6 @@ codeunit 50001 "Item Jnl.-Submit Approval"
                     TempItemjournalLine.TransferFields(recItemJournalLines);
                     TempItemjournalLine.Insert();
                     recItemJournalLines.Delete();
-
-
                 UNTIL recItemJournalLines.NEXT = 0;
 
                 if TempItemjournalLine.FindFirst() then begin
@@ -126,7 +124,6 @@ codeunit 50001 "Item Jnl.-Submit Approval"
         END;
     end;
 
-
     local procedure GetlastNo(var Template: Code[20]; Batch: code[20]): Integer
     var
         ItemJournalLine1: Record "Item Journal Line";
@@ -142,4 +139,3 @@ codeunit 50001 "Item Jnl.-Submit Approval"
             exit(10000)
     end;
 }
-

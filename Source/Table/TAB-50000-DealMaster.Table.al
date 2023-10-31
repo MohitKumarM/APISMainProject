@@ -66,7 +66,6 @@ table 50000 "Deal Master"
             CalcFormula = Sum("Deal Dispatch Details"."Dispatched Tins / Buckets" WHERE("Sauda No." = FIELD("No.")));
             Editable = false;
             FieldClass = FlowField;
-
         }
         field(11; "Pending Approval"; Boolean)
         {
@@ -204,4 +203,3 @@ table 50000 "Deal Master"
     var
         recSalesPerson: Record "Salesperson/Purchaser";
 }
-

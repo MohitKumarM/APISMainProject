@@ -227,4 +227,3 @@ page 50008 "Deal Approval Card"
         recItem: Record Item;
         recProductGroup: Record "New Product Group";
 }
-

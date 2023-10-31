@@ -57,7 +57,6 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         {
             DataClassification = ToBeClassified;
         }
-
         field(50019; "New Product Group Code"; Code[20])
         {
             DataClassification = ToBeClassified;

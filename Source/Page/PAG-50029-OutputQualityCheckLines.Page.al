@@ -45,4 +45,3 @@ page 50029 "Output Quality Check Lines"
     {
     }
 }
-

@@ -106,4 +106,3 @@ page 50002 "Deal Dispatch Details"
         recPurchLine: Record "Purchase Line";
         recPurchRcptLine: Record "Purch. Rcpt. Line";
 }
-

@@ -27,7 +27,6 @@ tableextension 50022 PurchaseReceiept extends "Purch. Rcpt. Header"
             OptionCaption = ' ,Supplier,Buyer';
             OptionMembers = " ",Supplier,Buyer;
             DataClassification = ToBeClassified;
-
         }
         field(50006; "Waybill No."; Code[20])
         {
@@ -53,13 +52,11 @@ tableextension 50022 PurchaseReceiept extends "Purch. Rcpt. Header"
         {
             OptionMembers = " ","Buy-from Address","Order Address","Location Address";
             DataClassification = ToBeClassified;
-
         }
         field(90002; "Product Group Code"; Code[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = "New Product Group".Code;
-
         }
         field(50007; "GAN Approval Pending"; Boolean)
         {
@@ -85,7 +82,6 @@ tableextension 50022 PurchaseReceiept extends "Purch. Rcpt. Header"
         {
             DataClassification = ToBeClassified;
         }
-
     }
 
     var

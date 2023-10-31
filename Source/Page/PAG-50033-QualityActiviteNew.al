@@ -123,7 +123,7 @@ page 50033 "Quality Activities New"
                     DrillDownPageID = "Output Posting";
                     LookupPageID = "Output Posting";
                 }
-            } 
+            }
             cuegroup(Requisition)
             {
                 Caption = 'Requisition';
@@ -175,7 +175,6 @@ page 50033 "Quality Activities New"
         // END;
         //Iappc - User Mgmt End
 
-
         // RESET;
         // IF NOT GET THEN BEGIN
         //     INIT;
@@ -185,4 +184,3 @@ page 50033 "Quality Activities New"
         // SETFILTER("Date Filter", '>=%1', WORKDATE);
     end;
 }
-

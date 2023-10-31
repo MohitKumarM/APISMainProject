@@ -2,7 +2,7 @@ page 50040 "GAN Approval Others"
 {
     CardPageID = "GAN Approval Order";
     DeleteAllowed = false;
-    Caption = 'GAN Approval Orders';
+    Caption = 'GAN Approval Others';
     Editable = false;
     InsertAllowed = false;
     LinksAllowed = false;
@@ -14,7 +14,7 @@ page 50040 "GAN Approval Others"
     SourceTableView = SORTING("Document Type", "No.")
                       ORDER(Ascending)
                       WHERE("Document Type" = FILTER(Order),
-                            "GAN Approval Pending" = FILTER(true),
+                            "GAN Approval Pending" = const(true),
                             "Order Type" = FILTER(Other));
 
     layout
@@ -107,4 +107,3 @@ page 50040 "GAN Approval Others"
         }
     }
 }
-

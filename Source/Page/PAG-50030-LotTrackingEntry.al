@@ -130,4 +130,3 @@ page 50030 "Lot Entries"
         Rec.FILTERGROUP(0);
     end;
 }
-

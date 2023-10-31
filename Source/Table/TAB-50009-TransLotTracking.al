@@ -27,7 +27,6 @@ table 50009 "Tran. Lot Tracking"
         }
         field(6; "Qty. In Packs"; Decimal)
         {
-
             trigger OnValidate()
             begin
                 IF "Qty. In Packs" <> 0 THEN
@@ -36,7 +35,6 @@ table 50009 "Tran. Lot Tracking"
         }
         field(7; Quantity; Decimal)
         {
-
             trigger OnValidate()
             begin
                 Rec.TESTFIELD("Qty. In Packs");
@@ -123,4 +121,3 @@ table 50009 "Tran. Lot Tracking"
     var
         recTranLotEntry: Record "Tran. Lot Tracking";
 }
-

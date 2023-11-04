@@ -40,6 +40,10 @@ tableextension 50026 ReservatonEntry extends "Reservation Entry"
         {
             DataClassification = ToBeClassified;
         }
+        field(50025; "ILE No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var

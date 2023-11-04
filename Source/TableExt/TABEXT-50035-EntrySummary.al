@@ -22,6 +22,10 @@ tableextension 50035 EntrySummary extends "Entry Summary"
         {
             DataClassification = ToBeClassified;
         }
+        field(50025; "ILE No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

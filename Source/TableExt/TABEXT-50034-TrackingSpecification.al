@@ -22,8 +22,20 @@ tableextension 50034 TrackingSpecfication extends "Tracking Specification"
         {
             DataClassification = ToBeClassified;
         }
+        field(50025; "ILE No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
+    keys
+    {
+        key(Key20; "ILE No.")
+        {
+
+        }
+    }
     var
         myInt: Integer;
+
 }

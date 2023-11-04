@@ -12,6 +12,7 @@ codeunit 50000 Tble83
         Tin: Decimal;
         Drum: Decimal;
         Bucket: Decimal;
+        ILENo: Integer;
 
     [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnAfterCopyItemJnlLineFromPurchLine', '', false, false)]
     local procedure OnAfterCopyItemJnlLineFromPurchLine(var ItemJnlLine: Record "Item Journal Line"; PurchLine: Record "Purchase Line")
@@ -315,9 +316,15 @@ codeunit 50000 Tble83
 
 
     // Page6510 Start
-    [IntegrationEvent(false, false)]
+    [EventSubscriber(ObjectType::Page, 6510, 'OnAssistEditLotNoOnBeforeCurrPageUdate', '', false, false)]
     local procedure OnAssistEditLotNoOnBeforeCurrPageUdate(var TrackingSpecification: Record "Tracking Specification"; xTrackingSpecification: Record "Tracking Specification")
+    var
+        ItemLedgerEntry: Record "Item Ledger Entry";
     begin
+
+        /* if TrackingSpecification."MRP Price" <> xTrackingSpecification."MRP Price" then
+            Error('MRP Price Should Be Same for Same Tracking Line'); */
+
     end;
 
 
@@ -330,8 +337,13 @@ codeunit 50000 Tble83
         Tin := NewTrackingSpecification.Tin;
         Drum := NewTrackingSpecification.Drum;
         Bucket := NewTrackingSpecification.Bucket;
+        ILENo := NewTrackingSpecification."ILE No.";
     end;
 
+    [IntegrationEvent(false, false)]
+    local procedure OnRegisterChangeOnChangeTypeModifyOnBeforeCheckEntriesAreIdentical(var ReservEntry1: Record "Reservation Entry"; var ReservEntry2: Record "Reservation Entry"; var OldTrackingSpecification: Record "Tracking Specification"; var NewTrackingSpecification: Record "Tracking Specification"; var IdenticalArray: array[2] of Boolean)
+    begin
+    end;
     // Page6510 End
     // Codeunit99000830 Start
     [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnAfterSetDates', '', false, false)]
@@ -342,6 +354,7 @@ codeunit 50000 Tble83
         ReservationEntry.Tin := Tin;
         ReservationEntry.Drum := Drum;
         ReservationEntry.Bucket := Bucket;
+        ReservationEntry."ILE No." := ILENo;
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnCreateReservEntryExtraFields', '', false, false)]
@@ -352,6 +365,7 @@ codeunit 50000 Tble83
         InsertReservEntry.Tin := NewTrackingSpecification.Tin;
         InsertReservEntry.Drum := NewTrackingSpecification.Drum;
         InsertReservEntry.Bucket := NewTrackingSpecification.Bucket;
+        InsertReservEntry."ILE No." := NewTrackingSpecification."ILE No.";
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnAfterCopyFromInsertReservEntry', '', false, false)]
@@ -367,6 +381,7 @@ codeunit 50000 Tble83
                 ReservEntry.Tin := R_ReservEntry.Tin;
                 ReservEntry.Drum := R_ReservEntry.Drum;
                 ReservEntry.Bucket := R_ReservEntry.Bucket;
+                ReservEntry."ILE No." := R_ReservEntry."ILE No.";
             END;
         END;
     end;
@@ -377,7 +392,8 @@ codeunit 50000 Tble83
     [EventSubscriber(ObjectType::Page, 6510, 'OnAfterEntriesAreIdentical', '', false, false)]
     local procedure OnAfterEntriesAreIdentical(ReservEntry1: Record "Reservation Entry"; ReservEntry2: Record "Reservation Entry"; var IdenticalArray: array[2] of Boolean)
     begin
-        IdenticalArray[2] := ((ReservEntry1."MRP Price" = ReservEntry2."MRP Price") and (ReservEntry1."MFG. Date" = ReservEntry2."MFG. Date") and (ReservEntry1.Tin = ReservEntry2.Tin) and (ReservEntry1.Drum = ReservEntry2.Drum) and (ReservEntry1.Bucket = ReservEntry2.Bucket));
+        IdenticalArray[2] := ((ReservEntry1."MRP Price" = ReservEntry2."MRP Price") and (ReservEntry1."MFG. Date" = ReservEntry2."MFG. Date") and (ReservEntry1.Tin = ReservEntry2.Tin) and (ReservEntry1.Drum = ReservEntry2.Drum)
+            and (ReservEntry1.Bucket = ReservEntry2.Bucket) and (ReservEntry1."ILE No." = ReservEntry2."ILE No."));
     end;
 
     [EventSubscriber(ObjectType::Page, 6510, 'OnAfterCopyTrackingSpec', '', false, false)]
@@ -389,14 +405,17 @@ codeunit 50000 Tble83
             SourceTrackingSpec.Tin := DestTrkgSpec.Tin;
             SourceTrackingSpec.Drum := DestTrkgSpec.Drum;
             SourceTrackingSpec.Bucket := DestTrkgSpec.Bucket;
+            SourceTrackingSpec."ILE No." := DestTrkgSpec."ILE No.";
         end else begin
             DestTrkgSpec."MRP Price" := SourceTrackingSpec."MRP Price";
             DestTrkgSpec."MFG. Date" := SourceTrackingSpec."MFG. Date";
             DestTrkgSpec.Tin := SourceTrackingSpec.Tin;
             DestTrkgSpec.Drum := SourceTrackingSpec.Drum;
             DestTrkgSpec.Bucket := SourceTrackingSpec.Bucket;
+            DestTrkgSpec."ILE No." := SourceTrackingSpec."ILE No.";
         end;
     end;
+
 
     [EventSubscriber(ObjectType::Page, 6510, 'OnAfterMoveFields', '', false, false)]
     local procedure OnAfterMoveFields(var TrkgSpec: Record "Tracking Specification"; var ReservEntry: Record "Reservation Entry")
@@ -406,6 +425,7 @@ codeunit 50000 Tble83
         ReservEntry.Tin := TrkgSpec.Tin;
         ReservEntry.Drum := TrkgSpec.Drum;
         ReservEntry.Bucket := TrkgSpec.Bucket;
+        ReservEntry."ILE No." := TrkgSpec."ILE No.";
     end;
     // Page6510 End
 
@@ -421,6 +441,7 @@ codeunit 50000 Tble83
         ReservEntry.Tin := TrackingSpecification.Tin;
         ReservEntry.Drum := TrackingSpecification.Drum;
         ReservEntry.Bucket := TrackingSpecification.Bucket;
+        ReservEntry."ILE No." := TrackingSpecification."ILE No.";
     end;
     // Codeunit99000831 End
 
@@ -434,6 +455,7 @@ codeunit 50000 Tble83
         ReservEntry.Tin := ItemLedgerEntry.Tin;
         ReservEntry.Drum := ItemLedgerEntry.Drum;
         ReservEntry.Bucket := ItemLedgerEntry.Bucket;
+        ReservEntry."ILE No." := ItemLedgerEntry."Entry No.";
     end;
     // Codeunit6500 End
 
@@ -448,13 +470,101 @@ codeunit 50000 Tble83
         ValueEntrySales: Record "Value Entry";
         ValueEntrySCrG: Record "Value Entry";
         CustmerG: Record Customer;
+        ItemLedgerEntry: Record "Item Ledger Entry";
+        ReservationEntry: Record "Reservation Entry";
+        TrackingSpecification2: Record "Tracking Specification";
+        ReservationEntry2: Record "Reservation Entry";
+        QtyResereve: Decimal;
+        ItemLedgeEntry2: Record "Item Ledger Entry";
+        QtyResereve2: Decimal;
+        QtyTracking: Decimal;
+        TempTrackingSpecification: Record "Tracking Specification" temporary;
     begin
         TrackingSpecification."MRP Price" := TempGlobalEntrySummary."MRP Price";
         TrackingSpecification."MFG. Date" := TempGlobalEntrySummary."MFG. Date";
         TrackingSpecification.Tin := TempGlobalEntrySummary.Tin;
         TrackingSpecification.Drum := TempGlobalEntrySummary.Drum;
         TrackingSpecification.Bucket := TempGlobalEntrySummary.Bucket;
+        TrackingSpecification."ILE No." := TempGlobalEntrySummary."ILE No.";
 
+
+        if (TrackingSpecification."Source Type" = 37) then begin
+            if (TempGlobalEntrySummary."Total Available Quantity" <= 0) or ((TempGlobalEntrySummary."Current Pending Quantity" < 0)) then
+                Error('In this Lot No. Total Available Quantity is 0.');
+
+
+            ItemLedgerEntry.SetCurrentKey("Entry No.");
+            ItemLedgerEntry.SetRange("Item No.", TrackingSpecification."Item No.");
+            ItemLedgerEntry.SetRange("Location Code", TrackingSpecification."Location Code");
+            ItemLedgerEntry.SetRange(Open, true);
+            if ItemLedgerEntry.FindFirst() then begin
+                TempTrackingSpecification.Init();
+                TempTrackingSpecification := (TrackingSpecification);
+                TempTrackingSpecification.Insert();
+                repeat
+                    ItemLedgeEntry2.Reset();
+                    ItemLedgeEntry2.SetRange("Item No.", ItemLedgerEntry."Item No.");
+                    ItemLedgeEntry2.SetRange("Location Code", ItemLedgerEntry."Location Code");
+                    ItemLedgeEntry2.SetRange("Lot No.", ItemLedgerEntry."Lot No.");
+                    ItemLedgeEntry2.SetRange(Open, true);
+                    ItemLedgeEntry2.CalcSums("Remaining Quantity");
+                    // if ItemLedgerEntry."Remaining Quantity" <> TempGlobalEntrySummary."Total Requested Quantity" then
+                    if (ItemLedgerEntry."Lot No." <> TrackingSpecification."Lot No.") then begin
+
+                        ReservationEntry.SetRange("Item No.", ItemLedgerEntry."Item No.");
+                        ReservationEntry.SetRange("Lot No.", ItemLedgerEntry."Lot No.");
+                        ReservationEntry.SetRange("Location Code", ItemLedgerEntry."Location Code");
+                        ReservationEntry.SetFilter("Source ID", '<>%1', TrackingSpecification."Source ID");
+                        //ReservationEntry.SetFilter("Source Ref. No.", '<>%1', TrackingSpecification."Source Ref. No.");
+                        ReservationEntry.CalcSums(Quantity);
+                        QtyResereve2 := abs(ReservationEntry.Quantity);
+
+                        ReservationEntry2.Reset();
+                        ReservationEntry2.SetRange("Item No.", ItemLedgerEntry."Item No.");
+                        ReservationEntry2.SetRange("Lot No.", ItemLedgerEntry."Lot No.");
+                        ReservationEntry2.SetRange("Location Code", ItemLedgerEntry."Location Code");
+                        ReservationEntry2.SetFilter("Source ID", TrackingSpecification."Source ID");
+                        //ReservationEntry2.SetFilter("Source Ref. No.", '<>%1', TrackingSpecification."Source Ref. No.");
+                        ReservationEntry2.CalcSums(Quantity);
+                        QtyResereve := abs(ReservationEntry2.Quantity);
+
+                        if ItemLedgeEntry2."Remaining Quantity" <> (QtyResereve2 + QtyResereve) then begin
+                            TrackingSpecification.SetRange("Lot No.", ItemLedgerEntry."Lot No.");
+                            TrackingSpecification.SetRange("Location Code", ItemLedgerEntry."Location Code");
+                            TrackingSpecification.SetRange("Item No.", ItemLedgerEntry."Item No.");
+                            TrackingSpecification.SetRange("Source ID", TrackingSpecification."Source ID");
+                            TrackingSpecification.CalcSums("Quantity (Base)");
+                            QtyTracking := Abs(TrackingSpecification."Quantity (Base)");
+                            if ItemLedgeEntry2."Remaining Quantity" <> (QtyTracking + QtyResereve2 + QtyResereve) then
+                                Error('Please Select the Lot No On FIFO basis.')
+                            else begin
+                                TrackingSpecification.SetCurrentKey("Entry No.");
+                                if TrackingSpecification.FindFirst() then
+                                    if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
+                                        Error('MRP Should be Same');
+                                TrackingSpecification.SetRange("Lot No.");
+                                TrackingSpecification.TransferFields(TempTrackingSpecification);
+                            end;
+                        end;
+
+                    end else begin
+                        /*  if TrackingSpecification."MRP Price" <> TempGlobalEntrySummary."MRP Price" then
+                             Error('MRP Price Should Be Same for Same Tracking Line'); */
+
+                        TrackingSpecification.SetCurrentKey("Entry No.");
+                        if TrackingSpecification.FindFirst() then
+                            if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
+                                Error('MRP Should be Same');
+                        TrackingSpecification.SetRange("Lot No.");
+                        TrackingSpecification.TransferFields(TempTrackingSpecification);
+
+                        exit;
+                    end;
+                until ItemLedgerEntry.Next() = 0;
+
+
+            end;
+        end;
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 6501, 'OnTransferItemLedgToTempRecOnBeforeInsert', '', false, false)]
@@ -466,6 +576,7 @@ codeunit 50000 Tble83
         TempGlobalReservEntry.Tin := ItemLedgerEntry.Tin;
         TempGlobalReservEntry.Drum := ItemLedgerEntry.Drum;
         TempGlobalReservEntry.Bucket := ItemLedgerEntry.Bucket;
+        TempGlobalReservEntry."ILE No." := ItemLedgerEntry."Entry No.";
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 6501, 'OnCreateEntrySummary2OnAfterAssignTrackingFromReservEntry', '', false, false)]
@@ -476,6 +587,7 @@ codeunit 50000 Tble83
         TempGlobalEntrySummary.Tin := TempReservEntry.Tin;
         TempGlobalEntrySummary.Drum := TempReservEntry.Drum;
         TempGlobalEntrySummary.Bucket := TempReservEntry.Bucket;
+        TempGlobalEntrySummary."ILE No." := TempReservEntry."ILE No.";
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAddSelectedTrackingToDataSetOnAfterInitTrackingSpecification2', '', false, false)]
@@ -487,6 +599,7 @@ codeunit 50000 Tble83
         TrackingSpecification.Tin := TempTrackingSpecification.Tin;
         TrackingSpecification.Drum := TempTrackingSpecification.Drum;
         TrackingSpecification.Bucket := TempTrackingSpecification.Bucket;
+        TrackingSpecification."ILE No." := TempTrackingSpecification."ILE No.";
     end;
 
     [EventSubscriber(ObjectType::Codeunit, 6501, 'OnBeforeTempTrackingSpecificationInsert', '', false, false)]
@@ -497,7 +610,26 @@ codeunit 50000 Tble83
         TempTrackingSpecification.Tin := TempEntrySummary.Tin;
         TempTrackingSpecification.Drum := TempEntrySummary.Drum;
         TempTrackingSpecification.Bucket := TempEntrySummary.Bucket;
+        TempTrackingSpecification."ILE No." := TempEntrySummary."ILE No.";
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAfterTransferReservEntryToTempRec', '', false, false)]
+    local procedure OnAfterTransferReservEntryToTempRec(var GlobalReservEntry: Record "Reservation Entry"; ReservEntry: Record "Reservation Entry"; TrackingSpecification: Record "Tracking Specification"; var IsHandled: Boolean)
+    begin
+
+        GlobalReservEntry."ILE No." := ReservEntry."ILE No."
+
+    end;
     // Codeunit6501 End
+
+    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAssistEditTrackingNoLookupLotNoOnAfterSetFilters', '', false, false)]
+    local procedure OnAssistEditTrackingNoLookupLotNoOnAfterSetFilters(var TempGlobalEntrySummary: Record "Entry Summary" temporary; TempTrackingSpecification: Record "Tracking Specification" temporary)
+    begin
+
+    end;
+
+
+
+
+
 }

@@ -13,6 +13,7 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
             var
                 PriceListLine: Record "Price List Line";
             begin
+
                 if rec."Source Type" <> 37 then begin
                     PriceListLine.Reset();
                     PriceListLine.SetCurrentKey("Ending Date");
@@ -32,10 +33,12 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
             field("MRP Price"; Rec."MRP Price")
             {
                 ApplicationArea = all;
+                Editable = Item_Editable;
             }
             field("MFG. Date"; Rec."MFG. Date")
             {
                 ApplicationArea = all;
+                Editable = Item_Editable;
                 trigger OnValidate()
                 var
                     L_Item: Record Item;
@@ -53,17 +56,20 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
             }
             field(Tin; Rec.Tin)
             {
-                Editable = Item_Editable;
+                Visible = Item_Visible;
                 ApplicationArea = all;
+                Editable = Item_Editable;
             }
             field(Drum; Rec.Drum)
             {
                 ApplicationArea = all;
+                Visible = Item_Visible;
                 Editable = Item_Editable;
             }
             field(Bucket; Rec.Bucket)
             {
                 ApplicationArea = all;
+                Visible = Item_Visible;
                 Editable = Item_Editable;
             }
         }
@@ -74,37 +80,67 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
     }
 
     var
+
+        Item_Visible: Boolean;
         Item_Editable: Boolean;
 
     trigger OnOpenPage()
     var
         myInt: Integer;
     begin
-        if Rec."Source Type" <> 39 then
-            Item_Editable := false
-        else
+        Item_Visible := true;
+        Item_Editable := true;
+        if (Rec."Source Type" <> 39) then begin
+            if Rec."Source Type" = 37 then begin
+                Item_Visible := true;
+                Item_Editable := false;
+            end else begin
+                Item_Visible := false;
+                Item_Editable := true;
+            end;
+        end else begin
+            Item_Visible := true;
             Item_Editable := true;
+        end;
+
+
     end;
 
     trigger OnAfterGetRecord()
     var
 
     begin
-        if Rec."Source Type" <> 39 then
-            Item_Editable := false
-        else
-            Item_Editable := true;
+
     end;
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
-
-    // TrackingSpecfiaction: Record "Tracking Specification";
+        PriceListLine: Record "Price List Line";
+        SalesLine: Record "Sales Line";
+        ItemLedgerEntry: Record "Item Ledger Entry";
+        ReservationEntry: Record "Reservation Entry";
+        TrackingSpecification2: Record "Tracking Specification";
     begin
+        if rec."Source Type" = 37 then begin
 
-        /*         rec.TestField("MRP Price");
-                Rec.TestField("MFG. Date");
-                Rec.TestField("Lot No.");
-                Rec.TestField("Expiration Date"); */
+            PriceListLine.Reset();
+            PriceListLine.SetRange("Source Type", PriceListLine."Source Type"::"All Customers");
+            PriceListLine.SetRange("Asset Type", PriceListLine."Asset Type"::Item);
+            PriceListLine.SetRange("Product No.", Rec."Item No.");
+            PriceListLine.SetRange(Status, PriceListLine.Status::Active);
+            PriceListLine.SetRange("MRP Price", Rec."MRP Price");
+            if PriceListLine.FindFirst() then begin
+                SalesLine.Reset();
+                SalesLine.SetRange("Document Type", SalesLine."Document Type"::Order);
+                SalesLine.SetRange("Document No.", Rec."Source ID");
+                SalesLine.SetRange("Line No.", Rec."Source Ref. No.");
+                SalesLine.SetRange("No.", Rec."Item No.");
+                if SalesLine.FindFirst() then begin
+                    SalesLine.Validate("Unit Price", PriceListLine."Unit Price");
+                    SalesLine.Modify();
+                end;
+
+            end;
+        end;
     end;
 }

@@ -22,7 +22,6 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
 
             trigger OnValidate()
             var
-                Rec_Item: Record Item;
                 DealMaster: Record "Deal Master";
             begin
                 IF Rec."Deal No." = '' THEN
@@ -153,24 +152,16 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
         field(50009; "Other Charges"; Decimal)
         {
         }
+        field(50010; "Billed Quantity"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50015; "New Product Group Code"; Code[10])
         {
             Caption = 'Product Group Code';
             DataClassification = ToBeClassified;
             // TableRelation = "New Product Group".Code WHERE("Item Category Code" = FIELD("Item Category Code"));
             TableRelation = "New Product Group".Code WHERE("Item Category Code" = filter(''));
-        }
-        field(50010; "Billed Quantity"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(70003; "Item Tracking Quantity Honey"; Decimal)
-        {
-            CalcFormula = Sum("Tran. Lot Tracking".Quantity WHERE("Document No." = FIELD("Document No."),
-                                                                   "Document Line No." = FIELD("Line No."),
-                                                                   "Item No." = FIELD("No.")));
-            Editable = false;
-            FieldClass = FlowField;
         }
         field(50020; "P.A.N. No."; Code[20])
         {
@@ -186,11 +177,17 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
             TableRelation = Item where("Item Category Code" = const('PACK HONEY'));
             DataClassification = ToBeClassified;
             trigger OnValidate()
-            var
-                Item: Record Item;
             begin
                 Validate("No.", "Honey Item No.");
             end;
+        }
+        field(70003; "Item Tracking Quantity Honey"; Decimal)
+        {
+            CalcFormula = Sum("Tran. Lot Tracking".Quantity WHERE("Document No." = FIELD("Document No."),
+                                                                   "Document Line No." = FIELD("Line No."),
+                                                                   "Item No." = FIELD("No.")));
+            Editable = false;
+            FieldClass = FlowField;
         }
     }
 
@@ -204,60 +201,15 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
                                                  PurchHeader: Record "Purchase Header")
     var
         PurchLine: Record "Purchase Line";
-        TDSEntry: Record "TDS Entry";
-
-        CurrPurchLine: Record "Purchase Line";
-        Vendor: Record Vendor;
         DateFilterCalc: Codeunit "DateFilter-Calc";
         AccountingPeriodFilter: Text[30];
         AccountingPeriodFilter2: Text[30];
-        FiscalYear: Boolean;
-        PreviousTDSAmt: Decimal;
-        PreviousSurchargeAmt: Decimal;
-        PreviousAmount: Decimal;
-        AppliedAmount: Decimal;
-        CurrentPOTDSAmt: Decimal;
-        CurrentPOAmount: Decimal;
-        CurrentPOContractAmt: Decimal;
-        CurrentPOContractTDSAmt: Decimal;
-        CalculatedTDSAmt: Decimal;
-        CalculatedSurchargeAmt: Decimal;
-        CalculateSurcharge: Boolean;
-        SurchargeBase: Decimal;
-        PreviousContractAmount: Decimal;
-        InvoiceAmount: Decimal;
-        PaymentAmount: Decimal;
-        AppliedAmountDoc: Decimal;
-
-        TDSSetupPercentage: Decimal;
-        PreviousBaseAMTWithTDS: Decimal;
-        TDSBaseLCY: Decimal;
-        TempTDSBase: Decimal;
-        SurchargeBaseLCY: Decimal;
-        TDSPercentage: Decimal;
-        SurchargePercentage: Decimal;
-        RemainingAmount: Decimal;
-        ReverseChargePct: Integer;
-        PreviousAmount1: Decimal;
-        InvoiceAmt1: Decimal;
-        PaymentAmt1: Decimal;
-        PreviousTDSAmt1: Decimal;
 
         PurchInvAmt_TDS: Decimal;
         PurchCrMemoAmt_TDS: Decimal;
         FinalAmt_TDS: Decimal;
-        OrderLineNo: Integer;
-        LineWiseOrderamt: Decimal;
-        OrderAmtB: Decimal;
-        FinalOrderAmt: Decimal;
-        TDSB: Decimal;
-        OverPurchase: Boolean;
         LineC: Integer;
         Team002: Label 'Previous Purchase amount of PAN %1 is %2.';
-        TempTDSBForAppliedDoc: Decimal;
-        TempQtyF: Decimal;
-
-        CodeUnit4Check: Codeunit "Gen. Jnl.-Post Batch";
     begin
         PurchLine.SETRANGE("Document Type", PurchHeader."Document Type");
         PurchLine.SETRANGE("Document No.", PurchHeader."No.");
@@ -302,44 +254,14 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
     procedure CalculateTDS_TradingTrans(var PurchHeader: Record "Purchase Header")
     var
         PurchLine: Record "Purchase Line";
-        TDSEntry: Record "TDS Entry";
 
         CurrPurchLine: Record "Purchase Line";
-        Vendor: Record Vendor;
         DateFilterCalc: Codeunit "DateFilter-Calc";
         AccountingPeriodFilter: Text[30];
         AccountingPeriodFilter2: Text[30];
-        FiscalYear: Boolean;
-        PreviousTDSAmt: Decimal;
-        PreviousSurchargeAmt: Decimal;
-        PreviousAmount: Decimal;
-        AppliedAmount: Decimal;
         CurrentPOTDSAmt: Decimal;
         CurrentPOAmount: Decimal;
-        CurrentPOContractAmt: Decimal;
-        CurrentPOContractTDSAmt: Decimal;
-        CalculatedTDSAmt: Decimal;
-        CalculatedSurchargeAmt: Decimal;
-        CalculateSurcharge: Boolean;
-        SurchargeBase: Decimal;
-        PreviousContractAmount: Decimal;
-        InvoiceAmount: Decimal;
-        PaymentAmount: Decimal;
-        AppliedAmountDoc: Decimal;
-
-        TDSSetupPercentage: Decimal;
-        PreviousBaseAMTWithTDS: Decimal;
         TDSBaseLCY: Decimal;
-        TempTDSBase: Decimal;
-        SurchargeBaseLCY: Decimal;
-        TDSPercentage: Decimal;
-        SurchargePercentage: Decimal;
-        RemainingAmount: Decimal;
-        ReverseChargePct: Integer;
-        PreviousAmount1: Decimal;
-        InvoiceAmt1: Decimal;
-        PaymentAmt1: Decimal;
-        PreviousTDSAmt1: Decimal;
 
         PurchInvAmt_TDS: Decimal;
         PurchCrMemoAmt_TDS: Decimal;
@@ -351,11 +273,6 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
         TDSB: Decimal;
         OverPurchase: Boolean;
         LineC: Integer;
-        Team002: Label 'Previous Purchase amount of PAN %1 is %2.';
-        TempTDSBForAppliedDoc: Decimal;
-        TempQtyF: Decimal;
-        CodeUnit4Check: Codeunit "Gen. Jnl.-Post Batch";
-        VendledgEntry1: Record "Vendor Ledger Entry";
         TaxTransValueR_ForPurchline: Record "Tax Transaction Value";
         TDSSetup_ForPurchline: Record "TDS Setup";
         Tdsamt_Currpurchline: Decimal;

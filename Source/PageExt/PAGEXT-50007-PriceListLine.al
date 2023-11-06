@@ -15,7 +15,4 @@ pageextension 50007 PriceListline extends "Price List Lines"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

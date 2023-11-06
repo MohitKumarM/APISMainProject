@@ -73,9 +73,6 @@ codeunit 50000 Tble83
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post", 'OnAfterPurchInvLineInsert', '', false, false)]
     local procedure OnAfterPurchInvLineInsert(var PurchInvLine: Record "Purch. Inv. Line"; PurchInvHeader: Record "Purch. Inv. Header"; PurchLine: Record "Purchase Line"; ItemLedgShptEntryNo: Integer; WhseShip: Boolean; WhseReceive: Boolean; CommitIsSupressed: Boolean; PurchHeader: Record "Purchase Header"; PurchRcptHeader: Record "Purch. Rcpt. Header"; TempWhseRcptHeader: Record "Warehouse Receipt Header")
     var
-        decCurrencyFactor: Decimal;
-        recVendor: Record Vendor;
-        Location: Record Location;
         BeekeeperLedgerEntries: Record "BeeKeeper VendorLedger Entries";
         BeekeeperEntryNo: Integer;
     begin
@@ -124,9 +121,6 @@ codeunit 50000 Tble83
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post", 'OnAfterPurchCrMemoLineInsert', '', false, false)]
     local procedure OnAfterPurchCrMemoLineInsert(var PurchCrMemoLine: Record "Purch. Cr. Memo Line"; var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr."; var PurchLine: Record "Purchase Line"; CommitIsSupressed: Boolean; var PurchaseHeader: Record "Purchase Header")
     var
-        decCurrencyFactor: Decimal;
-        recVendor: Record Vendor;
-        Location: Record Location;
         BeekeeperLedgerEntries: Record "BeeKeeper VendorLedger Entries";
         BeekeeperEntryNo: Integer;
     begin
@@ -250,7 +244,6 @@ codeunit 50000 Tble83
     local procedure OnBeforeSelectPostOrderOption(var PurchaseHeader: Record "Purchase Header"; DefaultOption: Integer; var Result: Boolean; var IsHandled: Boolean)
     var
         Selection: Integer;
-        ReceiveInvoiceOptionsQst: Label '&Receive';
     begin
         IsHandled := true;
         //Selection := StrMenu(ReceiveInvoiceOptionsQst, DefaultOption);
@@ -313,20 +306,14 @@ codeunit 50000 Tble83
 
     // Table39 End
 
-
-
     // Page6510 Start
-    [EventSubscriber(ObjectType::Page, 6510, 'OnAssistEditLotNoOnBeforeCurrPageUdate', '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnAssistEditLotNoOnBeforeCurrPageUdate', '', false, false)]
     local procedure OnAssistEditLotNoOnBeforeCurrPageUdate(var TrackingSpecification: Record "Tracking Specification"; xTrackingSpecification: Record "Tracking Specification")
-    var
-        ItemLedgerEntry: Record "Item Ledger Entry";
     begin
 
         /* if TrackingSpecification."MRP Price" <> xTrackingSpecification."MRP Price" then
             Error('MRP Price Should Be Same for Same Tracking Line'); */
-
     end;
-
 
     [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnRegisterChangeOnChangeTypeInsertOnBeforeInsertReservEntry', '', false, false)]
     local procedure OnRegisterChangeOnChangeTypeInsertOnBeforeInsertReservEntry(var TrackingSpecification: Record "Tracking Specification"; var OldTrackingSpecification: Record "Tracking Specification"; var NewTrackingSpecification: Record "Tracking Specification"; FormRunMode: Option)
@@ -340,13 +327,9 @@ codeunit 50000 Tble83
         ILENo := NewTrackingSpecification."ILE No.";
     end;
 
-    [IntegrationEvent(false, false)]
-    local procedure OnRegisterChangeOnChangeTypeModifyOnBeforeCheckEntriesAreIdentical(var ReservEntry1: Record "Reservation Entry"; var ReservEntry2: Record "Reservation Entry"; var OldTrackingSpecification: Record "Tracking Specification"; var NewTrackingSpecification: Record "Tracking Specification"; var IdenticalArray: array[2] of Boolean)
-    begin
-    end;
     // Page6510 End
     // Codeunit99000830 Start
-    [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnAfterSetDates', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Create Reserv. Entry", 'OnAfterSetDates', '', false, false)]
     local procedure OnAfterSetDates(var ReservationEntry: Record "Reservation Entry")
     begin
         ReservationEntry."MRP Price" := MRPPrice;
@@ -357,7 +340,7 @@ codeunit 50000 Tble83
         ReservationEntry."ILE No." := ILENo;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnCreateReservEntryExtraFields', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Create Reserv. Entry", 'OnCreateReservEntryExtraFields', '', false, false)]
     local procedure OnCreateReservEntryExtraFields(var InsertReservEntry: Record "Reservation Entry"; OldTrackingSpecification: Record "Tracking Specification"; NewTrackingSpecification: Record "Tracking Specification")
     begin
         InsertReservEntry."MRP Price" := NewTrackingSpecification."MRP Price";
@@ -368,7 +351,7 @@ codeunit 50000 Tble83
         InsertReservEntry."ILE No." := NewTrackingSpecification."ILE No.";
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 99000830, 'OnAfterCopyFromInsertReservEntry', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Create Reserv. Entry", 'OnAfterCopyFromInsertReservEntry', '', false, false)]
     local procedure OnAfterCopyFromInsertReservEntry(var InsertReservEntry: Record "Reservation Entry"; var ReservEntry: Record "Reservation Entry"; FromReservEntry: Record "Reservation Entry"; Status: Enum "Reservation Status"; QtyToHandleAndInvoiceIsSet: Boolean)
     var
         R_ReservEntry: Record "Reservation Entry";
@@ -389,14 +372,14 @@ codeunit 50000 Tble83
     // Codeunit99000830 End
 
     // Page6510 Start
-    [EventSubscriber(ObjectType::Page, 6510, 'OnAfterEntriesAreIdentical', '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnAfterEntriesAreIdentical', '', false, false)]
     local procedure OnAfterEntriesAreIdentical(ReservEntry1: Record "Reservation Entry"; ReservEntry2: Record "Reservation Entry"; var IdenticalArray: array[2] of Boolean)
     begin
         IdenticalArray[2] := ((ReservEntry1."MRP Price" = ReservEntry2."MRP Price") and (ReservEntry1."MFG. Date" = ReservEntry2."MFG. Date") and (ReservEntry1.Tin = ReservEntry2.Tin) and (ReservEntry1.Drum = ReservEntry2.Drum)
             and (ReservEntry1.Bucket = ReservEntry2.Bucket) and (ReservEntry1."ILE No." = ReservEntry2."ILE No."));
     end;
 
-    [EventSubscriber(ObjectType::Page, 6510, 'OnAfterCopyTrackingSpec', '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnAfterCopyTrackingSpec', '', false, false)]
     local procedure OnAfterCopyTrackingSpec(var SourceTrackingSpec: Record "Tracking Specification"; var DestTrkgSpec: Record "Tracking Specification")
     begin
         if ModifyRun = false then begin
@@ -416,8 +399,7 @@ codeunit 50000 Tble83
         end;
     end;
 
-
-    [EventSubscriber(ObjectType::Page, 6510, 'OnAfterMoveFields', '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnAfterMoveFields', '', false, false)]
     local procedure OnAfterMoveFields(var TrkgSpec: Record "Tracking Specification"; var ReservEntry: Record "Reservation Entry")
     begin
         ReservEntry."MRP Price" := TrkgSpec."MRP Price";
@@ -429,10 +411,8 @@ codeunit 50000 Tble83
     end;
     // Page6510 End
 
-
-
     // Codeunit99000831 Start
-    [EventSubscriber(ObjectType::Codeunit, 99000831, 'OnBeforeUpdateItemTracking', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Reservation Engine Mgt.", 'OnBeforeUpdateItemTracking', '', false, false)]
     local procedure OnBeforeUpdateItemTracking(var ReservEntry: Record "Reservation Entry"; var TrackingSpecification: Record "Tracking Specification")
     begin
 
@@ -460,19 +440,11 @@ codeunit 50000 Tble83
     // Codeunit6500 End
 
     // Codeunit6501 Start
-    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAfterAssistEditTrackingNo', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Tracking Data Collection", 'OnAfterAssistEditTrackingNo', '', false, false)]
     local procedure OnAfterAssistEditTrackingNo(var TrackingSpecification: Record "Tracking Specification"; var TempGlobalEntrySummary: Record "Entry Summary" temporary; CurrentSignFactor: Integer; MaxQuantity: Decimal)
     var
-        //RG23D:Record RG 23 D;
-        S_Line: Record "Sales Line";
-        R_ValueEntry: Record "Value Entry";
-        ValueEntryG: Record "Value Entry";
-        ValueEntrySales: Record "Value Entry";
-        ValueEntrySCrG: Record "Value Entry";
-        CustmerG: Record Customer;
         ItemLedgerEntry: Record "Item Ledger Entry";
         ReservationEntry: Record "Reservation Entry";
-        TrackingSpecification2: Record "Tracking Specification";
         ReservationEntry2: Record "Reservation Entry";
         QtyResereve: Decimal;
         ItemLedgeEntry2: Record "Item Ledger Entry";
@@ -487,11 +459,9 @@ codeunit 50000 Tble83
         TrackingSpecification.Bucket := TempGlobalEntrySummary.Bucket;
         TrackingSpecification."ILE No." := TempGlobalEntrySummary."ILE No.";
 
-
         if (TrackingSpecification."Source Type" = 37) then begin
             if (TempGlobalEntrySummary."Total Available Quantity" <= 0) or ((TempGlobalEntrySummary."Current Pending Quantity" < 0)) then
                 Error('In this Lot No. Total Available Quantity is 0.');
-
 
             ItemLedgerEntry.SetCurrentKey("Entry No.");
             ItemLedgerEntry.SetRange("Item No.", TrackingSpecification."Item No.");
@@ -541,33 +511,26 @@ codeunit 50000 Tble83
                                 TrackingSpecification.SetCurrentKey("Entry No.");
                                 if TrackingSpecification.FindFirst() then
                                     if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
-                                        Error('MRP Should be Same');
+                                        Error('MRP Price Should be Same As in First Line in Tracking Specification');
                                 TrackingSpecification.SetRange("Lot No.");
                                 TrackingSpecification.TransferFields(TempTrackingSpecification);
                             end;
                         end;
-
                     end else begin
-                        /*  if TrackingSpecification."MRP Price" <> TempGlobalEntrySummary."MRP Price" then
-                             Error('MRP Price Should Be Same for Same Tracking Line'); */
-
                         TrackingSpecification.SetCurrentKey("Entry No.");
                         if TrackingSpecification.FindFirst() then
                             if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
-                                Error('MRP Should be Same');
+                                Error('MRP Price Should be Same As in First Line in Tracking Specification');
                         TrackingSpecification.SetRange("Lot No.");
                         TrackingSpecification.TransferFields(TempTrackingSpecification);
-
                         exit;
                     end;
                 until ItemLedgerEntry.Next() = 0;
-
-
             end;
         end;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnTransferItemLedgToTempRecOnBeforeInsert', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Tracking Data Collection", 'OnTransferItemLedgToTempRecOnBeforeInsert', '', false, false)]
     local procedure OnTransferItemLedgToTempRecOnBeforeInsert(var TempGlobalReservEntry: Record "Reservation Entry" temporary; ItemLedgerEntry: Record "Item Ledger Entry"; TrackingSpecification: Record "Tracking Specification"; var IsHandled: Boolean)
     begin
 
@@ -579,7 +542,7 @@ codeunit 50000 Tble83
         TempGlobalReservEntry."ILE No." := ItemLedgerEntry."Entry No.";
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnCreateEntrySummary2OnAfterAssignTrackingFromReservEntry', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Tracking Data Collection", 'OnCreateEntrySummary2OnAfterAssignTrackingFromReservEntry', '', false, false)]
     local procedure OnCreateEntrySummary2OnAfterAssignTrackingFromReservEntry(var TempGlobalEntrySummary: Record "Entry Summary" temporary; TempReservEntry: Record "Reservation Entry" temporary);
     begin
         TempGlobalEntrySummary."MRP Price" := TempReservEntry."MRP Price";
@@ -590,7 +553,7 @@ codeunit 50000 Tble83
         TempGlobalEntrySummary."ILE No." := TempReservEntry."ILE No.";
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAddSelectedTrackingToDataSetOnAfterInitTrackingSpecification2', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Tracking Data Collection", 'OnAddSelectedTrackingToDataSetOnAfterInitTrackingSpecification2', '', false, false)]
     local procedure OnAddSelectedTrackingToDataSetOnAfterInitTrackingSpecification2(var TrackingSpecification: Record "Tracking Specification"; TempTrackingSpecification: Record "Tracking Specification" temporary)
     begin
         //TEAM::3333
@@ -602,7 +565,7 @@ codeunit 50000 Tble83
         TrackingSpecification."ILE No." := TempTrackingSpecification."ILE No.";
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnBeforeTempTrackingSpecificationInsert', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Tracking Data Collection", 'OnBeforeTempTrackingSpecificationInsert', '', false, false)]
     local procedure OnBeforeTempTrackingSpecificationInsert(var TempTrackingSpecification: Record "Tracking Specification" temporary; var TempEntrySummary: Record "Entry Summary" temporary)
     begin
         TempTrackingSpecification."MRP Price" := TempEntrySummary."MRP Price";
@@ -613,23 +576,58 @@ codeunit 50000 Tble83
         TempTrackingSpecification."ILE No." := TempEntrySummary."ILE No.";
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAfterTransferReservEntryToTempRec', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Tracking Data Collection", 'OnAfterTransferReservEntryToTempRec', '', false, false)]
     local procedure OnAfterTransferReservEntryToTempRec(var GlobalReservEntry: Record "Reservation Entry"; ReservEntry: Record "Reservation Entry"; TrackingSpecification: Record "Tracking Specification"; var IsHandled: Boolean)
     begin
 
         GlobalReservEntry."ILE No." := ReservEntry."ILE No."
-
     end;
     // Codeunit6501 End
 
-    [EventSubscriber(ObjectType::Codeunit, 6501, 'OnAssistEditTrackingNoLookupLotNoOnAfterSetFilters', '', false, false)]
-    local procedure OnAssistEditTrackingNoLookupLotNoOnAfterSetFilters(var TempGlobalEntrySummary: Record "Entry Summary" temporary; TempTrackingSpecification: Record "Tracking Specification" temporary)
+    //Codeunit80 Start
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterSalesInvLineInsert', '', false, false)]
+    local procedure OnAfterSalesInvLineInsert(var SalesInvLine: Record "Sales Invoice Line"; SalesInvHeader: Record "Sales Invoice Header"; SalesLine: Record "Sales Line"; ItemLedgShptEntryNo: Integer; WhseShip: Boolean; WhseReceive: Boolean; CommitIsSuppressed: Boolean; var SalesHeader: Record "Sales Header"; var TempItemChargeAssgntSales: Record "Item Charge Assignment (Sales)" temporary; var TempWhseShptHeader: Record "Warehouse Shipment Header" temporary; var TempWhseRcptHeader: Record "Warehouse Receipt Header" temporary; PreviewMode: Boolean)
+    var
+        PrePackingList: Record "Pre Packing List";
+        PostedPackigList: Record "Posted Packing List";
     begin
-
+        //Iappc - Packing List Posting Begin
+        PrePackingList.Reset();
+        PrePackingList.SetRange("Order No.", SalesLine."Document No.");
+        PrePackingList.SetRange("Order Line No.", SalesLine."Line No.");
+        if PrePackingList.FindSet() then
+            repeat
+                PostedPackigList.Init();
+                PostedPackigList.TransferFields(PrePackingList);
+                PostedPackigList."Order No." := SalesInvHeader."No.";
+                PostedPackigList.Insert();
+                PrePackingList.Delete();
+            until PrePackingList.Next() = 0;
     end;
+    //Codeunit80 End
 
-
-
-
+    //Codeunit1535 Start
+    [EventSubscriber(ObjectType::Codeunit, 1535, 'OnApproveApprovalRequest', '', false, false)]
+    local procedure OnApproveApprovalRequest(var ApprovalEntry: Record "Approval Entry")
+    var
+        Customer_Approval: Record Customer;
+        Rec: RecordId;
+        Recref: RecordRef;
+    begin
+        if ApprovalEntry."Table ID" = Database::Customer then begin
+            Recref.Get(ApprovalEntry."Record ID to Approve");
+            case
+                Recref.Number of
+                Database::Customer:
+                    begin
+                        Recref.SetTable(Customer_Approval);
+                        Recref.Field(Customer_Approval.FieldNo(Blocked)).Value := Customer_Approval.Blocked::" ";
+                        Recref.Modify();
+                    end;
+            end;
+        end;
+    end;
+    //Codeunit1535 End
 
 }

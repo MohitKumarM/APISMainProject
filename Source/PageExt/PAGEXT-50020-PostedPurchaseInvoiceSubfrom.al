@@ -35,7 +35,4 @@ pageextension 50020 PostedPurchaseInvoiceSubform extends "Posted Purch. Invoice 
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

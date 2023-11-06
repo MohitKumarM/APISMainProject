@@ -20,6 +20,10 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(50004; "Gate Entry No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50005; "Freight Liability"; Option)
         {
             OptionCaption = ' ,Supplier,Buyer';
@@ -29,6 +33,26 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
         field(50006; "Waybill No."; Code[20])
         {
             Caption = 'E-Way Bill';
+        }
+        field(50007; "GAN Approval Pending"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50009; "GR / LR No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50010; "GR / LR Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50011; "Gate Entry Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50014; "Vendor Invoice Value"; Decimal)
+        {
+            DataClassification = ToBeClassified;
         }
         field(50016; "Shipping Vendor"; Code[20])
         {
@@ -53,32 +77,5 @@ tableextension 50021 PurchaseInvoiceHeader extends "Purch. Inv. Header"
             DataClassification = ToBeClassified;
             TableRelation = "New Product Group".Code;
         }
-        field(50007; "GAN Approval Pending"; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50009; "GR / LR No."; Code[20])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50010; "GR / LR Date"; Date)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50011; "Gate Entry Date"; Date)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50004; "Gate Entry No."; Code[20])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50014; "Vendor Invoice Value"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
     }
-
-    var
-        myInt: Integer;
 }

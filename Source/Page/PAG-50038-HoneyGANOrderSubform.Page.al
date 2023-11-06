@@ -384,7 +384,6 @@ page 50038 "Honey GAN Order Subform"
 
     var
         TransferExtendedText: Codeunit "Transfer Extended Text";
-        ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
         ShortcutDimCode: array[8] of Code[20];
         UpdateAllowedVar: Boolean;
         Text000: Label 'Unable to execute this function while in view only mode.';

@@ -1,6 +1,5 @@
 pageextension 50009 "ItemTrackingSummary" extends "Item Tracking Summary"
 {
-
     layout
     {
         addafter("Serial No.")
@@ -17,7 +16,6 @@ pageextension 50009 "ItemTrackingSummary" extends "Item Tracking Summary"
             {
                 ApplicationArea = all;
                 Editable = false;
-
             }
             field("MFG. Date"; Rec."MFG. Date")
             {
@@ -48,17 +46,9 @@ pageextension 50009 "ItemTrackingSummary" extends "Item Tracking Summary"
         // Add changes to page actions here
     }
 
-    var
-        myInt: Integer;
-
     trigger OnAfterGetRecord()
-    var
-        myInt: Integer;
     begin
         if rec."Lot No." <> '' then
             Rec.SetCurrentKey("ILE No.");
     end;
-
-
-
 }

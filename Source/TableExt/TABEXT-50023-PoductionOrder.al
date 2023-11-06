@@ -16,7 +16,4 @@ tableextension 50023 ProductionOrder extends "Production Order"
             FieldClass = FlowField;
         }
     }
-
-    var
-        myInt: Integer;
 }

@@ -602,11 +602,6 @@ page 50021 "Output QC"
         recQualityMeasure: Record "Standard Task Quality Measure";
         recQualityLines: Record "Quality Line";
         pgQuality: Page "Output Quality Check Card";
-        recBatchProcess: Record "Batch Process Header";
-        pgBatchProcess: Page "De-Crystallizer Card";
-        pgVacuumCirculation: Page "Vacuum Circulation Card";
-        recReservationEntry: Record "Reservation Entry";
-        recBatchProcessLine: Record "Batch Process Line";
         recCustomer: Record Customer;
     begin
         recMachineCenter.GET(Rec."No.");

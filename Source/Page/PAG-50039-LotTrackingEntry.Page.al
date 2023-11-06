@@ -108,7 +108,6 @@ page 50039 "Lot Tracking Entry"
         decRemQty: Decimal;
         decAppliedQty: Decimal;
         recLotTracking: Record "Tran. Lot Tracking";
-        recLotEntry: Record "Lot Tracking Entry";
         cdLocationCode: Code[20];
         opDocumentType: Option "Purch. Receipt",Consumption;
 

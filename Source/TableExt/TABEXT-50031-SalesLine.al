@@ -7,7 +7,4 @@ tableextension 50031 SalesLine extends "Sales Line"
             DataClassification = CustomerContent;
         }
     }
-
-    var
-        myInt: Integer;
 }

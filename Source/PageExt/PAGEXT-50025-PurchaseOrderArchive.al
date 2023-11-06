@@ -15,7 +15,4 @@ pageextension 50025 PurchaseHedaerArchive extends "Purchase Order Archive"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

@@ -110,8 +110,6 @@ pageextension 50019 PurchaseOrder extends "Purchase Order"
         modify(Statistics)
         {
             trigger OnBeforeAction()
-            var
-                myInt: Integer;
             begin
                 rec.CallnewTdsfunctionsForMessage();//200523
                 Rec.CallnewTdsfunctions();//200523
@@ -129,7 +127,6 @@ pageextension 50019 PurchaseOrder extends "Purchase Order"
                 trigger OnAction()
                 var
                     PurchasePayableSetup: Record "Purchases & Payables Setup";
-                    PurchaseHeader: Record "Purchase Header";
                     ArchiveManagement: Codeunit ArchiveManagement;
                 begin
                     PurchasePayableSetup.get;

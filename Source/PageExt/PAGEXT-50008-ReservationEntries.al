@@ -31,7 +31,4 @@ pageextension 50008 ReservationEntry extends "Reservation Entries"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

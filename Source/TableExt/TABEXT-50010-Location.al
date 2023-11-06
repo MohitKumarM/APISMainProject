@@ -11,7 +11,4 @@ tableextension 50010 Locations extends Location
             TableRelation = Location;
         }
     }
-
-    var
-        myInt: Integer;
 }

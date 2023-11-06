@@ -42,6 +42,10 @@ tableextension 50012 PurchaseInvoiceLine extends "Purch. Inv. Line"
         field(50009; "Other Charges"; Decimal)
         {
         }
+        field(50010; "Billed Quantity"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50020; "P.A.N. No."; Code[20])
         {
             Caption = 'P.A.N. No.';
@@ -52,10 +56,6 @@ tableextension 50012 PurchaseInvoiceLine extends "Purch. Inv. Line"
             DataClassification = ToBeClassified;
         }
         field(50022; "Honey Item No."; Code[20])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50010; "Billed Quantity"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -71,7 +71,4 @@ tableextension 50012 PurchaseInvoiceLine extends "Purch. Inv. Line"
             FieldClass = FlowField;
         }
     }
-
-    var
-        myInt: Integer;
 }

@@ -53,7 +53,4 @@ pageextension 50022 PurchaseCrSubform extends "Purch. Cr. Memo Subform"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

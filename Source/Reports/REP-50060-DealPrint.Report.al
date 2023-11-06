@@ -302,7 +302,6 @@ report 50060 "Deal Print"
     }
 
     var
-        NoText: array[2] of Text[10];
         rptCheque: Report "Check Report";
         recCompanyInfo: Record "Company Information";
         recCountry: Record "Country/Region";
@@ -313,29 +312,17 @@ report 50060 "Deal Print"
         recLocation: Record Location;
         recPaymentTerms: Record "Payment Terms";
         decTotalLineAmount: Decimal;
-        intSrNo: Integer;
         // rptCheque: Report 1401;
         NumberText: array[2] of Text[80];
-        txtTaxName: Text[50];
-        // recTaxChargeGroup: Record 13790;
-        recPurchaseLine: Record "Purchase Line";
         // recStructureLines: Record 13794;
         decTotalLineValue: Decimal;
-        recShipmentMethod: Record "Shipment Method";
-        decTaxPerc: Decimal;
-        decSerTaxPerc: Decimal;
         txtRegOffStateName: Text[50];
         txtRegOffCountryName: Text[50];
-        txtFormCode: Text[50];
-        txtPaymentTerm: Text[50];
-        txtFreightTerms: Text[100];
         recItem: Record Item;
         txtLocationState: Text[50];
         txtLocationCountry: Text[50];
         recState: Record State;
         PurchSetup: Record "Purchases & Payables Setup";
-        PurchLine: Record "Purchase Line";
-        decLineTaxAmount: Decimal;
         txtQualityInstruction: array[10] of Text[250];
         x: Integer;
         txtTaxRate: Text;

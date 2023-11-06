@@ -7,7 +7,4 @@ tableextension 50015 CompanyInfromation extends "Company Information"
             Caption = 'STD Code';
         }
     }
-
-    var
-        myInt: Integer;
 }

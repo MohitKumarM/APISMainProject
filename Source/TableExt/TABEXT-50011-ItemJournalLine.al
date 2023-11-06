@@ -41,9 +41,16 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         field(50012; "Purchaser Name"; Text[50])
         {
         }
-        field(50023; "MFG. Date"; Date)
+        field(50014; "Customer Code"; Text[30])
+        {
+        }
+        field(50015; "Prod. Date for Expiry Calc"; Date)
+        {
+        }
+        field(50019; "New Product Group Code"; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = "New Product Group".Code WHERE("Item Category Code" = FIELD("Item Category Code"));
         }
         field(50020; "Tin"; Decimal)
         {
@@ -57,21 +64,11 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         {
             DataClassification = ToBeClassified;
         }
-        field(50019; "New Product Group Code"; Code[20])
+        field(50023; "MFG. Date"; Date)
         {
             DataClassification = ToBeClassified;
-            TableRelation = "New Product Group".Code WHERE("Item Category Code" = FIELD("Item Category Code"));
         }
         field(60000; "Temp Message Control"; Boolean)
-        {
-        }
-        field(50014; "Customer Code"; Text[30])
-        {
-        }
-        field(50015; "Prod. Date for Expiry Calc"; Date)
-        {
-        }
-        field(60014; "QC Required"; Boolean)
         {
         }
         field(60006; "ByProduct Item Code"; Code[20])
@@ -82,14 +79,6 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         {
             MinValue = 0;
         }
-        field(60011; "Source Template Code"; Code[20])
-        {
-            TableRelation = "Item Journal Template";
-        }
-        field(60012; "Source Batch Name"; Code[10])
-        {
-            TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("Source Template Code"));
-        }
         field(60008; "ByProduct Entry"; Boolean)
         {
         }
@@ -99,6 +88,17 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         field(60010; "Machine Center No."; Code[20])
         {
             TableRelation = "Machine Center";
+        }
+        field(60011; "Source Template Code"; Code[20])
+        {
+            TableRelation = "Item Journal Template";
+        }
+        field(60012; "Source Batch Name"; Code[10])
+        {
+            TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("Source Template Code"));
+        }
+        field(60014; "QC Required"; Boolean)
+        {
         }
         field(70000; "Moisture (%)"; Text[10])
         {
@@ -120,7 +120,4 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         }
         //Ending---
     }
-
-    var
-        myInt: Integer;
 }

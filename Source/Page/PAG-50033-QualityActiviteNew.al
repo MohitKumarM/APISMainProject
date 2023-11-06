@@ -145,7 +145,6 @@ page 50033 "Quality Activities New"
         intUserCount: Integer;
         recGLSetup: Record "General Ledger Setup";
         recUser: Record User;
-        recActiveSession: Record "Active Session";
     begin
         //Iappc - User Mgmt Begin
         recGLSetup.GET;

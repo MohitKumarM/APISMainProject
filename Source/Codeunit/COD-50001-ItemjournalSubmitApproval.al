@@ -71,7 +71,6 @@ codeunit 50001 "Item Jnl.-Submit Approval"
     var
         Text000: Label 'cannot be filtered when posting recurring journals';
         Text001: Label 'Do you want to submit the journal lines?';
-        Text002: Label 'There is nothing to post.';
         Text003: Label 'The journal lines were successfully submitted.';
         Text004: Label 'The journal lines were successfully submitted. ';
         Text005: Label 'You are now in the %1 journal.';
@@ -84,7 +83,6 @@ codeunit 50001 "Item Jnl.-Submit Approval"
         recItemJournalLinesInsert: Record "Item Journal Line";
         cdTemplate: Code[20];
         cdBatch: Code[20];
-        intLineNo: Integer;
         blnProcessed: Boolean;
         TempItemjournalLine: Record "Item Journal Line" temporary;
 

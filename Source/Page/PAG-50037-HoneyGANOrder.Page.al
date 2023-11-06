@@ -699,9 +699,6 @@ page 50037 "Honey GAN Order"
         PurchSetup: Record "Purchases & Payables Setup";
         ChangeExchangeRate: Page "Change Exchange Rate";
         CopyPurchDoc: Report "Copy Purchase Document";
-        MoveNegPurchLines: Report "Move Negative Purchase Lines";
-        ReportPrint: Codeunit "Test Report-Print";
-        DocPrint: Codeunit "Document-Print";
         UserMgt: Codeunit "User Setup Management";
         ArchiveManagement: Codeunit ArchiveManagement;
         PurchLine: Record "Purchase Line";
@@ -721,10 +718,8 @@ page 50037 "Honey GAN Order"
         ShouldSearchForVendByName: Boolean;
         PurchaseDocCheckFactboxVisible: Boolean;
         IsPurchaseLinesEditable: Boolean;
-        IsRemitToCountyVisible: Boolean;
         VendorInvoiceNoMandatory: Boolean;
         ShowWorkflowStatus: Boolean;
-        InbTack: Page "Item Tracking Code Card";
 
     local procedure Post(PostingCodeunitID: Integer)
     begin

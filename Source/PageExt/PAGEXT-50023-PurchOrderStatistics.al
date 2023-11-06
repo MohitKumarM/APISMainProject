@@ -10,9 +10,6 @@ pageextension 50023 PurchaseOrderStatistics extends "Purchase Order Statistics"
         // Add changes to page actions here
     }
 
-    var
-        myInt: Integer;
-
     trigger OnOpenPage()
     var
         PurchaseLine: Record "Purchase Line";

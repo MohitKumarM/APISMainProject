@@ -19,7 +19,4 @@ pageextension 50018 Location extends "Location Card"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

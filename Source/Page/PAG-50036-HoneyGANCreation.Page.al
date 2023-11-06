@@ -145,11 +145,4 @@ page 50036 "Honey GAN Creation"
             }
         }
     }
-
-    var
-        recPurchSetup: Record "Purchases & Payables Setup";
-        recOrder: Record "Purchase Header";
-        cdOrderCode: Code[20];
-        cuNoSeries: Codeunit NoSeriesManagement;
-        pgHoneyOrder: Page "Honey Purchase Order";
 }

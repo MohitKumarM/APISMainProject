@@ -23,7 +23,4 @@ pageextension 50011 ItemN1 extends "Item Card"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

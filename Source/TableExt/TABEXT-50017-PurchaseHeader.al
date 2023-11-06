@@ -20,6 +20,10 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(50004; "Gate Entry No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50005; "Freight Liability"; Option)
         {
             OptionCaption = ' ,Supplier,Buyer';
@@ -35,14 +39,6 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
         {
             Caption = 'E-Way Bill';
         }
-        field(50004; "Gate Entry No."; Code[20])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50014; "Vendor Invoice Value"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
         field(50007; "GAN Approval Pending"; Boolean)
         {
             DataClassification = ToBeClassified;
@@ -56,6 +52,10 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
             DataClassification = ToBeClassified;
         }
         field(50011; "Gate Entry Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50014; "Vendor Invoice Value"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -96,9 +96,6 @@ tableextension 50017 PurchaseHeader extends "Purchase Header"
             DataClassification = ToBeClassified;
         }
     }
-
-    var
-        myInt: Integer;
 
     procedure CallnewTdsfunctionsForMessage()
     var

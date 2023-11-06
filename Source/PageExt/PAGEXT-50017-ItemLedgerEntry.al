@@ -87,7 +87,4 @@ pageextension 50017 ItemLedgerEntry extends "Item Ledger Entries"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

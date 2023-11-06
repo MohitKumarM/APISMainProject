@@ -39,28 +39,17 @@ tableextension 50005 PurchaseReciptLine extends "Purch. Rcpt. Line"
             TableRelation = "Salesperson/Purchaser";
             /*comment by amar*/
         }
-        field(50010; "Billed Quantity"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
         field(50009; "Other Charges"; Decimal)
         {
         }
-        field(70003; "Item Tracking Quantity Honey"; Decimal)
+        field(50010; "Billed Quantity"; Decimal)
         {
-            CalcFormula = Sum("Tran. Lot Tracking".Quantity WHERE("Document No." = FIELD("Document No."),
-                                                                   "Document Line No." = FIELD("Line No."),
-                                                                   "Item No." = FIELD("No.")));
-            Editable = false;
-            FieldClass = FlowField;
+            DataClassification = ToBeClassified;
         }
         field(50020; "P.A.N. No."; Code[20])
         {
             Caption = 'P.A.N. No.';
             DataClassification = ToBeClassified;
-        }
-        field(60001; "Pending QC Approval"; Boolean)
-        {
         }
         field(50021; "New TDS Base Amount"; Decimal)
         {
@@ -73,8 +62,16 @@ tableextension 50005 PurchaseReciptLine extends "Purch. Rcpt. Line"
         field(60000; "QC Completed"; Boolean)
         {
         }
+        field(60001; "Pending QC Approval"; Boolean)
+        {
+        }
+        field(70003; "Item Tracking Quantity Honey"; Decimal)
+        {
+            CalcFormula = Sum("Tran. Lot Tracking".Quantity WHERE("Document No." = FIELD("Document No."),
+                                                                   "Document Line No." = FIELD("Line No."),
+                                                                   "Item No." = FIELD("No.")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
     }
-
-    var
-        myInt: Integer;
 }

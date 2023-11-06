@@ -34,7 +34,4 @@ tableextension 50028 PurhaseQue extends "Purchase Cue"
             FieldClass = FlowField;
         }
     }
-
-    var
-        myInt: Integer;
 }

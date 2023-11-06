@@ -88,9 +88,6 @@ report 50009 "Payment Advice"
             }
 
             trigger OnAfterGetRecord()
-            var
-                PurchInvHeader: Record "Purch. Inv. Header";
-                RecCheckLedgerEntry: Record "Check Ledger Entry";
             begin
                 CLEAR(FinanceUser);
                 IF RecVendor.GET("Vendor Ledger Entry"."Vendor No.") THEN;
@@ -152,9 +149,6 @@ report 50009 "Payment Advice"
                 RecPIComment: Record "Purch. Comment Line";
                 RecVendorLedgerEntry: Record "Vendor Ledger Entry";
                 RecPostedNarration: Record "Posted Narration";
-                RecPurchInvHeader: Record "Purch. Inv. Header";
-                RecVendor1: Record Vendor;
-                RecVendorOrderAddress: Record "Order Address";
                 RecBankAccountLedEntry: Record "Bank Account Ledger Entry";
             begin
                 if not AppliedDetails then
@@ -386,7 +380,6 @@ report 50009 "Payment Advice"
         RecVenLedEntry: Record "Vendor Ledger Entry" temporary;
         RecState: Record State;
         AppliedDetails: Boolean;
-        RecepientEmail: List OF [Text];
     //15578  RecPaymentAdviceLog1: Record "Payment Advice Log";
 
     procedure GetPaymentNo(DocumentNo: Code[20]; EntryNo: Integer; VendorNo: Code[20])

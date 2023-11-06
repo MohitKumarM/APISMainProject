@@ -7,7 +7,4 @@ tableextension 50018 "Inventory Posting Group EXt." extends "Inventory Posting G
             DataClassification = ToBeClassified;
         }
     }
-
-    var
-        myInt: Integer;
 }

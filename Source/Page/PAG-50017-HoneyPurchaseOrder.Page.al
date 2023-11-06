@@ -545,7 +545,6 @@ page 50017 "Honey Purchase Order"
                     trigger OnAction()
                     var
                         PurchasePayableSetup: Record "Purchases & Payables Setup";
-                        PurchaseHeader: Record "Purchase Header";
                     begin
 
                         PurchasePayableSetup.get;
@@ -632,12 +631,8 @@ page 50017 "Honey Purchase Order"
 
     var
         PurchSetup: Record "Purchases & Payables Setup";
-        purord: page "Purchase Order";
         ChangeExchangeRate: Page "Change Exchange Rate";
         CopyPurchDoc: Report "Copy Purchase Document";
-        MoveNegPurchLines: Report "Move Negative Purchase Lines";
-        ReportPrint: Codeunit "Test Report-Print";
-        DocPrint: Codeunit "Document-Print";
         UserMgt: Codeunit "User Setup Management";
         ArchiveManagement: Codeunit ArchiveManagement;
         PurchLine: Record "Purchase Line";
@@ -655,7 +650,6 @@ page 50017 "Honey Purchase Order"
         ShouldSearchForVendByName: Boolean;
         PurchaseDocCheckFactboxVisible: Boolean;
         IsPurchaseLinesEditable: Boolean;
-        IsRemitToCountyVisible: Boolean;
         VendorInvoiceNoMandatory: Boolean;
         ShowWorkflowStatus: Boolean;
 

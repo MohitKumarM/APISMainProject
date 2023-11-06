@@ -49,7 +49,4 @@ pageextension 50012 PurchasePayableSetupN1 extends "Purchases & Payables Setup"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

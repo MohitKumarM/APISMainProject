@@ -42,13 +42,16 @@ tableextension 50016 PurchaseLineArchive extends "Purchase Line Archive"
         field(50009; "Other Charges"; Decimal)
         {
         }
+        field(50010; "Billed Quantity"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50022; "Honey Item No."; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(50010; "Billed Quantity"; Decimal)
+        field(60000; "QC Completed"; Boolean)
         {
-            DataClassification = ToBeClassified;
         }
         field(70003; "Item Tracking Quantity Honey"; Decimal)
         {
@@ -58,11 +61,5 @@ tableextension 50016 PurchaseLineArchive extends "Purchase Line Archive"
             Editable = false;
             FieldClass = FlowField;
         }
-        field(60000; "QC Completed"; Boolean)
-        {
-        }
     }
-
-    var
-        myInt: Integer;
 }

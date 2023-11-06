@@ -156,9 +156,6 @@ pageextension 50013 PurchaOrderSubform extends "Purchase Order Subform"
         }
     }
 
-    var
-        myInt: Integer;
-
     procedure UpdateTaxAmount()
     var
         CalculateTax: Codeunit "Calculate Tax";

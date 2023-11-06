@@ -15,7 +15,4 @@ pageextension 50005 ItemCategoryCode extends "Item Categories"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

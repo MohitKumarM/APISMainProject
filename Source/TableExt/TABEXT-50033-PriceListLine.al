@@ -7,7 +7,4 @@ tableextension 50033 PriceListLine extends "Price List Line"
             DataClassification = ToBeClassified;
         }
     }
-
-    var
-        myInt: Integer;
 }

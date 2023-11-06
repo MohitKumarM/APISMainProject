@@ -62,9 +62,6 @@ pageextension 50003 SalesInvoiceSubform extends "Sales Invoice Subform"
         // Add changes to page actions here
     }
 
-    var
-        myInt: Integer;
-
     local procedure UpdateTaxAmount()
     var
         CalculateTax: Codeunit "Calculate Tax";

@@ -15,7 +15,4 @@ pageextension 50024 "Inventory Posting Group Ext." extends "Inventory Posting Gr
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

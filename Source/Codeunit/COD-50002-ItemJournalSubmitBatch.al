@@ -18,7 +18,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         Text003: Label 'Posting lines         #3###### @4@@@@@@@@@@@@@\';
         Text004: Label 'Updating lines        #5###### @6@@@@@@@@@@@@@';
         Text005: Label 'Posting lines         #3###### @4@@@@@@@@@@@@@';
-        Text006: Label 'A maximum of %1 posting number series can be used in each journal.';
         Text007: Label '<Month Text>';
         Text008: Label 'There are new postings made in the period you want to revalue item no. %1.\';
         Text009: Label 'You must calculate the inventory value again.';
@@ -69,7 +68,7 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         UpdateAnalysisView: Codeunit "Update Analysis View";
         UpdateItemAnalysisView: Codeunit "Update Item Analysis View";
         PhysInvtCountMgt: Codeunit "Phys. Invt. Count.-Management";
-        OldEntryType: Option Purchase,Sale,"Positive Adjmt.","Negative Adjmt.",Transfer,Consumption,Output," ","Assembly Consumption","Assembly Output";
+        OldEntryType: Enum "Item Ledger Entry Type";
     begin
         ItemJnlLine.LOCKTABLE;
         ItemJnlLine.SETRANGE(ItemJnlLine."Journal Template Name", ItemJnlLine."Journal Template Name");
@@ -136,7 +135,7 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         PhysInvtCount := FALSE;
         // Post lines
         LineCount := 0;
-        OldEntryType := ItemJnlLine."Entry Type".AsInteger();
+        OldEntryType := ItemJnlLine."Entry Type";
         PostLines(ItemJnlLine, PhysInvtCountMgt);
         // Copy register no. and current journal batch name to item journal
         IF NOT ItemReg.FINDLAST OR (ItemReg."No." <> ItemRegNo) THEN
@@ -355,7 +354,7 @@ codeunit 50002 "Item Jnl.-Submit Batch"
         UNTIL ItemJnlLine2.NEXT = 0;
     end;
 
-    procedure HandleNonRecurringLine(var ItemJnlLine: Record "Item Journal Line"; OldEntryType: Option Purchase,Sale,"Positive Adjmt.","Negative Adjmt.",Transfer,Consumption,Output," ","Assembly Consumption","Assembly Output")
+    procedure HandleNonRecurringLine(var ItemJnlLine: Record "Item Journal Line"; OldEntryType: enum "Item Ledger Entry Type")
     var
         ItemJnlLine2: Record "Item Journal Line";
         ItemJnlLine3: Record "Item Journal Line";
@@ -647,7 +646,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
     var
         WhseJnlLine: Record "Warehouse Journal Line";
         TempWhseJnlLine2: Record "Warehouse Journal Line" temporary;
-        ItemTrackingMgt: Codeunit "Item Tracing Mgt.";
     begin
         ItemJnlLine.Quantity := OriginalQuantity;
         ItemJnlLine."Quantity (Base)" := OriginalQuantityBase;
@@ -804,7 +802,6 @@ codeunit 50002 "Item Jnl.-Submit Batch"
 
     procedure GenerateScrapEntry(DocumentNo: Code[20]; PostingDate: Date; ScrapItem: Code[20]; ScrapLocation: Code[20]; GD1: Code[20]; GD2: Code[20]; DimSetID: Integer; ScrapQty: Decimal; ProdOrderLineNo: Integer; MachineCenterNo: Code[20])
     var
-        recShipmentLines: Record "Sales Shipment Line";
         recItemJournal: Record "Item Journal Line";
         intLineNo: Integer;
     begin

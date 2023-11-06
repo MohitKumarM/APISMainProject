@@ -6,7 +6,4 @@ tableextension 50032 ItemCategory extends "Item Category"
         {
         }
     }
-
-    var
-        myInt: Integer;
 }

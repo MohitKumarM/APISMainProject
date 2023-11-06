@@ -1,21 +1,16 @@
-pageextension 50004 CustomerCard extends "Customer Card"
+pageextension 50030 "Customer List" extends "Customer List"
 {
-    Editable = false;
     layout
     {
-        addafter("Disable Search by Name")
-        {
-            field("Skip TCS"; Rec."Skip TCS")
-            {
-                ApplicationArea = all;
-            }
-        }
+        // Add changes to page layout here
     }
 
     actions
     {
         // Add changes to page actions here
     }
+
+
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin

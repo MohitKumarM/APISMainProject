@@ -15,7 +15,4 @@ tableextension 50001 ItemN1 extends Item
             TableRelation = "New Product Group" WHERE("Item Category Code" = FIELD("Item Category Code"));
         }
     }
-
-    var
-        myInt: Integer;
 }

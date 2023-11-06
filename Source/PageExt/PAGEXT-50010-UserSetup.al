@@ -53,7 +53,4 @@ pageextension 50010 UsersSetup extends "User Setup"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

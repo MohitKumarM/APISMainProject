@@ -150,8 +150,6 @@ page 50031 "Cons. Lot Tracking View"
         intLineNo: Integer;
         cdItemCode: Code[20];
         decTotalToRcd: Decimal;
-        decRemQty: Decimal;
-        decAppliedQty: Decimal;
         recLotTracking: Record "Tran. Lot Tracking";
         recLotEntry: Record "Lot Tracking Entry";
         cdLocationCode: Code[20];

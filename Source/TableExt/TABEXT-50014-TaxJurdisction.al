@@ -8,7 +8,4 @@ tableextension 50014 TaxJurdistion extends "Tax Jurisdiction"
             OptionMembers = " ",CGST,SGST,IGST;
         }
     }
-
-    var
-        myInt: Integer;
 }

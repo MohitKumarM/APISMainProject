@@ -23,7 +23,4 @@ pageextension 50016 InventerySetup extends "Inventory Setup"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

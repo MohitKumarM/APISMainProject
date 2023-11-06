@@ -607,9 +607,7 @@ page 50022 "Quality Check Card to Approve"
     end;
 
     var
-        recPurchRcptLine: Record "Purch. Rcpt. Line";
         recItemLedger: Record "Item Ledger Entry";
-        decApprovedQty: Decimal;
         recItemJournal: Record "Item Journal Line";
         recInventorySetup: Record "Inventory Setup";
         intLineNo: Integer;

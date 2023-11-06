@@ -537,15 +537,11 @@ page 50041 "GAN Approval Order"
     end;
 
     var
-        PurchSetup: Record "Purchases & Payables Setup";
         ChangeExchangeRate: Page "Change Exchange Rate";
         CopyPurchDoc: Report "Copy Purchase Document";
-        MoveNegPurchLines: Report "Move Negative Purchase Lines";
-        ReportPrint: Codeunit "Test Report-Print";
         DocPrint: Codeunit "Document-Print";
         UserMgt: Codeunit "User Setup Management";
         ArchiveManagement: Codeunit ArchiveManagement;
-        PurchLine: Record "Purchase Line";
         // DefermentBuffer: Record 16532;
         [InDataSet]
 
@@ -589,8 +585,6 @@ page 50041 "GAN Approval Order"
     end;
 
     local procedure ShortcutDimension2CodeOnAfterV()
-    var
-        ItemJournal: Record "Item Journal Batch";
     begin
         CurrPage.UPDATE;
     end;

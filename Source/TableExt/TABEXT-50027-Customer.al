@@ -24,17 +24,25 @@ tableextension 50027 Customer extends Customer
         field(50005; "MSME No."; Text[20])
         {
         }
-        field(80003; "Address 3"; Text[50])
-        {
-        }
         field(50006; "FASSAI No."; Code[20])
         {
         }
         field(80002; "Print Name"; Text[100])
         {
         }
+        field(80003; "Address 3"; Text[50])
+        {
+        }
     }
 
-    var
-        myInt: Integer;
+    trigger OnAfterInsert()
+    begin
+        Rec.Blocked := Rec.Blocked::All;
+    end;
+
+    trigger OnAfterModify()
+
+    begin
+        Rec.Blocked := Rec.Blocked::All;
+    end;
 }

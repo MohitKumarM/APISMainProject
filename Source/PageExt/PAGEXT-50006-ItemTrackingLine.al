@@ -85,8 +85,6 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
         Item_Editable: Boolean;
 
     trigger OnOpenPage()
-    var
-        myInt: Integer;
     begin
         Item_Visible := true;
         Item_Editable := true;
@@ -102,24 +100,18 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
             Item_Visible := true;
             Item_Editable := true;
         end;
-
-
     end;
 
     trigger OnAfterGetRecord()
     var
 
     begin
-
     end;
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
         PriceListLine: Record "Price List Line";
         SalesLine: Record "Sales Line";
-        ItemLedgerEntry: Record "Item Ledger Entry";
-        ReservationEntry: Record "Reservation Entry";
-        TrackingSpecification2: Record "Tracking Specification";
     begin
         if rec."Source Type" = 37 then begin
 
@@ -139,7 +131,6 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
                     SalesLine.Validate("Unit Price", PriceListLine."Unit Price");
                     SalesLine.Modify();
                 end;
-
             end;
         end;
     end;

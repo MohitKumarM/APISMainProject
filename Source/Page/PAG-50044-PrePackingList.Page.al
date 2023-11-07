@@ -16,6 +16,16 @@ page 50044 "Pre Packing List"
                 {
                     ToolTip = 'Specifies the value of the Item Code field.';
                 }
+                field("Order No."; Rec."Order No.")
+                {
+                    Visible = false;
+                    ToolTip = 'Specifies the value of the Order No. field.';
+                }
+                field("Order Line No."; Rec."Order Line No.")
+                {
+                    Visible = false;
+                    ToolTip = 'Specifies the value of the Order Line No. field.';
+                }
                 field("Item Description"; Rec."Item Description")
                 {
                     ToolTip = 'Specifies the value of the Item Description field.';
@@ -68,14 +78,7 @@ page 50044 "Pre Packing List"
                 {
                     ToolTip = 'Specifies the value of the No. of Pallets field.';
                 }
-                field("Order No."; Rec."Order No.")
-                {
-                    ToolTip = 'Specifies the value of the Order No. field.';
-                }
-                field("Order Line No."; Rec."Order Line No.")
-                {
-                    ToolTip = 'Specifies the value of the Order Line No. field.';
-                }
+
                 field(Packing; Rec.Packing)
                 {
                     ToolTip = 'Specifies the value of the Packing field.';

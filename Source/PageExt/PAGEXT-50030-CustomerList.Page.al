@@ -7,7 +7,18 @@ pageextension 50030 "Customer List" extends "Customer List"
 
     actions
     {
-        // Add changes to page actions here
+        modify("Request Approval")
+        {
+            Visible = false;
+        }
+        modify(SendApprovalRequest)
+        {
+            Visible = false;
+        }
+        modify(CancelApprovalRequest)
+        {
+            Visible = false;
+        }
     }
 
 

@@ -11,6 +11,13 @@ table 50010 "Pre Packing List"
         }
         field(3; "Item Code"; Code[20])
         {
+            trigger OnValidate()
+            var
+                Rec_Item: Record Item;
+            begin
+                if Rec_Item.get("Item Code") then
+                    Rec."Item Description" := Rec_Item.Description;
+            end;
         }
         field(4; "Line No."; Integer)
         {

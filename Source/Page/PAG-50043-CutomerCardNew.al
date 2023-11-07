@@ -95,6 +95,7 @@ page 50043 "Customer Card New"
                 field(Blocked; Rec.Blocked)
                 {
                     ApplicationArea = All;
+                    Editable = false;
 
                 }
                 field("Phone No.2"; Rec."Phone No.")
@@ -228,6 +229,15 @@ page 50043 "Customer Card New"
                 field("ARN No."; Rec."ARN No.")
                 {
                     ApplicationArea = all;
+                }
+                field("Parent Group"; Rec."Parent Group")
+                {
+                    ApplicationArea = all;
+                }
+                field("Child Group"; Rec."Child Group")
+                {
+                    ApplicationArea = all;
+
                 }
             }
 
@@ -1218,6 +1228,20 @@ page 50043 "Customer Card New"
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
+                        rec.TestField(Name);
+                        Rec.TestField("Print Name");
+                        Rec.TestField(Address);
+                        rec.TestField("State Code");
+                        rec.TestField("Gen. Bus. Posting Group");
+                        rec.TestField("Customer Posting Group");
+                        rec.TestField("Payment Terms Code");
+                        rec.TestField("Currency Code");
+                        Rec.TestField("Quality Process");
+                        Rec.TestField("Authorized person");
+                        Rec.TestField("Security Cheque No");
+                        rec.TestField("MSME No.");
+                        Rec.TestField("FASSAI No.");
+                        Rec.TestField("RSM Name");
                         if ApprovalsMgmt.CheckCustomerApprovalsWorkflowEnabled(Rec) then
                             ApprovalsMgmt.OnSendCustomerForApproval(Rec);
                         SetWorkFlowEnabled();
@@ -1736,12 +1760,21 @@ page 50043 "Customer Card New"
         }
     }
 
+    trigger OnModifyRecord(): Boolean
+    var
+        myInt: Integer;
+    begin
+        Rec.Blocked := rec.Blocked::All;
+    end;
+
+
     trigger OnAfterGetCurrRecord()
     begin
         if GuiAllowed() then
             OnAfterGetCurrRecordFunc()
         else
             OnAfterGetCurrRecordFuncBackground();
+
     end;
 
     local procedure OnAfterGetCurrRecordFunc()

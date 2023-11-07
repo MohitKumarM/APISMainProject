@@ -33,6 +33,35 @@ tableextension 50027 Customer extends Customer
         field(80003; "Address 3"; Text[50])
         {
         }
+        field(80004; "Parent Group"; Code[20])
+        {
+            TableRelation = "Customer Group Master".Code;
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                Rec.TestField("Child Group", '');
+            end;
+        }
+        field(80005; "Child Group"; Code[20])
+        {
+            TableRelation = "Customer Group Master".Code;
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                Rec.TestField("Parent Group", '');
+            end;
+        }
+        field(80006; "Total Group Wise Amount"; Decimal)
+        {
+
+        }
+    }
+    keys
+    {
+        key(Key25; "Parent Group", "Child Group")
+        {
+
+        }
     }
 
     trigger OnAfterInsert()
@@ -45,4 +74,6 @@ tableextension 50027 Customer extends Customer
     begin
         Rec.Blocked := Rec.Blocked::All;
     end;
+
+
 }

@@ -4,7 +4,9 @@ page 50045 "Posted Packing List"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Posted Packing List";
-
+    Editable = false;
+    InsertAllowed = false;
+    DeleteAllowed = false;
     layout
     {
         area(Content)
@@ -69,10 +71,12 @@ page 50045 "Posted Packing List"
                 }
                 field("Order No."; Rec."Order No.")
                 {
+                    Visible = false;
                     ToolTip = 'Specifies the value of the Order No. field.';
                 }
                 field("Order Line No."; Rec."Order Line No.")
                 {
+                    Visible = false;
                     ToolTip = 'Specifies the value of the Order Line No. field.';
                 }
                 field(Packing; Rec.Packing)

@@ -8,44 +8,63 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         }
         field(50001; "Deal No."; Code[20])
         {
+            DataClassification = ToBeClassified;
             TableRelation = "Deal Master" WHERE(Status = FILTER(Release));
         }
         field(50002; "Packing Type"; Option)
         {
+            DataClassification = ToBeClassified;
             OptionCaption = ' ,Drums,Tins,Buckets,Cans';
             OptionMembers = " ",Drums,Tins,Buckets,Cans;
         }
         field(50003; "Qty. in Pack"; Decimal)
         {
+            DataClassification = ToBeClassified;
         }
         field(50004; "Deal Line No."; Integer)
         {
+            DataClassification = ToBeClassified;
             TableRelation = "Deal Dispatch Details"."Line No." WHERE("Sauda No." = FIELD("Deal No."),
                                                                       "GAN Created" = FILTER(false));
         }
         field(50005; "Dispatched Qty. in Kg."; Decimal)
         {
+            DataClassification = ToBeClassified;
             Editable = false;
         }
         field(50006; Flora; Code[20])
         {
+            DataClassification = ToBeClassified;
             Editable = false;
             TableRelation = "New Product Group".Code WHERE("Item Category Code" = FILTER(''));
         }
         field(50010; "Vehicle No."; Code[20])
         {
+            DataClassification = ToBeClassified;
         }
         field(50011; "Purchaser Code"; Code[20])
         {
+            DataClassification = ToBeClassified;
         }
         field(50012; "Purchaser Name"; Text[50])
         {
+            DataClassification = ToBeClassified;
         }
         field(50014; "Customer Code"; Text[30])
         {
+            DataClassification = ToBeClassified;
         }
         field(50015; "Prod. Date for Expiry Calc"; Date)
         {
+            DataClassification = ToBeClassified;
+        }
+        field(50017; "Starting Date Time"; DateTime)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50018; "Ending Date Time"; DateTime)
+        {
+            DataClassification = ToBeClassified;
         }
         field(50019; "New Product Group Code"; Code[20])
         {
@@ -71,6 +90,7 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         field(60000; "Temp Message Control"; Boolean)
         {
         }
+
         field(60006; "ByProduct Item Code"; Code[20])
         {
             TableRelation = Item;
@@ -119,5 +139,6 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         {
         }
         //Ending---
+
     }
 }

@@ -378,7 +378,7 @@ page 50041 "GAN Approval Order"
                 action("Calculate TDS")
                 {
                     Caption = 'Calculate TDS';
-                    Image = CalculateVATExemption;
+
 
                     trigger OnAction()
                     begin

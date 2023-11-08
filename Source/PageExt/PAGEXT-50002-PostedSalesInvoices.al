@@ -31,4 +31,11 @@ pageextension 50002 PostedSalesInvoices extends "Posted Sales Invoices"
         if LCustomerLedger.FindFirst() then
             AmountToCustomer := LCustomerLedger."Amount (LCY)";
     end;
+
+    trigger OnOpenPage()
+    begin
+        rec.FilterGroup(2);
+        rec.SetFilter("GST Customer Type", '<>%1', Rec."GST Customer Type"::Export);
+        rec.FilterGroup(0);
+    end;
 }

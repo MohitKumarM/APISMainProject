@@ -630,4 +630,48 @@ codeunit 50000 Tble83
     end;
     //Codeunit1535 End
 
+    //Table36 Start
+    [EventSubscriber(ObjectType::Table, 36, 'OnAfterGetNoSeriesCode', '', false, false)]
+    local procedure OnAfterGetNoSeriesCode(var SalesHeader: Record "Sales Header"; SalesReceivablesSetup: Record "Sales & Receivables Setup"; var NoSeriesCode: Code[20])
+    begin
+        SalesReceivablesSetup.TestField("Sales Export Order No.");
+        if (SalesHeader."Document Type" = SalesHeader."Document Type"::Order) and (SalesHeader."GST Customer Type" = SalesHeader."GST Customer Type"::Export) then
+            NoSeriesCode := SalesReceivablesSetup."Sales Export Order No.";
+    end;
+
+    // Page50052 Start
+    [EventSubscriber(ObjectType::Page, 50052, 'OnBeforePostSalesOrder', '', false, false)]
+    local procedure OnBeforePostSalesOrder(var SalesHeader: Record "Sales Header"; PostingCodeunitID: Integer; Navigate: Enum "Navigate After Posting")
+    var
+        SalesReceivableSetup: Record "Sales & Receivables Setup";
+    begin
+        SalesReceivableSetup.Get();
+        if (SalesHeader."Document Type" = SalesHeader."Document Type"::Order) and (SalesHeader."GST Customer Type" = SalesHeader."GST Customer Type"::Export) then begin
+            SalesReceivableSetup.TestField("Posted Invoice Export No.");
+            SalesReceivableSetup.TestField("Posted Shipment Export No.");
+            SalesHeader."Posting No. Series" := SalesReceivableSetup."Posted Invoice Export No.";
+            SalesHeader."Shipping No. Series" := SalesReceivableSetup."Posted Shipment Export No.";
+            SalesHeader.Modify();
+        end;
+    end;
+    // Page50052 End
+
+
+
+    /*  [EventSubscriber(ObjectType::Table, 36, 'OnAfterOnInsert', '', false, false)]
+     local procedure OnAfterOnInsert(var SalesHeader: Record "Sales Header")
+     var
+         SalesRecviableSetup: Record "Sales & Receivables Setup";
+     begin
+         SalesRecviableSetup.Get();
+         if (SalesHeader."Document Type" = SalesHeader."Document Type"::Order) and (SalesHeader."GST Customer Type" = SalesHeader."GST Customer Type"::Export) then begin
+             SalesRecviableSetup.TestField("Posted Invoice Export No.");
+             SalesRecviableSetup.TestField("Posted Invoice Export No.");
+             SalesHeader."Posting No. Series" := SalesRecviableSetup."Posted Invoice Export No.";
+             SalesHeader."Shipping No. Series" := SalesRecviableSetup."Posted Shipment Export No.";
+         end;
+     end;
+  */
+
+    //Table36 End
 }

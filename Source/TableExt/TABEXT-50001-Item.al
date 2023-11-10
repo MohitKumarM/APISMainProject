@@ -6,6 +6,10 @@ tableextension 50001 ItemN1 extends Item
         {
             TableRelation = "Standard Task";
         }
+        field(50001; "Customer Code"; Code[20])
+        {
+            TableRelation = Customer."No.";
+        }
         field(50009; "Expiry Date Formula"; DateFormula)
         {
         }
@@ -14,5 +18,32 @@ tableextension 50001 ItemN1 extends Item
             Caption = 'Product Group Code';
             TableRelation = "New Product Group" WHERE("Item Category Code" = FIELD("Item Category Code"));
         }
+
+        Field(50002; "Pack Size"; Text[30])
+        {
+
+        }
+        field(50003; "Net Weight Per (Kg)"; Decimal)
+        {
+
+        }
+
+        Field(70000; "Opening Date Filter"; Date) { }
+        Field(70001; "Opening Quantity"; Decimal) { }
+        Field(70002; "Inward Quantity"; Decimal) { }
+        Field(70003; "Outward Quantity"; Decimal) { }
+        Field(70004; "Total Opening Quantity"; Decimal) { }
+        Field(70005; "Total Inward Quantity"; Decimal) { }
+        Field(70006; "Total Outward Quantity"; Decimal) { }
+        Field(70007; "Total Closing Quantity"; Decimal) { }
+        Field(70008; "Opening Value"; Decimal) { }
+        Field(70009; "Inward Value"; Decimal) { }
+        Field(70010; "Outward Value"; Decimal) { }
+        Field(70011; "Closing Value"; Decimal) { }
+        Field(70012; "Total Opening Value"; Decimal) { }
+        Field(70013; "Total Inward Value"; Decimal) { }
+        Field(70014; "Total Outward Value"; Decimal) { }
+        Field(70015; "Total Closing Value"; Decimal) { }
+
     }
 }

@@ -8,7 +8,7 @@ page 50050 "Sales Invoice Export List"
     PageType = List;
     QueryCategory = 'Sales Invoice List';
     SourceTable = "Sales Header";
-    SourceTableView = WHERE("Document Type" = CONST(Invoice), "GST Customer Type" = const(Export));
+    SourceTableView = WHERE("Document Type" = CONST(Invoice));
     UsageCategory = Lists;
 
     AboutTitle = 'About sales invoices';

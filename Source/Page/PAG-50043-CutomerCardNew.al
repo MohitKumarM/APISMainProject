@@ -226,6 +226,10 @@ page 50043 "Customer Card New"
                     ShowMandatory = true;
 
                 }
+                field("Assessee Code"; Rec."Assessee Code")
+                {
+                    ApplicationArea = all;
+                }
                 field("ARN No."; Rec."ARN No.")
                 {
                     ApplicationArea = all;
@@ -237,6 +241,7 @@ page 50043 "Customer Card New"
                 field("Child Group"; Rec."Child Group")
                 {
                     ApplicationArea = all;
+                    Visible = false;
 
                 }
             }
@@ -359,6 +364,7 @@ page 50043 "Customer Card New"
             group("&Customer")
             {
 
+
                 Caption = '&Customer';
                 Image = Customer;
                 action(Dimensions)
@@ -372,6 +378,54 @@ page 50043 "Customer Card New"
                                   "No." = FIELD("No.");
                     ShortCutKey = 'Alt+D';
                     ToolTip = 'View or edit dimensions, such as area, project, or department, that you can assign to sales and purchase documents to distribute costs and analyze transaction history.';
+                }
+                action("TDS Customer Allowed Sections")
+                {
+                    Caption = 'TDS Customer Allowed Sections';
+                    ApplicationArea = Basic, Suite;
+                    // Promoted = true;
+                    // PromotedCategory = Category9;
+                    // PromotedIsBig = true;
+                    Image = LinkAccount;
+                    RunObject = Page "Customer Allowed Sections";
+                    RunPageLink = "Customer No" = field("No.");
+                    ToolTip = 'Specifies the Allowed Sections on Customer.';
+                }
+                action("TDS Customer Concessional Codes")
+                {
+                    Caption = 'TDS Customer Concessional Codes';
+                    ApplicationArea = Basic, Suite;
+                    // Promoted = true;
+                    // PromotedIsBig = true;
+                    // PromotedCategory = Category9;
+                    Image = LinkAccount;
+                    RunObject = Page "TDS Cust Concessional Codes";
+                    RunPageLink = "Customer No." = field("No.");
+                    ToolTip = 'Specify the Concessional Code if concessional rate is applicable.';
+                }
+                action("TCS Allowed NOC")
+                {
+                    Caption = 'TCS Allowed NOC';
+                    ApplicationArea = Basic, Suite;
+                    // Promoted = true;
+                    // PromotedCategory = Category9;
+                    // PromotedIsBig = true;
+                    Image = LinkAccount;
+                    RunObject = Page "Allowed NOC";
+                    RunPageLink = "Customer No." = field("No.");
+                    ToolTip = 'Specifies the TCS Nature of Collection on customer.';
+                }
+                action("TCS Customer Concessional Codes")
+                {
+                    Caption = 'TCS Customer Concessional Codes';
+                    ApplicationArea = Basic, Suite;
+                    // Promoted = true;
+                    // PromotedIsBig = true;
+                    // PromotedCategory = Category9;
+                    Image = LinkAccount;
+                    RunObject = Page "Customer Concessional Codes";
+                    RunPageLink = "Customer No." = field("No.");
+                    ToolTip = 'Specify the Concessional Code if concessional rate is applicable.';
                 }
                 action("Bank Accounts")
                 {
@@ -1231,17 +1285,19 @@ page 50043 "Customer Card New"
                         rec.TestField(Name);
                         Rec.TestField("Print Name");
                         Rec.TestField(Address);
-                        rec.TestField("State Code");
+                        if rec."Country/Region Code" = 'IN' then
+                            rec.TestField("State Code");
                         rec.TestField("Gen. Bus. Posting Group");
                         rec.TestField("Customer Posting Group");
                         rec.TestField("Payment Terms Code");
-                        rec.TestField("Currency Code");
+                        //rec.TestField("Currency Code");
                         Rec.TestField("Quality Process");
                         Rec.TestField("Authorized person");
                         Rec.TestField("Security Cheque No");
                         rec.TestField("MSME No.");
                         Rec.TestField("FASSAI No.");
                         Rec.TestField("RSM Name");
+                        Rec.TestField("GST Customer Type");
                         if ApprovalsMgmt.CheckCustomerApprovalsWorkflowEnabled(Rec) then
                             ApprovalsMgmt.OnSendCustomerForApproval(Rec);
                         SetWorkFlowEnabled();

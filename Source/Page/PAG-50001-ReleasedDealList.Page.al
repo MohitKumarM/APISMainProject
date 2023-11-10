@@ -135,7 +135,7 @@ page 50001 "Released Deal List"
                     ApplicationArea = All;
                 }
             }
-            part("Deal Dispatch Details"; "Deal Dispatch Details")
+            part("Deal Dispatch Details"; "Deal Dispatch Subform")
             {
                 SubPageLink = "Sauda No." = FIELD("No.");
                 SubPageView = SORTING("Sauda No.", "Line No.")

@@ -219,7 +219,7 @@ page 50017 "Honey Purchase Order"
             part(TaxInformation; "Tax Information Factbox")
             {
                 Provider = PurchLines;
-                SubPageLink = "Table ID Filter" = const(39), "Document Type Filter" = field("Document Type"), "Document No. Filter" = field("Document No."), "Line No. Filter" = field("Line No.");
+                SubPageLink = "Table ID Filter" = const(39), "Document Type Filter" = const(2), "Document No. Filter" = field("Document No."), "Line No. Filter" = field("Line No.");
                 ApplicationArea = Basic, Suite;
             }
             part(PurchaseDocCheckFactbox; "Purch. Doc. Check Factbox")
@@ -483,7 +483,7 @@ page 50017 "Honey Purchase Order"
                 action("Calculate TDS")
                 {
                     Caption = 'Calculate TDS';
-                    Image = CalculateVATExemption;
+
 
                     trigger OnAction()
                     begin

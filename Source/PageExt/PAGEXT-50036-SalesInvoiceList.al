@@ -15,8 +15,6 @@ pageextension 50036 SalesInvoiceList extends "Sales Invoice List"
 
     trigger OnOpenPage()
     begin
-        rec.FilterGroup(2);
-        rec.SetFilter("GST Customer Type", '<>%1', Rec."GST Customer Type"::Export);
-        rec.FilterGroup(0);
+
     end;
 }

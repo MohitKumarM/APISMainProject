@@ -1,7 +1,85 @@
-tableextension 50023 ProductionOrder extends "Production Order"
+tableextension 50023 ProductionOrderExt extends "Production Order"
 {
     fields
     {
+        Field(50000; Refreshed; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50001; "Planning Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50002; "Planning Entry No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50003; "Order Type"; Option)
+        {
+            OptionMembers = Production,Packing,Dates;
+        }
+        Field(50004; "Requested Material Issue"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50005; "Addtional Materal Quantity"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+
+        Field(50008; "Production Type"; Option)
+        {
+            OptionMembers = ,"Bulk Without Filteration","Bulk With Filteration","Small Pack";
+        }
+
+        Field(50010; "Moisture"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50011; "Color"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50012; "FG"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50013; "HMF"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50014; "Start Time Initiated"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50100; "KHP"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50101; "Water"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50102; "Pollen"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50103; "Packing Approval DateTime"; DateTime)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50104; "Tank No. for Packing"; Code[10])
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50105; "Packing Approved"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        Field(50106; "Assigned Lot Qty."; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50006; "Batch No."; Code[20])
         {
         }

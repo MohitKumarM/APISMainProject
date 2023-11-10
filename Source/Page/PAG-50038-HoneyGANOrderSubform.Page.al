@@ -388,7 +388,7 @@ page 50038 "Honey GAN Order Subform"
         UpdateAllowedVar: Boolean;
         Text000: Label 'Unable to execute this function while in view only mode.';
         PurchHeader: Record "Purchase Header";
-        PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
+
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the purchase order has been invoiced.';
         recItem: Record Item;
 
@@ -470,19 +470,19 @@ page 50038 "Honey GAN Order Subform"
         EXIT(TRUE);
     end;
 
-    procedure ShowPrices()
-    begin
-        PurchHeader.GET(Rec."Document Type", Rec."Document No.");
-        CLEAR(PurchPriceCalcMgt);
-        PurchPriceCalcMgt.GetPurchLinePrice(PurchHeader, Rec);
-    end;
+    /*  procedure ShowPrices()
+     begin
+         PurchHeader.GET(Rec."Document Type", Rec."Document No.");
+         CLEAR(PurchPriceCalcMgt);
+         PurchPriceCalcMgt.GetPurchLinePrice(PurchHeader, Rec);
+     end;
 
-    procedure ShowLineDisc()
-    begin
-        PurchHeader.GET(Rec."Document Type", Rec."Document No.");
-        CLEAR(PurchPriceCalcMgt);
-        PurchPriceCalcMgt.GetPurchLineLineDisc(PurchHeader, Rec);
-    end;
+     procedure ShowLineDisc()
+     begin
+         PurchHeader.GET(Rec."Document Type", Rec."Document No.");
+         CLEAR(PurchPriceCalcMgt);
+         PurchPriceCalcMgt.GetPurchLineLineDisc(PurchHeader, Rec);
+     end; */
 
     local procedure NoOnAfterValidate()
     begin

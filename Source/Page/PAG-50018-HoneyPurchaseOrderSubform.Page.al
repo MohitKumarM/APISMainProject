@@ -331,7 +331,7 @@ page 50018 "Honey Purchase Order Subform"
         UpdateAllowedVar: Boolean;
         Text000: Label 'Unable to execute this function while in view only mode.';
         PurchHeader: Record "Purchase Header";
-        PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
+        //PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the purchase order has been invoiced.';
 
     procedure ApproveCalcInvDisc()
@@ -412,7 +412,7 @@ page 50018 "Honey Purchase Order Subform"
         EXIT(TRUE);
     end;
 
-    procedure ShowPrices()
+    /* procedure ShowPrices()
     begin
         PurchHeader.GET(Rec."Document Type", Rec."Document No.");
         CLEAR(PurchPriceCalcMgt);
@@ -424,7 +424,7 @@ page 50018 "Honey Purchase Order Subform"
         PurchHeader.GET(Rec."Document Type", Rec."Document No.");
         CLEAR(PurchPriceCalcMgt);
         PurchPriceCalcMgt.GetPurchLineLineDisc(PurchHeader, Rec);
-    end;
+    end; */
 
     local procedure NoOnAfterValidate()
     begin

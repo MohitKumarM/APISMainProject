@@ -2,13 +2,13 @@ page 50049 "Sales Order Export List"
 {
     ApplicationArea = Basic, Suite, Assembly;
     Caption = 'Sales Orders Exports';
-    CardPageID = "Sales Order";
+    CardPageID = "Sales Order Export";
     DataCaptionFields = "Sell-to Customer No.";
     Editable = false;
     PageType = List;
     QueryCategory = 'Sales Order List';
     SourceTable = "Sales Header";
-    SourceTableView = WHERE("Document Type" = CONST(Order), "GST Customer Type" = const(Export));
+    SourceTableView = WHERE("Document Type" = CONST(Order));
     UsageCategory = Lists;
 
     AboutTitle = 'About sales orders';
@@ -1177,10 +1177,11 @@ page 50049 "Sales Order Export List"
 
     trigger OnInit()
     begin
-
+        rec."GST Customer Type" := Rec."GST Customer Type"::Export;
         CurrPage.PowerBIEmbeddedReportPart.PAGE.InitPageRatio(PowerBIServiceMgt.GetFactboxRatio());
         CurrPage.PowerBIEmbeddedReportPart.PAGE.SetPageContext(CurrPage.ObjectId(false));
     end;
+
 
     trigger OnOpenPage()
     var
@@ -1189,6 +1190,10 @@ page 50049 "Sales Order Export List"
         CRMIntegrationManagement: Codeunit "CRM Integration Management";
         OfficeMgt: Codeunit "Office Management";
     begin
+        rec.FilterGroup(2);
+        rec.SetRange("GST Customer Type", Rec."GST Customer Type"::Export);
+        rec.FilterGroup(0);
+
         Rec.SetSecurityFilterOnRespCenter();
 
         Rec.SetRange("Date Filter", 0D, WorkDate());

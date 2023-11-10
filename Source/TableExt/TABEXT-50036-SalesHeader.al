@@ -2,7 +2,7 @@ tableextension 50036 SalesHeader extends "Sales Header"
 {
     fields
     {
-        // Add changes to table fields here
+
     }
 
     keys

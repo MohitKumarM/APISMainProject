@@ -508,10 +508,10 @@ page 50021 "Output QC"
             ItemJnlMgt.OpenJnl(CurrentJnlBatchName, Rec);
             EXIT;
         END;
-        /* ItemJnlMgt.TemplateSelection(PAGE::"Output QC", 5, false, Rec, JnlSelected);
+        ItemJnlMgt.TemplateSelection(PAGE::"Output QC", 5, false, Rec, JnlSelected);
         IF NOT JnlSelected THEN
             ERROR('');
-        ItemJnlMgt.OpenJnl(CurrentJnlBatchName, Rec); */ // 15800 Need To dicuss
+        ItemJnlMgt.OpenJnl(CurrentJnlBatchName, Rec);
     end;
 
     var

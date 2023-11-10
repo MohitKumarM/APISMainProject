@@ -10,5 +10,13 @@ tableextension 50010 Locations extends Location
         {
             TableRelation = Location;
         }
+        field(50101; "Production Unit"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50102; "Reject Unit"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

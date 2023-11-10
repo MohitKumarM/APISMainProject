@@ -4,6 +4,24 @@ pageextension 50016 InventerySetup extends "Inventory Setup"
     {
         addafter("Automatic Cost Adjustment")
         {
+
+            field("Output Approval Template"; Rec."Output Approval Template")
+            {
+                ApplicationArea = all;
+            }
+            field("Output Approval Batch"; Rec."Output Approval Batch")
+            {
+                ApplicationArea = all;
+            }
+            field("Output Posting Template"; Rec."Output Posting Template")
+            {
+                ApplicationArea = all;
+
+            }
+            field("Output Posting Batch"; Rec."Output Posting Batch")
+            {
+                ApplicationArea = all;
+            }
             field("Quality Nos."; Rec."Quality Nos.")
             {
                 ApplicationArea = all;

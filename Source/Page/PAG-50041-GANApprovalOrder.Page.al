@@ -543,7 +543,7 @@ page 50041 "GAN Approval Order"
         UserMgt: Codeunit "User Setup Management";
         ArchiveManagement: Codeunit ArchiveManagement;
         // DefermentBuffer: Record 16532;
-        [InDataSet]
+
 
         JobQueueVisible: Boolean;
     // recProductGroup: Record 5723;

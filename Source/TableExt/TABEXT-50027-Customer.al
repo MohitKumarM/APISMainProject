@@ -35,17 +35,25 @@ tableextension 50027 Customer extends Customer
         }
         field(80004; "Parent Group"; Code[20])
         {
-            TableRelation = "Customer Group Master".Code;
+            TableRelation = Customer."No.";
             DataClassification = ToBeClassified;
             trigger OnValidate()
+            var
+                Rec_Customer: Record Customer;
             begin
-                Rec.TestField("Child Group", '');
+                Rec_Customer.SetFilter("Parent Group", '<>%1', '');
+                if Rec_Customer.FindSet() then
+                    repeat
+                        if Rec_Customer."Parent Group" = Rec."No." then
+                            Error('You Cannot Select Because he is already define  Parent Customer');
+                    until Rec_Customer.Next() = 0;
             end;
         }
         field(80005; "Child Group"; Code[20])
         {
-            TableRelation = "Customer Group Master".Code;
+            TableRelation = Customer."No.";
             DataClassification = ToBeClassified;
+
             trigger OnValidate()
             begin
                 Rec.TestField("Parent Group", '');

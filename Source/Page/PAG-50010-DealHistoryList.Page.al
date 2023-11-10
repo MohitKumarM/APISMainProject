@@ -63,7 +63,7 @@ page 50010 "Deal History List"
                     ApplicationArea = All;
                 }
             }
-            part(Line; "Deal Dispatch Details")
+            part(Line; "Deal Dispatch Subform")
             {
                 SubPageLink = "Sauda No." = FIELD("No.");
                 SubPageView = SORTING("Sauda No.", "Line No.")

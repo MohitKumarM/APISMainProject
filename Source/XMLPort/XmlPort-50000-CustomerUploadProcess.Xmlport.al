@@ -82,7 +82,6 @@ xmlport 50000 "Import Customer"
                 {
                     MinOccurs = Zero;
                 }
-
                 textelement(GSTRegistrationNo)
                 {
                     MinOccurs = Zero;
@@ -95,12 +94,10 @@ xmlport 50000 "Import Customer"
                 {
                     MinOccurs = Zero;
                 }
-
                 textelement(PANStatus)
                 {
                     MinOccurs = Zero;
                 }
-
                 textelement(QualityProcess)
                 {
                     MinOccurs = Zero;
@@ -210,7 +207,6 @@ xmlport 50000 "Import Customer"
     begin
         Message('Import Successfully');
     end;
-
 
     var
         SkipFirstRow: Boolean;

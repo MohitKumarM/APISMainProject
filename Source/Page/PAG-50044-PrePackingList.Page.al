@@ -11,7 +11,6 @@ page 50044 "Pre Packing List"
         {
             repeater(GroupName)
             {
-
                 field("Item Code"; Rec."Item Code")
                 {
                     ToolTip = 'Specifies the value of the Item Code field.';
@@ -78,7 +77,6 @@ page 50044 "Pre Packing List"
                 {
                     ToolTip = 'Specifies the value of the No. of Pallets field.';
                 }
-
                 field(Packing; Rec.Packing)
                 {
                     ToolTip = 'Specifies the value of the Packing field.';
@@ -135,7 +133,6 @@ page 50044 "Pre Packing List"
         }
         area(Factboxes)
         {
-
         }
     }
 
@@ -149,7 +146,6 @@ page 50044 "Pre Packing List"
 
                 trigger OnAction();
                 begin
-
                 end;
             }
         }

@@ -10,7 +10,6 @@ page 50049 "Sales Order Export List"
     SourceTable = "Sales Header";
     SourceTableView = WHERE("Document Type" = CONST(Order));
     UsageCategory = Lists;
-
     AboutTitle = 'About sales orders';
     AboutText = 'Use a sales order when you partially ship or invoice an order, and when you use drop shipments or prepayments. For sales that are fully shipped and invoiced in one go, sales invoices are typically used instead.';
 
@@ -246,7 +245,6 @@ page 50049 "Sales Order Export List"
                 {
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies whether all the items on the order have been shipped or, in the case of inbound items, completely received.';
-
                     AboutTitle = 'Is the order completely shipped?';
                     AboutText = 'Sales orders stay in this list until their order quantities are fully shipped and invoiced. After that you can find them in the Posted Sales Invoice and Posted Sales Shipment lists.';
                 }
@@ -446,7 +444,6 @@ page 50049 "Sales Order Export List"
                     RunPageLink = "Order No." = FIELD("No.");
                     RunPageView = SORTING("Order No.");
                     ToolTip = 'View a list of ongoing sales invoices for the order.';
-
                     AboutTitle = 'What has been invoiced?';
                     AboutText = 'Here you can look up what has already been invoiced on an order.';
                 }
@@ -1166,7 +1163,6 @@ page 50049 "Sales Order Export List"
         if CRMIntegrationEnabled then
             CRMIsCoupledToRecord := CRMCouplingManagement.IsRecordCoupledToCRM(Rec.RecordId);
 
-
         CurrPage.PowerBIEmbeddedReportPart.PAGE.SetCurrentListSelection(Rec."No.");
     end;
 
@@ -1181,7 +1177,6 @@ page 50049 "Sales Order Export List"
         CurrPage.PowerBIEmbeddedReportPart.PAGE.InitPageRatio(PowerBIServiceMgt.GetFactboxRatio());
         CurrPage.PowerBIEmbeddedReportPart.PAGE.SetPageContext(CurrPage.ObjectId(false));
     end;
-
 
     trigger OnOpenPage()
     var

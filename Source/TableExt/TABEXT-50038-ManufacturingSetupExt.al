@@ -45,7 +45,4 @@ tableextension 50038 "Manufacturing Setup Ext." extends "Manufacturing Setup"
     {
         // Add changes to field groups here
     }
-
-    var
-        myInt: Integer;
 }

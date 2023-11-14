@@ -154,14 +154,13 @@ page 50042 "CustomerList"
         {
             group("ImportCustomer")
             {
-
                 action("Import Customer")
                 {
                     ApplicationArea = All;
                     Image = Import;
                     trigger OnAction()
                     var
-                        ImportCustomer: XmlPort 50000;
+                        ImportCustomer: XmlPort "Import Customer";
                     begin
                         ImportCustomer.Run;
                     end;
@@ -169,7 +168,6 @@ page 50042 "CustomerList"
             }
         }
     }
-
 
     procedure GetSelectionFilter(): Text
     var
@@ -179,7 +177,6 @@ page 50042 "CustomerList"
         CurrPage.SETSELECTIONFILTER(Cust);
         EXIT(SelectionFilterManagement.GetSelectionFilterForCustomer(Cust));
     end;
-
 
     procedure SetSelection(var Cust: Record Customer)
     begin

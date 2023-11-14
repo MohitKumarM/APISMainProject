@@ -330,7 +330,6 @@ page 50018 "Honey Purchase Order Subform"
         ShortcutDimCode: array[8] of Code[20];
         UpdateAllowedVar: Boolean;
         Text000: Label 'Unable to execute this function while in view only mode.';
-        PurchHeader: Record "Purchase Header";
         //PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the purchase order has been invoiced.';
 

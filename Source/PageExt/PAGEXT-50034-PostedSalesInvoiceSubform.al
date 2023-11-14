@@ -15,12 +15,7 @@ pageextension 50034 "Posted Sales Invoice Subform" extends "Posted Sales Invoice
                 ApplicationArea = All;
                 RunObject = page "Posted Packing List";
                 RunPageLink = "Order No." = field("Document No."), "Order Line No." = field("Line No."), "Item Code" = field("No.");
-
             }
-
         }
-
     }
-    var
-        myInt: Integer;
 }

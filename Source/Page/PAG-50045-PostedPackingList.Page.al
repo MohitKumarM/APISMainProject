@@ -135,7 +135,6 @@ page 50045 "Posted Packing List"
         }
         area(Factboxes)
         {
-
         }
     }
 
@@ -149,7 +148,6 @@ page 50045 "Posted Packing List"
 
                 trigger OnAction();
                 begin
-
                 end;
             }
         }

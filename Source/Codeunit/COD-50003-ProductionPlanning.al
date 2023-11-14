@@ -1,6 +1,5 @@
 codeunit 50003 "Production Planning"
 {
-
     trigger OnRun()
     begin
     end;
@@ -383,7 +382,5 @@ codeunit 50003 "Production Planning"
                 recPlanningLines."Remaining Qty. to Produce" := recPlanningLines.Quantity - recPlanningLines."Stock Adjusted";
                 recPlanningLines.MODIFY;
             UNTIL recPlanningLines.NEXT = 0;
-
     end;
 }
-

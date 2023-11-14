@@ -2,7 +2,6 @@ tableextension 50039 "Routing Header Ext." extends "Routing Header"
 {
     fields
     {
-
         field(50008; "Production Type"; Option)
         {
             OptionMembers = ,"Bulk Without Filteration","Bulk With Filteration","Small Pack";
@@ -22,7 +21,4 @@ tableextension 50039 "Routing Header Ext." extends "Routing Header"
     {
         // Add changes to field groups here
     }
-
-    var
-        myInt: Integer;
 }

@@ -379,7 +379,6 @@ page 50041 "GAN Approval Order"
                 {
                     Caption = 'Calculate TDS';
 
-
                     trigger OnAction()
                     begin
                         // PurchLine.CalculateTDS(Rec);
@@ -543,7 +542,6 @@ page 50041 "GAN Approval Order"
         UserMgt: Codeunit "User Setup Management";
         ArchiveManagement: Codeunit ArchiveManagement;
         // DefermentBuffer: Record 16532;
-
 
         JobQueueVisible: Boolean;
     // recProductGroup: Record 5723;

@@ -10,14 +10,9 @@ pageextension 50032 "RequestToApprove" extends "Requests to Approve"
         modify(Approve)
         {
             trigger OnBeforeAction()
-            var
-                myInt: Integer;
             begin
                 //  Message('Test');
             end;
         }
     }
-
-    var
-        myInt: Integer;
 }

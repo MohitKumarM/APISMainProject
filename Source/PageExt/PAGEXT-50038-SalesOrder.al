@@ -4,7 +4,6 @@ pageextension 50038 "SalesOrder" extends "Sales Order"
     {
         modify("Sell-to Customer No.")
         {
-
             trigger OnAfterValidate()
 
             begin
@@ -18,7 +17,4 @@ pageextension 50038 "SalesOrder" extends "Sales Order"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

@@ -608,11 +608,10 @@ codeunit 50000 Tble83
     //Codeunit80 End
 
     //Codeunit1535 Start
-    [EventSubscriber(ObjectType::Codeunit, 1535, 'OnApproveApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnApproveApprovalRequest', '', false, false)]
     local procedure OnApproveApprovalRequest(var ApprovalEntry: Record "Approval Entry")
     var
         Customer_Approval: Record Customer;
-        Rec: RecordId;
         Recref: RecordRef;
     begin
         if ApprovalEntry."Table ID" = Database::Customer then begin
@@ -631,7 +630,7 @@ codeunit 50000 Tble83
     //Codeunit1535 End
 
     //Table36 Start
-    [EventSubscriber(ObjectType::Table, 36, 'OnAfterGetNoSeriesCode', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", 'OnAfterGetNoSeriesCode', '', false, false)]
     local procedure OnAfterGetNoSeriesCode(var SalesHeader: Record "Sales Header"; SalesReceivablesSetup: Record "Sales & Receivables Setup"; var NoSeriesCode: Code[20])
     begin
         SalesReceivablesSetup.TestField("Sales Export Order No.");
@@ -640,7 +639,7 @@ codeunit 50000 Tble83
     end;
 
     // Page50052 Start
-    [EventSubscriber(ObjectType::Page, 50052, 'OnBeforePostSalesOrder', '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Sales Order Export", 'OnBeforePostSalesOrder', '', false, false)]
     local procedure OnBeforePostSalesOrder(var SalesHeader: Record "Sales Header"; PostingCodeunitID: Integer; Navigate: Enum "Navigate After Posting")
     var
         SalesReceivableSetup: Record "Sales & Receivables Setup";
@@ -655,8 +654,6 @@ codeunit 50000 Tble83
         end;
     end;
     // Page50052 End
-
-
 
     /*  [EventSubscriber(ObjectType::Table, 36, 'OnAfterOnInsert', '', false, false)]
      local procedure OnAfterOnInsert(var SalesHeader: Record "Sales Header")

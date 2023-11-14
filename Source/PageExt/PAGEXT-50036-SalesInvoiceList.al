@@ -10,11 +10,7 @@ pageextension 50036 SalesInvoiceList extends "Sales Invoice List"
         // Add changes to page actions here
     }
 
-    var
-        myInt: Integer;
-
     trigger OnOpenPage()
     begin
-
     end;
 }

@@ -10,7 +10,4 @@ pageextension 50031 CustomerLookUp extends "Customer Lookup"
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

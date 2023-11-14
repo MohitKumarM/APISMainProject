@@ -19,7 +19,4 @@ pageextension 50040 RoutingExt extends Routing
     {
         // Add changes to page actions here
     }
-
-    var
-        myInt: Integer;
 }

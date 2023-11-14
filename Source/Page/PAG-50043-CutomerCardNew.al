@@ -1,4 +1,3 @@
-
 page 50043 "Customer Card New"
 {
     Caption = 'Customer Card';
@@ -6,8 +5,6 @@ page 50043 "Customer Card New"
     RefreshOnActivate = true;
     SourceTable = Customer;
     LinksAllowed = false;
-
-
     AboutTitle = 'About customer details';
     AboutText = 'With the **Customer Card** you manage information about a customer and specify the terms of business, such as payment terms, prices and discounts. From here you can also drill down on past and ongoing sales activity.';
 
@@ -34,51 +31,41 @@ page 50043 "Customer Card New"
                     Importance = Promoted;
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field(Address; Rec.Address)
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Address 2"; Rec."Address 2")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Address 3"; Rec."Address 3")
                 {
                     ApplicationArea = All;
-
                 }
-
                 field("Post Code"; Rec."Post Code")
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
-
                 }
                 field(City; Rec.City)
                 {
                     ApplicationArea = All;
-
                 }
                 field("Country/Region Code"; Rec."Country/Region Code")
                 {
                     ApplicationArea = All;
-
                 }
                 field("State Code"; Rec."State Code")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Balance (LCY)"; Rec."Balance (LCY)")
                 {
                     ApplicationArea = All;
-
 
                     trigger OnDrillDown()
                     var
@@ -96,89 +83,74 @@ page 50043 "Customer Card New"
                 {
                     ApplicationArea = All;
                     Editable = false;
-
                 }
                 field("Phone No.2"; Rec."Phone No.")
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
-
                 }
                 field("E-Mail"; Rec."E-Mail")
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
-
                 }
                 field("Home Page"; Rec."Home Page")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Customer Posting Group"; Rec."Customer Posting Group")
                 {
                     Importance = Promoted;
                     ShowMandatory = true;
                     ApplicationArea = All;
-
                 }
                 field("Customer Price Group"; Rec."Customer Price Group")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Application Method"; Rec."Application Method")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Payment Terms Code"; Rec."Payment Terms Code")
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Currency Code"; Rec."Currency Code")
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("GST Registration No."; Rec."GST Registration No.")
                 {
                     ApplicationArea = All;
-
                 }
                 field("GST Customer Type"; Rec."GST Customer Type")
                 {
                     ApplicationArea = All;
-
                 }
                 field("P.A.N. No."; Rec."P.A.N. No.")
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
-
                 }
                 field("P.A.N. Status"; Rec."P.A.N. Status")
                 {
                     ApplicationArea = All;
-
                 }
                 field("P.A.N. Reference No."; Rec."P.A.N. Reference No.")
                 {
                     Caption = 'P.A.N. Reference No.';
                     ApplicationArea = All;
-
                 }
                 field("Skip TCS Calc."; Rec."Skip TCS")
                 {
@@ -188,43 +160,36 @@ page 50043 "Customer Card New"
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Authorized person"; Rec."Authorized person")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Print Name"; Rec."Print Name")
                 {
                     ShowMandatory = true;
                     ApplicationArea = all;
-
                 }
                 field("RSM Name"; Rec."RSM Name")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Security Cheque No"; Rec."Security Cheque No")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("MSME No."; Rec."MSME No.")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("FASSAI No."; Rec."FASSAI No.")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;
-
                 }
                 field("Assessee Code"; Rec."Assessee Code")
                 {
@@ -242,14 +207,11 @@ page 50043 "Customer Card New"
                 {
                     ApplicationArea = all;
                     Visible = false;
-
                 }
             }
-
         }
         area(factboxes)
         {
-
             part("Attached Documents"; "Document Attachment Factbox")
             {
                 ApplicationArea = All;
@@ -258,8 +220,6 @@ page 50043 "Customer Card New"
                               "No." = FIELD("No.");
                 Visible = false;
             }
-
-
 
             part(SalesHistSelltoFactBox; "Sales Hist. Sell-to FactBox")
             {
@@ -280,7 +240,6 @@ page 50043 "Customer Card New"
                               "Date Filter" = FIELD("Date Filter"),
                               "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
                               "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
-
             }
             part(CustomerStatisticsFactBox; "Customer Statistics FactBox")
             {
@@ -348,14 +307,13 @@ page 50043 "Customer Card New"
         {
             group("ImportCustomer")
             {
-
                 action("Import Customer")
                 {
                     ApplicationArea = All;
                     Image = Import;
                     trigger OnAction()
                     var
-                        ImportCustomer: XmlPort 50000;
+                        ImportCustomer: XmlPort "Import Customer";
                     begin
                         ImportCustomer.Run;
                     end;
@@ -363,8 +321,6 @@ page 50043 "Customer Card New"
             }
             group("&Customer")
             {
-
-
                 Caption = '&Customer';
                 Image = Customer;
                 action(Dimensions)
@@ -544,7 +500,6 @@ page 50043 "Customer Card New"
                 }
             }
 
-
             group(History)
             {
                 Visible = false;
@@ -553,7 +508,6 @@ page 50043 "Customer Card New"
                 action("Ledger E&ntries")
                 {
                     Visible = false;
-
                     ApplicationArea = Basic, Suite;
                     Caption = 'Ledger E&ntries';
                     Image = CustomerLedger;
@@ -672,7 +626,6 @@ page 50043 "Customer Card New"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Sales Price Lists';
                     Image = Price;
-
                     ToolTip = 'View or set up sales price lists for products that you sell to the customer. A product price is automatically granted on invoice lines when the specified criteria are met, such as customer, quantity, or ending date.';
 
                     trigger OnAction()
@@ -1325,7 +1278,6 @@ page 50043 "Customer Card New"
                     Visible = false;
                     Caption = 'Power Automate';
 
-
 #if not CLEAN22
                     action(CreateFlow)
                     {
@@ -1608,7 +1560,6 @@ page 50043 "Customer Card New"
                         Database::Customer, Customer.FieldName("No."), true);
                 end;
             }
-
         }
         area(Promoted)
         {
@@ -1632,7 +1583,6 @@ page 50043 "Customer Card New"
             }
             group(Category_Category5)
             {
-
                 Caption = 'Approve', Comment = 'Generated from the PromotedActionCategories property index 4.';
 
                 actionref(Approve_Promoted; Approve)
@@ -1650,7 +1600,6 @@ page 50043 "Customer Card New"
             }
             group(Category_Category6)
             {
-
                 Caption = 'Request Approval', Comment = 'Generated from the PromotedActionCategories property index 5.';
 
                 actionref(SendApprovalRequest_Promoted; SendApprovalRequest)
@@ -1658,7 +1607,6 @@ page 50043 "Customer Card New"
                 }
                 actionref(CancelApproavlRequest_Promoted; CancelApprovalRequest)
                 {
-
                 }
                 actionref(ApprovalEntries_Promoted; ApprovalEntries)
                 {
@@ -1707,7 +1655,6 @@ page 50043 "Customer Card New"
 
 #if not CLEAN21
 #endif
-
             }
             group(Category_Category9)
             {
@@ -1726,15 +1673,12 @@ page 50043 "Customer Card New"
                 actionref(Attachments_Promoted; Attachments)
                 {
                 }
-
                 actionref("Co&mments_Promoted"; "Co&mments")
                 {
                 }
-
                 separator(Navigate_Separator)
                 {
                 }
-
                 actionref(CustomerReportSelections_Promoted; CustomerReportSelections)
                 {
                 }
@@ -1807,22 +1751,17 @@ page 50043 "Customer Card New"
                 actionref("Report Customer Detailed Aging_Promoted"; "Report Customer Detailed Aging")
                 {
                 }
-
                 actionref("S&ales_Promoted"; "S&ales")
                 {
                 }
             }
-
         }
     }
 
     trigger OnModifyRecord(): Boolean
-    var
-        myInt: Integer;
     begin
         Rec.Blocked := rec.Blocked::All;
     end;
-
 
     trigger OnAfterGetCurrRecord()
     begin
@@ -1830,7 +1769,6 @@ page 50043 "Customer Card New"
             OnAfterGetCurrRecordFunc()
         else
             OnAfterGetCurrRecordFuncBackground();
-
     end;
 
     local procedure OnAfterGetCurrRecordFunc()
@@ -1862,7 +1800,6 @@ page 50043 "Customer Card New"
             OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
             if OpenApprovalEntriesExist then
                 OpenApprovalEntriesExistCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(rec.RecordId);
-
         end;
     end;
 
@@ -1910,7 +1847,6 @@ page 50043 "Customer Card New"
             OnOpenPageFunc()
         else
             OnOpenBackground();
-
     end;
 
     local procedure OnOpenPageFunc()
@@ -1927,7 +1863,6 @@ page 50043 "Customer Card New"
             if IntegrationTableMapping.Get('CUSTOMER') then
                 BlockedFilterApplied := IntegrationTableMapping.GetTableFilter().Contains('Field39=1(0)');
         ExtendedPriceEnabled := PriceCalculationMgt.IsExtendedPriceCalculationEnabled();
-
 
         SetNoFieldVisible();
 
@@ -1984,14 +1919,10 @@ page 50043 "Customer Card New"
         BalanceAsVendor := 0;
         BalanceAsVendorEnabled := false;
 
-
-
         CurrPage.EnqueueBackgroundTask(BackgroundTaskId, Codeunit::"Customer Card Calculations", Args);
 
         Session.LogMessage('0000D4Q', StrSubstNo(PageBckGrndTaskStartedTxt, Rec."No."), Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, 'Category', CustomerCardServiceCategoryTxt);
     end;
-
-
 
     var
         SalesReceivablesSetup: Record "Sales & Receivables Setup";
@@ -2051,7 +1982,6 @@ page 50043 "Customer Card New"
         BackgroundTaskId: Integer;
         BalanceAsVendorEnabled: Boolean;
 
-
         ContactEditable: Boolean;
         IsOfficeAddin: Boolean;
         NoPostedInvoices: Integer;
@@ -2079,7 +2009,6 @@ page 50043 "Customer Card New"
         if Rec."Country/Region Code" <> PrevCountryCode then
             IsCountyVisible := FormatAddress.UseCounty(Rec."Country/Region Code");
         PrevCountryCode := Rec."Country/Region Code";
-
     end;
 
     local procedure SetCreditLimitStyle()
@@ -2126,7 +2055,6 @@ page 50043 "Customer Card New"
         CustomerTemplMgt: Codeunit "Customer Templ. Mgt.";
     begin
 
-
         if not NewMode then
             exit;
         NewMode := false;
@@ -2158,7 +2086,6 @@ page 50043 "Customer Card New"
             end;
     end;
 
-
     var
         PowerAutomateTemplatesEnabled: Boolean;
         PowerAutomateTemplatesFeatureLbl: Label 'PowerAutomateTemplates', Locked = true;
@@ -2173,5 +2100,3 @@ page 50043 "Customer Card New"
                 PowerAutomateTemplatesEnabled := false;
     end;
 }
-
-

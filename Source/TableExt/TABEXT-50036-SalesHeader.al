@@ -2,7 +2,6 @@ tableextension 50036 SalesHeader extends "Sales Header"
 {
     fields
     {
-
     }
 
     keys
@@ -47,7 +46,4 @@ tableextension 50036 SalesHeader extends "Sales Header"
         NoOfSkipped := NoOfSelected - SalesHeader.Count;
         BatchProcessingMgt.BatchProcess(SalesHeader, Codeunit::"Sales Manual Reopen", "Error Handling Options"::"Show Error", NoOfSelected, NoOfSkipped);
     end;
-
-    var
-        myInt: Integer;
 }

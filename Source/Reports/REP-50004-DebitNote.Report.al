@@ -208,7 +208,6 @@ report 50004 "Debit Note-New"
 
     requestpage
     {
-
         layout
         {
         }
@@ -229,14 +228,14 @@ report 50004 "Debit Note-New"
     end;
 
     var
-        recLocation: Record 14;
+        recLocation: Record Location;
         txtLocation: array[10] of Text[255];
         rec_Vendor: Record Vendor;
         BuyerGST_NO: Code[25];
         Home_Page: Text[90];
         PAN_No: Code[25];
         txt_Vendor: array[10] of Text[255];
-        recCompInfo: Record 79;
+        recCompInfo: Record "Company Information";
         TotalAmount: Decimal;
         Sr_No: Integer;
         DetailedGSTLedgerEntry: Record "Detailed GST Ledger Entry";
@@ -252,7 +251,4 @@ report 50004 "Debit Note-New"
         Total_GSTAmount: Decimal;
         GrandTotalAmount: Decimal;
         GRAND_RoundOff_Total: Decimal;
-
-
 }
-

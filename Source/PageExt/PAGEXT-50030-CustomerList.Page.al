@@ -21,8 +21,6 @@ pageextension 50030 "Customer List" extends "Customer List"
         }
     }
 
-
-
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
         Error('Do Not Insert any Record for this Page You Can only View the Data');

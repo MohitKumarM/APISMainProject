@@ -90,7 +90,6 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         field(60000; "Temp Message Control"; Boolean)
         {
         }
-
         field(60006; "ByProduct Item Code"; Code[20])
         {
             TableRelation = Item;
@@ -139,6 +138,5 @@ tableextension 50011 ItemJournalLine extends "Item Journal Line"
         {
         }
         //Ending---
-
     }
 }

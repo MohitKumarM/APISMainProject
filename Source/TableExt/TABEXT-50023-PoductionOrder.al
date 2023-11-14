@@ -26,12 +26,23 @@ tableextension 50023 ProductionOrderExt extends "Production Order"
         {
             DataClassification = ToBeClassified;
         }
-
+        field(50006; "Batch No."; Code[20])
+        {
+        }
+        field(50007; "Customer Code"; Code[20])
+        {
+            TableRelation = Customer;
+        }
         Field(50008; "Production Type"; Option)
         {
             OptionMembers = ,"Bulk Without Filteration","Bulk With Filteration","Small Pack";
         }
-
+        field(50009; "Customer Name"; Text[100])
+        {
+            CalcFormula = Lookup(Customer.Name WHERE("No." = FIELD("Customer Code")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
         Field(50010; "Moisture"; Text[50])
         {
             DataClassification = ToBeClassified;
@@ -79,19 +90,6 @@ tableextension 50023 ProductionOrderExt extends "Production Order"
         Field(50106; "Assigned Lot Qty."; Decimal)
         {
             DataClassification = ToBeClassified;
-        }
-        field(50006; "Batch No."; Code[20])
-        {
-        }
-        field(50007; "Customer Code"; Code[20])
-        {
-            TableRelation = Customer;
-        }
-        field(50009; "Customer Name"; Text[100])
-        {
-            CalcFormula = Lookup(Customer.Name WHERE("No." = FIELD("Customer Code")));
-            Editable = false;
-            FieldClass = FlowField;
         }
     }
 }

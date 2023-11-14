@@ -484,7 +484,6 @@ page 50017 "Honey Purchase Order"
                 {
                     Caption = 'Calculate TDS';
 
-
                     trigger OnAction()
                     begin
                         // PurchLine.CalculateTDS(Rec);

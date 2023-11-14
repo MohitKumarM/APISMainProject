@@ -63,7 +63,6 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
     {
         addafter("&Print")
         {
-
             action("Submit for QC")
             {
                 Caption = 'Submit for QC';
@@ -89,7 +88,6 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
                     CODEUNIT.RUN(CODEUNIT::"Item Jnl.-Submit Approval", Rec);
                     CurrentJnlBatchName := Rec.GETRANGEMAX("Journal Batch Name");
                     CurrPage.UPDATE(FALSE);
-
                 END;
             }
             action("De-Crystlizer Details")
@@ -163,7 +161,6 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
                     CLEAR(pgVacuumCirculation);
                     pgVacuumCirculation.SETTABLEVIEW(recBatchProcess);
                     pgVacuumCirculation.RUN;
-
                 END;
             }
         }
@@ -183,8 +180,6 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
         recBatchProcess: Record "Batch Process Header";
         pgBatchProcess: Page "De-Crystallizer Card";
         pgVacuumCirculation: Page "Vacuum Circulation Card";
-        recReservationEntry: Record "Reservation Entry";
-        recBatchProcessLine: Record "Batch Process Line";
     BEGIN
         recMachineCenter.GET(Rec."No.");
         IF recMachineCenter."QC Mandatory" THEN BEGIN
@@ -312,7 +307,6 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
         ItemLedgerEntry.SETRANGE("Document No.", ProductionOrderNo);
 
         EXIT(ItemLedgerEntry.FINDSET);
-
     end;
 
     procedure FindReservationsReverseOutput(var ReservationEntry: Record "Reservation Entry"; ItemJnlLine: Record "Item Journal Line"): Boolean
@@ -336,7 +330,6 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
         ReservationEntry.SETRANGE("Appl.-to Item Entry", 0);
 
         EXIT(ReservationEntry.FINDSET);
-
     end;
 
     procedure TrySetApplyToEntries()
@@ -356,7 +349,6 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
                             ReservationEntry.MODIFY(TRUE);
                         END;
                     UNTIL ReservationEntry.NEXT = 0;
-
             UNTIL ItemJournalLine2.NEXT = 0;
     end;
 
@@ -399,18 +391,11 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
     END;
 
     var
-        ItemJnlMgt: Codeunit "ItemJnlManagement";
-        ReportPrint: Codeunit "Test Report-Print";
-        ProdOrderDescription: Text[50];
-        OperationName: Text[50];
         CurrentJnlBatchName: Code[10];
-        ShortcutDimCode: Code[20];
-        OpenedFromBatch: Boolean;
         ProductionOrder: Record "Production Order";
         recItemJournalLines: Record "Item Journal Line";
         recMachineCenter: Record "Machine Center";
         recBatchProcess: Record "Batch Process Header";
         pgBatchProcess: Page "De-Crystallizer Card";
         pgVacuumCirculation: Page "Vacuum Circulation Card";
-
 }

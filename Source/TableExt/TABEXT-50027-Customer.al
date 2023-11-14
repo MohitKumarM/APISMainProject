@@ -61,14 +61,12 @@ tableextension 50027 Customer extends Customer
         }
         field(80006; "Total Group Wise Amount"; Decimal)
         {
-
         }
     }
     keys
     {
         key(Key25; "Parent Group", "Child Group")
         {
-
         }
     }
 
@@ -82,6 +80,4 @@ tableextension 50027 Customer extends Customer
     begin
         Rec.Blocked := Rec.Blocked::All;
     end;
-
-
 }

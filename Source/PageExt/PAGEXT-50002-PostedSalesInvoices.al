@@ -34,6 +34,5 @@ pageextension 50002 PostedSalesInvoices extends "Posted Sales Invoices"
 
     trigger OnOpenPage()
     begin
-
     end;
 }

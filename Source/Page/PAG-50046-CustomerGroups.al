@@ -20,8 +20,6 @@ page 50046 "Customer Groups"
                     ApplicationArea = All;
                     Style = Strong;
                     HideValue = IndentationHideValue;
-
-
                 }
                 field("No."; No)
                 {
@@ -45,10 +43,8 @@ page 50046 "Customer Groups"
         }
         area(Factboxes)
         {
-
         }
     }
-
 
     var
         ParentGroup: Code[20];
@@ -64,8 +60,6 @@ page 50046 "Customer Groups"
         L_CustomerGrpMaster: Record "Customer Group Master";
 
     trigger OnAfterGetRecord()
-    var
-        myInt: Integer;
     begin
         ParentGroup := rec."Parent Group";
         Indenation := rec.Indentation;
@@ -79,7 +73,6 @@ page 50046 "Customer Groups"
             IndentationHideValue := true;
             StyleExperssion := false;
         end;
-
     end;
 
     trigger OnOpenPage()
@@ -142,7 +135,6 @@ page 50046 "Customer Groups"
 
     trigger OnClosePage()
     var
-
     begin
         L_CustomerGrpMaster.Reset();
         L_CustomerGrpMaster.DeleteAll();

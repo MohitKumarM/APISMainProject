@@ -1,6 +1,5 @@
 page 50053 "Production Planning"
 {
-
     DeleteAllowed = false;
     InsertAllowed = false;
     LinksAllowed = false;
@@ -8,7 +7,6 @@ page 50053 "Production Planning"
     SourceTable = "Item Budget Entry";
     SourceTableView = SORTING("Analysis Area", "Budget Name", "Item No.", "Source Type", "Source No.", Date, "Location Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Budget Dimension 1 Code", "Budget Dimension 2 Code", "Budget Dimension 3 Code")
                       ORDER(Ascending) WHERE("Analysis Area" = FILTER(Sales), "Budget Name" = FILTER(''));
-
     ApplicationArea = ALL;
     UsageCategory = Lists;
     layout
@@ -148,7 +146,6 @@ page 50053 "Production Planning"
     {
         area(processing)
         {
-
             action("Create Prod. Order")
             {
                 Caption = 'Create Prod. Order';
@@ -231,7 +228,6 @@ page 50053 "Production Planning"
 
                             REPORT.RUNMODAL(Report::"Refresh Production Order", FALSE, TRUE, recProdOrderToRefresh);
                             COMMIT;
-
                         UNTIL recProductionOrder.NEXT = 0;
                     decQtyToProduce := 0;
                     cdLocationCode := '';
@@ -241,7 +237,6 @@ page 50053 "Production Planning"
                     cdBulkItemNo := '';
 
                     MESSAGE('Production order %1 created.', cdProdOrderCode);
-
                 end;
             }
 
@@ -263,9 +258,6 @@ page 50053 "Production Planning"
     end;
 
     var
-        cuProdPlanning: Codeunit "Production Planning";
-        dtFromDate: Date;
-        recPlanningLines: Record "Item Budget Entry";
         recProductionOrder: Record "Production Order";
         recProdOrderToRefresh: Record "Production Order";
         recManufacturingSetup: Record "Manufacturing Setup";
@@ -288,4 +280,3 @@ page 50053 "Production Planning"
         txtHMF: Text[30];
         dtPlanDate: Date;
 }
-

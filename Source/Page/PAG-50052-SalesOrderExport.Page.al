@@ -5,7 +5,6 @@ page 50052 "Sales Order Export"
     RefreshOnActivate = true;
     SourceTable = "Sales Header";
     SourceTableView = WHERE("Document Type" = FILTER(Order), "GST Customer Type" = filter(Export));
-
     AboutTitle = 'About sales order details';
     AboutText = 'Choose the order details and fill in order lines with quantities of what you are selling. Post the order when you are ready to ship or invoice. This creates posted sales shipments and posted sales invoices.';
 
@@ -43,7 +42,6 @@ page 50052 "Sales Order Export"
                         if Rec."GST Customer Type" <> Rec."GST Customer Type"::Export then
                             Error('You Cannot Select the Customer Other then Export.');
                         CurrPage.Update();
-
                     end;
                 }
                 field("Sell-to Customer Name"; Rec."Sell-to Customer Name")
@@ -52,7 +50,6 @@ page 50052 "Sales Order Export"
                     Caption = 'Customer Name';
                     ShowMandatory = true;
                     ToolTip = 'Specifies the name of the customer who will receive the products and be billed by default.';
-
                     AboutTitle = 'Who are you selling to?';
                     AboutText = 'You can choose existing customers, or add new customers when you create orders. Orders can automatically choose special prices and discounts that you have set for each customer.';
 
@@ -253,7 +250,6 @@ page 50052 "Sales Order Export"
                     ApplicationArea = Basic, Suite;
                     Importance = Promoted;
                     ToolTip = 'Specifies when the related sales invoice must be paid.';
-
                     AboutTitle = 'When is payment due?';
                     AboutText = 'When you post an order, the invoice gets it''s due date. You can set default due dates for orders by assigning payment terms to customers.';
                 }
@@ -959,7 +955,6 @@ page 50052 "Sales Order Export"
                 }
             }
 
-
             group("Tax Info")
             {
                 Caption = 'Tax Information';
@@ -987,7 +982,6 @@ page 50052 "Sales Order Export"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the merchant ID provided to customers by their payment processor.';
                 }
-
                 field("Reference Invoice No."; Rec."Reference Invoice No.")
                 {
                     ApplicationArea = All;
@@ -1098,8 +1092,6 @@ page 50052 "Sales Order Export"
                     ApplicationArea = All;
                     ToolTip = 'Selected to allow calculating TDS for the customer.';
                 }
-
-
             }
 
             group(Control1900201301)
@@ -2112,7 +2104,6 @@ page 50052 "Sales Order Export"
                     Image = PostOrder;
                     ShortCutKey = 'F9';
                     ToolTip = 'Finalize the document or journal by posting the amounts and quantities to the related accounts in your company books.';
-
                     AboutTitle = 'Posting the order';
                     AboutText = 'Posting will ship or invoice the quantities on the order, or both. **Post** and **Send** can save the order as a file, print it, or attach it to an email, all in one go.';
 
@@ -2815,7 +2806,6 @@ page 50052 "Sales Order Export"
         VATDateEnabled: Boolean;
         ShipToOptions: Enum "Sales Ship-to Options";
         BillToOptions: Enum "Sales Bill-to Options";
-        ShipToOptions1: Option "Default (Sell-to Address)","Alternate Shipping Address","Custom Address";
 
     local procedure ActivateFields()
     begin
@@ -3010,7 +3000,6 @@ page 50052 "Sales Order Export"
     procedure UpdateShipToBillToGroupVisibility()
     begin
         CustomerMgt.CalculateShipToBillToOptions(ShipToOptions, BillToOptions, Rec);
-
     end;
 
     procedure SetPostingGroupEditable()
@@ -3134,4 +3123,3 @@ page 50052 "Sales Order Export"
     begin
     end;
 }
-

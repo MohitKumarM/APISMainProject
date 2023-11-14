@@ -1,6 +1,5 @@
 table 50010 "Pre Packing List"
 {
-
     fields
     {
         field(1; "Order No."; Code[20])
@@ -28,7 +27,6 @@ table 50010 "Pre Packing List"
         }
         field(6; "Batch No."; Code[20])
         {
-
             trigger OnLookup()
             begin
                 recItemLedger.RESET;
@@ -93,35 +91,27 @@ table 50010 "Pre Packing List"
         }
         field(23; "Packing Size"; Code[25])
         {
-
         }
         field(24; Packing; Code[25])
         {
-
         }
         field(25; "Quantity In Case Of Drum"; Decimal)
         {
-
         }
         field(26; "Per Pallet Weight"; Decimal)
         {
-
         }
         field(27; "Total Pallet Weight Kg"; Decimal)
         {
-
         }
         field(28; "Net Weight In Kg"; Decimal)
         {
-
         }
         field(29; "Tare Weight"; Decimal)
         {
-
         }
         field(30; "Gross Weight In Kg"; Decimal)
         {
-
         }
     }
 
@@ -150,7 +140,6 @@ table 50010 "Pre Packing List"
     end;
 
     var
-        recPackingList: Record 50010;
-        recItemLedger: Record 32;
+        recPackingList: Record "Pre Packing List";
+        recItemLedger: Record "Item Ledger Entry";
 }
-

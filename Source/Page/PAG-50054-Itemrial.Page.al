@@ -81,7 +81,6 @@ page 50054 "Item Trial"
                                 UpdateValues;
                             end;
                         }
-
                     }
                 }
             }
@@ -153,8 +152,6 @@ page 50054 "Item Trial"
         }
     }
 
-
-
     actions
     {
         area(processing)
@@ -199,6 +196,4 @@ page 50054 "Item Trial"
         ELSE
             blnMaterialReq := FALSE;
     end;
-
 }
-

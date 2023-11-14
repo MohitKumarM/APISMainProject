@@ -10,7 +10,6 @@ page 50050 "Sales Invoice Export List"
     SourceTable = "Sales Header";
     SourceTableView = WHERE("Document Type" = CONST(Invoice));
     UsageCategory = Lists;
-
     AboutTitle = 'About sales invoices';
     AboutText = 'Sales invoices appear in this list until they are finalized and posted. After an invoice is posted, find it again in the [Posted Sales Invoices](?page=143 "Open the Posted Sales Invoices page") list.';
 
@@ -854,4 +853,3 @@ page 50050 "Sales Invoice Export List"
     begin
     end;
 }
-

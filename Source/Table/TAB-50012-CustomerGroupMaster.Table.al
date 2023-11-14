@@ -11,7 +11,7 @@ table 50012 "Customer Group Master"
         {
             DataClassification = ToBeClassified;
         }
-        field(3; "Name"; Code[50])
+        field(3; "Name"; text[50])
         {
             DataClassification = ToBeClassified;
         }
@@ -46,27 +46,19 @@ table 50012 "Customer Group Master"
         // Add changes to field groups here
     }
 
-    var
-        myInt: Integer;
-
     trigger OnInsert()
     begin
-
     end;
 
     trigger OnModify()
     begin
-
     end;
 
     trigger OnDelete()
     begin
-
     end;
 
     trigger OnRename()
     begin
-
     end;
-
 }

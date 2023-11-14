@@ -11,7 +11,6 @@ page 50051 "Posted Sales Invoices Export"
     SourceTableView = SORTING("Posting Date")
                       ORDER(Descending) where("GST Customer Type" = const(Export));
     UsageCategory = History;
-
     AboutTitle = 'About posted sales invoices';
     AboutText = 'When sales invoices are posted, they appear here where you can follow the remaining amounts to be paid by your customers.';
 
@@ -825,4 +824,3 @@ page 50051 "Posted Sales Invoices Export"
     begin
     end;
 }
-

@@ -1,9 +1,7 @@
 pageextension 50035 SalesOrderList extends "Sales Order List"
 {
-
     layout
     {
-
     }
 
     actions
@@ -13,11 +11,9 @@ pageextension 50035 SalesOrderList extends "Sales Order List"
 
     var
 
-
     trigger OnOpenPage()
     var
 
     begin
-
     end;
 }

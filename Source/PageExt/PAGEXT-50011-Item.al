@@ -16,6 +16,10 @@ pageextension 50011 ItemN1 extends "Item Card"
             {
                 ApplicationArea = all;
             }
+            field("Item Type"; Rec."Item Type")
+            {
+                ApplicationArea = all;
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-pageextension 50033 "Sales Order Subform" extends "Sales Order Subform"
+pageextension 50041 SalesCreditMemoSUbform extends "Sales Cr. Memo Subform"
 {
     layout
     {
@@ -59,39 +59,12 @@ pageextension 50033 "Sales Order Subform" extends "Sales Order Subform"
 
     actions
     {
-        addafter("&Line")
-        {
-            action("Packing List")
-            {
-                Image = PickLines;
-                ApplicationArea = All;
-                trigger OnAction()
-                var
-                    recItem: Record Item;
-                    recPackingList: Record "Pre Packing List";
-                    pgBulkPackingList: Page "Drum Packing List";
-                    pgSmallPackingList: Page "Bottling Packing List";
-                begin
-                    Rec.TESTFIELD(Type, Type::Item);
-                    Rec.TESTFIELD("No.");
-                    recItem.GET(Rec."No.");
-                    recPackingList.RESET;
-                    recPackingList.SETRANGE("Order No.", Rec."Document No.");
-                    recPackingList.SETRANGE("Order Line No.", Rec."Line No.");
-                    recPackingList.SETRANGE("Item Code", Rec."No.");
-                    if recItem."Item Type" = recItem."Item Type"::Bulk then begin
-                        CLEAR(pgBulkPackingList);
-                        pgBulkPackingList.SETTABLEVIEW(recPackingList);
-                        pgBulkPackingList.RUN;
-                    end else begin
-                        CLEAR(pgSmallPackingList);
-                        pgSmallPackingList.SETTABLEVIEW(recPackingList);
-                        pgSmallPackingList.RUN;
-                    end;
-                end;
-            }
-        }
+        // Add changes to page actions here
     }
+
+    var
+        myInt: Integer;
+
     local procedure UpdateTaxAmount()
     var
         CalculateTax: Codeunit "Calculate Tax";

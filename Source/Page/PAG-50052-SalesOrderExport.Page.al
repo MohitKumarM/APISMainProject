@@ -2998,8 +2998,11 @@ page 50052 "Sales Order Export"
     end;
 
     procedure UpdateShipToBillToGroupVisibility()
+    var
+    // ShipToOptions1: Option "Default (Sell-to Address)","Alternate Shipping Address","Custom Address";
     begin
         CustomerMgt.CalculateShipToBillToOptions(ShipToOptions, BillToOptions, Rec);
+
     end;
 
     procedure SetPostingGroupEditable()

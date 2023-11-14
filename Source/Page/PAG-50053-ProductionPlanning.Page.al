@@ -156,6 +156,7 @@ page 50053 "Production Planning"
 
                 trigger OnAction()
                 begin
+
                     recManufacturingSetup.GET;
                     recManufacturingSetup.TESTFIELD("Production Location");
                     recManufacturingSetup.TESTFIELD("Loose Honey Code");
@@ -172,11 +173,11 @@ page 50053 "Production Planning"
                     IF opProductionType = 0 THEN
                         ERROR('Select Production Type');
 
-                    // recProductionOrder.RESET;
-                    // recProductionOrder.SETRANGE(Status, recProductionOrder.Status::Released);
-                    // recProductionOrder.SETRANGE(Refreshed, FALSE);
-                    // IF recProductionOrder.FINDFIRST THEN
-                    //     ERROR('There are production orders to refresh, first refresh them manually.');
+                    recProductionOrder.RESET;
+                    recProductionOrder.SETRANGE(Status, recProductionOrder.Status::Released);
+                    recProductionOrder.SETRANGE(Refreshed, FALSE);
+                    IF recProductionOrder.FINDFIRST THEN
+                        ERROR('There are production orders to refresh, first refresh them manually.');
 
                     recProductionOrder.INIT;
                     recProductionOrder.VALIDATE(Status, recProductionOrder.Status::Released);
@@ -204,15 +205,10 @@ page 50053 "Production Planning"
                     recProductionOrder.Moisture := txtQualityValues;
                     recProductionOrder.Color := txtColor;
                     recProductionOrder.FG := txtFG;
+
                     recProductionOrder.HMF := txtHMF;
                     recProductionOrder.MODIFY(TRUE);
                     COMMIT;
-
-                    recReservationEntry.RESET;
-                    IF recReservationEntry.FINDLAST THEN
-                        intEntryNo := recReservationEntry."Entry No."
-                    ELSE
-                        intEntryNo := 0;
 
                     recProductionOrder.RESET;
                     recProductionOrder.SETRANGE(Status, recProductionOrder.Status::Released);
@@ -229,14 +225,21 @@ page 50053 "Production Planning"
                             REPORT.RUNMODAL(Report::"Refresh Production Order", FALSE, TRUE, recProdOrderToRefresh);
                             COMMIT;
                         UNTIL recProductionOrder.NEXT = 0;
-                    decQtyToProduce := 0;
-                    cdLocationCode := '';
-                    dBatchNo := '';
-                    cdCustomerCode := '';
-                    opProductionType := 0;
-                    cdBulkItemNo := '';
 
                     MESSAGE('Production order %1 created.', cdProdOrderCode);
+                    Clear(decQtyToProduce);
+                    Clear(cdLocationCode);
+                    Clear(dtPlanDate);
+                    Clear(cdCustomerCode);
+                    Clear(txtCustomerName);
+                    Clear(dBatchNo);
+                    Clear(opProductionType);
+                    Clear(cdBulkItemNo);
+                    Clear(txtQualityValues);
+                    Clear(txtColor);
+                    Clear(txtFG);
+                    Clear(txtHMF);
+                    CurrPage.Update();
                 end;
             }
 

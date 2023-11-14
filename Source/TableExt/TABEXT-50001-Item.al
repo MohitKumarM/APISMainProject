@@ -16,9 +16,15 @@ tableextension 50001 ItemN1 extends Item
         field(50003; "Net Weight Per (Kg)"; Decimal)
         {
         }
+        field(50007; "Item Type"; Option)
+        {
+            OptionCaption = ' ,Bulk,Small';
+            OptionMembers = " ",Bulk,Small;
+        }
         field(50009; "Expiry Date Formula"; DateFormula)
         {
         }
+
         field(50015; "New Product Group Code"; Code[10])
         {
             Caption = 'Product Group Code';

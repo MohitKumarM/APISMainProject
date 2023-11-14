@@ -163,6 +163,20 @@ page 50054 "Item Trial"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
+                trigger OnAction()
+                var
+                begin
+
+                    IF dtFromDate <> 0D THEN BEGIN
+                        Rec.SETFILTER("Date Filter", '%1..%2', dtFromDate, dtToDate);
+                        Rec.SETFILTER("Opening Date Filter", '%1..%2', 0D, dtFromDate - 1);
+                    END;
+                    Rec.SETFILTER("Global Dimension 1 Filter", cdGlobal1Filter);
+                    Rec.SETFILTER("Global Dimension 2 Filter", cdGlobal2Filter);
+                    Rec.SETFILTER("Location Filter", cdLocationFilter);
+                    CurrPage.UPDATE;
+
+                end;
             }
         }
     }

@@ -34,14 +34,7 @@ codeunit 50001 "Item Jnl.-Submit Approval"
                 recItemJournalLinesInsert.SETRANGE("Item No.", '');
                 IF recItemJournalLinesInsert.FINDSET THEN
                     recItemJournalLinesInsert.DELETEALL;
-                // recItemJournalLinesInsert.RESET;
-                // recItemJournalLinesInsert.SETRANGE("Journal Template Name", cdTemplate);
-                // recItemJournalLinesInsert.SETRANGE("Journal Batch Name", cdBatch);
-                // IF recItemJournalLinesInsert.FINDLAST THEN
-                //     intLineNo := recItemJournalLinesInsert."Line No."
-                // ELSE
-                //     intLineNo := 0;
-                // GetlastNo(cdTemplate, cdBatch) += 10000;
+
                 REPEAT
                     TempItemjournalLine.Init();
                     TempItemjournalLine.TransferFields(recItemJournalLines);
@@ -49,13 +42,17 @@ codeunit 50001 "Item Jnl.-Submit Approval"
                     recItemJournalLines.Delete();
                 UNTIL recItemJournalLines.NEXT = 0;
 
+
+                Clear(intLineNo);
+                intLineNo := GetlastNo(cdTemplate, cdBatch);
                 if TempItemjournalLine.FindFirst() then begin
                     repeat
                         recItemJournalLinesInsert.INIT;
                         recItemJournalLinesInsert.TRANSFERFIELDS(TempItemjournalLine);
                         recItemJournalLinesInsert."Journal Template Name" := cdTemplate;
                         recItemJournalLinesInsert."Journal Batch Name" := cdBatch;
-                        recItemJournalLinesInsert."Line No." := GetlastNo(cdTemplate, cdBatch);
+                        intLineNo += 10000;
+                        recItemJournalLinesInsert."Line No." := intLineNo;
                         recItemJournalLinesInsert."Source Template Code" := TempItemjournalLine."Journal Template Name";
                         recItemJournalLinesInsert."Source Batch Name" := TempItemjournalLine."Journal Batch Name";
                         recItemJournalLinesInsert.Insert();
@@ -69,6 +66,7 @@ codeunit 50001 "Item Jnl.-Submit Approval"
     end;
 
     var
+        intLineNo: Integer;
         Text000: Label 'cannot be filtered when posting recurring journals';
         Text001: Label 'Do you want to submit the journal lines?';
         Text003: Label 'The journal lines were successfully submitted.';
@@ -132,8 +130,6 @@ codeunit 50001 "Item Jnl.-Submit Approval"
         ItemJournalLine1.SetRange("Journal Template Name", Template);
         ItemJournalLine1.SetRange("Journal Batch Name", Batch);
         if ItemJournalLine1.FindLast() then
-            exit(ItemJournalLine1."Line No." + 10000)
-        else
-            exit(10000)
+            exit(ItemJournalLine1."Line No.");
     end;
 }

@@ -24,7 +24,7 @@ pageextension 50003 SalesInvoiceSubform extends "Sales Invoice Subform"
                             UpdateTaxAmount();
                         end else begin
                             UpdateTaxAmount();
-                            Message('Not eligible for TCS');
+                            Message('SKIP TCS feature is Enabled');
                         end;
                 end;
 
@@ -50,7 +50,7 @@ pageextension 50003 SalesInvoiceSubform extends "Sales Invoice Subform"
                             Clear(rec."TCS Nature of Collection");
                             Clear(rec."TCS Nature of Collection 1");
                             UpdateTaxAmount();
-                            Message('Not eligible for TCS');
+                            Message('SKIP TCS feature is Enabled');
                         end;
                 end;
             }

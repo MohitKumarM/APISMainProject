@@ -38,5 +38,9 @@ tableextension 50007 InventorySetup extends "Inventory Setup"
         {
             TableRelation = "Item Journal Batch".Name WHERE("Journal Template Name" = FIELD("Output Posting Template"));
         }
+        field(50006; "Receive Nos."; Code[10])
+        {
+            TableRelation = "No. Series";
+        }
     }
 }

@@ -61,7 +61,7 @@ page 50043 "Customer Card New"
                 field("State Code"; Rec."State Code")
                 {
                     ApplicationArea = All;
-                    ShowMandatory = true;
+                    ShowMandatory = MandField;
                 }
                 field("Balance (LCY)"; Rec."Balance (LCY)")
                 {
@@ -128,7 +128,6 @@ page 50043 "Customer Card New"
                 {
                     Importance = Promoted;
                     ApplicationArea = All;
-                    ShowMandatory = true;
                 }
                 field("GST Registration No."; Rec."GST Registration No.")
                 {
@@ -1760,7 +1759,21 @@ page 50043 "Customer Card New"
 
     trigger OnModifyRecord(): Boolean
     begin
+        if rec."Country/Region Code" = 'IN' then
+            MandField := true
+        else
+            MandField := false;
         Rec.Blocked := rec.Blocked::All;
+    end;
+
+    trigger OnAfterGetRecord()
+    var
+        myInt: Integer;
+    begin
+        if rec."Country/Region Code" = 'IN' then
+            MandField := true
+        else
+            MandField := false;
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -1769,6 +1782,11 @@ page 50043 "Customer Card New"
             OnAfterGetCurrRecordFunc()
         else
             OnAfterGetCurrRecordFuncBackground();
+        if rec."Country/Region Code" = 'IN' then
+            MandField := true
+        else
+            MandField := false;
+
     end;
 
     local procedure OnAfterGetCurrRecordFunc()
@@ -1988,6 +2006,7 @@ page 50043 "Customer Card New"
         NoPostedCrMemos: Integer;
         NoOutstandingInvoices: Integer;
         NoOutstandingCrMemos: Integer;
+        MandField: Boolean;
 
     [TryFunction]
     local procedure TryGetDictionaryValueFromKey(var DictionaryToLookIn: Dictionary of [Text, Text]; KeyToSearchFor: Text; var ReturnValue: Text)

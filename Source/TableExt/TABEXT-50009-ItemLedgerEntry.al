@@ -18,6 +18,7 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
         field(50003; "Qty. in Pack"; Decimal)
         {
         }
+
         field(50004; "Deal Line No."; Integer)
         {
             TableRelation = "Deal Dispatch Details"."Line No." WHERE("Sauda No." = FIELD("Deal No."),
@@ -60,6 +61,10 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
         {
             DataClassification = ToBeClassified;
         }
+        field(50024; "Barcode Generated"; Boolean)
+        {
+
+        }
         field(60000; "Approved Quantity"; Decimal)
         {
         }
@@ -87,5 +92,6 @@ tableextension 50009 ItemLedgerEntry extends "Item Ledger Entry"
         field(70005; FG; Text[10])
         {
         }
+
     }
 }

@@ -33,6 +33,13 @@ pageextension 50016 InventerySetup extends "Inventory Setup"
                 ApplicationArea = all;
             }
         }
+        addafter("Inventory Pick Nos.")
+        {
+            field("Receive Nos."; Rec."Receive Nos.")
+            {
+                ApplicationArea = all;
+            }
+        }
     }
 
     actions

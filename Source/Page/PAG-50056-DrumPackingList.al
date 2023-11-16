@@ -20,6 +20,7 @@ page 50056 "Drum Packing List"
                 field("Order Line No."; Rec."Order Line No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Item Code"; Rec."Item Code")
                 {
@@ -32,6 +33,7 @@ page 50056 "Drum Packing List"
                 field("Line No."; Rec."Line No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Container No."; Rec."Container No.")
                 {

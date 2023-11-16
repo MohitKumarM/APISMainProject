@@ -1141,7 +1141,7 @@ page 50052 "Sales Order Export"
             part(TaxInformation; "Tax Information Factbox")
             {
                 Provider = SalesLines;
-                SubPageLink = "Table ID Filter" = const(37), "Document Type Filter" = const(2), "Document No. Filter" = field("Document No."), "Line No. Filter" = field("Line No.");
+                SubPageLink = "Table ID Filter" = const(37), "Document Type Filter" = const(1), "Document No. Filter" = field("Document No."), "Line No. Filter" = field("Line No.");
                 ApplicationArea = Basic, Suite;
             }
 

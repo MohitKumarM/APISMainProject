@@ -34,10 +34,24 @@ page 50053 "Production Planning"
                 field("Plan Date"; dtPlanDate)
                 {
                 }
+                field("Production For"; ProductionFor)
+                {
+                    Caption = 'Production For';
+
+                    trigger OnValidate()
+                    var
+                    begin
+                        IF (ProductionFor = ProductionFor::Customer) then
+                            ProductionForEnable := true
+                        else
+                            ProductionForEnable := false;
+                    end;
+                }
                 field(cdCustomerCode; cdCustomerCode)
                 {
                     Caption = 'Select Customer';
                     TableRelation = Customer;
+                    Enabled = ProductionForEnable;
 
                     trigger OnValidate()
                     begin
@@ -156,6 +170,8 @@ page 50053 "Production Planning"
 
                 trigger OnAction()
                 begin
+                    IF (ProductionFor = ProductionFor::" ") then
+                        Error('Please Select a value for Production For Field on Page');
 
                     recManufacturingSetup.GET;
                     recManufacturingSetup.TESTFIELD("Production Location");
@@ -258,6 +274,10 @@ page 50053 "Production Planning"
     trigger OnOpenPage()
     begin
         dtPlanDate := TODAY;
+        IF (ProductionFor = ProductionFor::Customer) then
+            ProductionForEnable := true
+        else
+            ProductionForEnable := false;
     end;
 
     var
@@ -282,4 +302,6 @@ page 50053 "Production Planning"
         txtFG: Text[30];
         txtHMF: Text[30];
         dtPlanDate: Date;
+        ProductionFor: Option " ","In House",Customer;
+        ProductionForEnable: Boolean;
 }

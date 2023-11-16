@@ -92,4 +92,45 @@ tableextension 50023 ProductionOrderExt extends "Production Order"
             DataClassification = ToBeClassified;
         }
     }
+
+    procedure GenerateBarCode()
+    var
+        recBarCodeLines: Record "Bar Code Lines";
+        cdLastBarCodeId: Code[10];
+        recItemLedger: Record "Item Ledger Entry";
+    begin
+        recBarCodeLines.RESET;
+        recBarCodeLines.SETCURRENTKEY("Bar Code ID");
+        IF recBarCodeLines.FINDLAST THEN
+            cdLastBarCodeId := recBarCodeLines."Bar Code ID"
+        ELSE
+            cdLastBarCodeId := '0000000000';
+
+        recItemLedger.RESET;
+        recItemLedger.SETCURRENTKEY("Document No.", "Document Type", "Document Line No.");
+        recItemLedger.SETRANGE("Document No.", "No.");
+        recItemLedger.SETRANGE("Entry Type", recItemLedger."Entry Type"::Output);
+        recItemLedger.SETRANGE("Barcode Generated", FALSE);
+        IF recItemLedger.FINDSET THEN
+            REPEAT
+                recBarCodeLines.INIT;
+                recBarCodeLines."Receiving No." := recItemLedger."Document No.";
+                recBarCodeLines."Receiving Line No." := recItemLedger."Entry No.";
+                recBarCodeLines."Line No." := 0;
+                recBarCodeLines."Purchase Order No." := recItemLedger."Document No.";
+                recBarCodeLines."Purchase Order Line No." := recItemLedger."Document Line No.";
+                recBarCodeLines."Item No." := recItemLedger."Item No.";
+                recBarCodeLines."Lot No." := recItemLedger."Lot No.";
+                cdLastBarCodeId := INCSTR(cdLastBarCodeId);
+                recBarCodeLines."Bar Code ID" := cdLastBarCodeId;
+                recBarCodeLines.Quantity := recItemLedger.Quantity;
+                recBarCodeLines.INSERT;
+
+                recItemLedger."Barcode Generated" := TRUE;
+                recItemLedger.MODIFY;
+            UNTIL recItemLedger.NEXT = 0 ELSE
+            ERROR('Nothing to generate.');
+
+        MESSAGE('The Barcodes generated for the output entries.');
+    end;
 }

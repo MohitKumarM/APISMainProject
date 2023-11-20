@@ -46,7 +46,7 @@ page 50033 "Quality Activities New"
 
                 actions
                 {
-                    /* action("Production Planning1")
+                    action("Production Planning1")
                     {
                         Caption = 'Production Planning';
                         RunObject = Page "Production Planning";
@@ -60,17 +60,17 @@ page 50033 "Quality Activities New"
                     {
                         Caption = 'Select Honey Batch';
                         RunObject = Page "Prod. Orders Material Request";
-                    } */
+                    }
                     action("Output Journal1")
                     {
                         Caption = 'Output Journal';
                         RunObject = Page "Output Journal";
                     }
-                    /* action("Output Posting1")
+                    action("Output Posting1")
                     {
                         Caption = 'Output Posting';
                         RunObject = Page "Output Posting";
-                    } */
+                    }
                 }
             }
             cuegroup(Quality)
@@ -96,7 +96,7 @@ page 50033 "Quality Activities New"
                     LookupPageID = "Quality Checks";
                 }
             }
-            /* cuegroup(Production)
+            cuegroup(Production)
             {
                 field("Production Planning"; Rec."Production Planning")
                 {
@@ -132,7 +132,7 @@ page 50033 "Quality Activities New"
                     DrillDownPageID = "Material Req. List";
                     LookupPageID = "Material Req. List";
                 }
-            }*/
+            }
         }
     }
 

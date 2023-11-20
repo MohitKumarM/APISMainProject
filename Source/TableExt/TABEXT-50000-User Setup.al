@@ -24,6 +24,10 @@ tableextension 50000 UserSetup extends "User Setup"
                     ERROR('Posting rights can not be assigned to a limited user.');
             end;
         }
+        field(50006; "Default Store Location"; Code[20])
+        {
+            TableRelation = Location;
+        }
         field(50007; "Purchaser Profile"; Option)
         {
             OptionCaption = ' ,All,Honey,Packing,Other';
@@ -93,6 +97,10 @@ tableextension 50000 UserSetup extends "User Setup"
                         ERROR('Approval rights in multiple modules can not be assigned to a limited user.');
                 END;
             end;
+        }
+        field(50019; "Post ByProduct Entry"; Boolean)
+        {
+            DataClassification = ToBeClassified;
         }
         field(50023; "Allow Send Back Deal"; Boolean)
         {

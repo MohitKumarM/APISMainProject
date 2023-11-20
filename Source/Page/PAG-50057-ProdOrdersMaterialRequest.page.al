@@ -1,12 +1,14 @@
 page 50057 "Prod. Orders Material Request"
 {
-    Caption = 'Prod. Orders Material Request';
+    Caption = 'Select Honey Batch';
     CardPageID = "Released Production Order";
     Editable = false;
     LinksAllowed = false;
     PageType = List;
     SourceTable = "Production Order";
     SourceTableView = WHERE(Status = CONST(Released), Refreshed = FILTER(true), "Order Type" = FILTER(Production), "Requested Material Issue" = FILTER(false));
+    ApplicationArea = all;
+    UsageCategory = Lists;
 
     layout
     {
@@ -274,6 +276,8 @@ page 50057 "Prod. Orders Material Request"
                     Caption = 'Components';
                     Image = Components;
                     Promoted = true;
+                    PromotedCategory = New;
+                    PromotedIsBig = true;
 
                     trigger OnAction()
                     begin
@@ -289,7 +293,8 @@ page 50057 "Prod. Orders Material Request"
                     Caption = 'Send for Material Issue';
                     Image = SendTo;
                     Promoted = true;
-
+                    PromotedCategory = New;
+                    PromotedIsBig = true;
                     trigger OnAction()
                     begin
                         IF NOT CONFIRM('Submit the order for material issue?', FALSE) THEN
@@ -305,23 +310,11 @@ page 50057 "Prod. Orders Material Request"
 
                         recPurchaseSetup.GET;
                         recPurchaseSetup.TESTFIELD("Raw Honey Item");
-                        /*
-                        Rec.CALCFIELDS("Assigned Lot Qty.");
-                        Rec.Quantity := Rec."Assigned Lot Qty.";
-                        Rec.MODIFY;
-                        
-                        recProdOrderLine.RESET;
-                        recProdOrderLine.SETRANGE(Status, Rec.Status);
-                        recProdOrderLine.SETRANGE("Prod. Order No.", Rec."No.");
-                        recProdOrderLine.FINDFIRST;
-                        recProdOrderLine.VALIDATE(Quantity, Rec."Assigned Lot Qty.");
-                        recProdOrderLine.MODIFY;
-                        */
+
                         recProdOrderComponent.RESET;
                         recProdOrderComponent.SETRANGE(Status, Rec.Status);
                         recProdOrderComponent.SETRANGE("Prod. Order No.", Rec."No.");
                         recProdOrderComponent.SETFILTER("Remaining Quantity", '<>%1', 0);
-                        //recProdOrderComponent.SETRANGE("Item No.", recPurchaseSetup."Raw Honey Item");
                         IF NOT recProdOrderComponent.FINDFIRST THEN
                             ERROR('Nothing to issue.')
                         ELSE BEGIN

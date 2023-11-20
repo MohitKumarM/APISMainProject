@@ -1,4 +1,4 @@
-table 50019 "Bar Code Lines"
+table 50013 "Bar Code Lines"
 {
 
     fields

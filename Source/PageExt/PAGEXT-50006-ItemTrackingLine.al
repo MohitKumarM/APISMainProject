@@ -16,14 +16,25 @@ pageextension 50006 ItemTrackingLine extends "Item Tracking Lines"
 
                 if rec."Source Type" <> 37 then begin
                     PriceListLine.Reset();
-                    PriceListLine.SetCurrentKey("Ending Date");
                     PriceListLine.SetRange("Source Type", PriceListLine."Source Type"::"All Customers");
                     PriceListLine.SetRange("Asset Type", PriceListLine."Asset Type"::Item);
                     PriceListLine.SetRange("Product No.", Rec."Item No.");
                     PriceListLine.SetRange(Status, PriceListLine.Status::Active);
-                    if PriceListLine.FindLast() then begin
+                    PriceListLine.SetRange("Ending Date", 0D);
+                    if PriceListLine.FindFirst() then begin
                         Rec."MRP Price" := PriceListLine."MRP Price";
                         Rec.Modify();
+                    end else begin
+                        PriceListLine.Reset();
+                        PriceListLine.SetCurrentKey("Ending Date");
+                        PriceListLine.SetRange("Source Type", PriceListLine."Source Type"::"All Customers");
+                        PriceListLine.SetRange("Asset Type", PriceListLine."Asset Type"::Item);
+                        PriceListLine.SetRange("Product No.", Rec."Item No.");
+                        PriceListLine.SetRange(Status, PriceListLine.Status::Active);
+                        if PriceListLine.FindLast() then begin
+                            Rec."MRP Price" := PriceListLine."MRP Price";
+                            Rec.Modify();
+                        end;
                     end;
                 end;
             end;

@@ -155,6 +155,11 @@ page 50043 "Customer Card New"
                 {
                     ApplicationArea = All;
                 }
+                field("Customer Type"; Rec."Customer Type")
+                {
+                    ApplicationArea = all;
+                    ShowMandatory = true;
+                }
                 field("Quality Process"; Rec."Quality Process")
                 {
                     ApplicationArea = All;
@@ -1250,6 +1255,7 @@ page 50043 "Customer Card New"
                         Rec.TestField("FASSAI No.");
                         Rec.TestField("RSM Name");
                         Rec.TestField("GST Customer Type");
+
                         if ApprovalsMgmt.CheckCustomerApprovalsWorkflowEnabled(Rec) then
                             ApprovalsMgmt.OnSendCustomerForApproval(Rec);
                         SetWorkFlowEnabled();

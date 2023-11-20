@@ -114,7 +114,7 @@ table 50015 "Material Receive Line"
     begin
         InitTrackingSpecification(ReceiveLine, TrackingSpecification);
         // 15800 ItemTrackingForm.SetFormRunMode(0);
-        ItemTrackingForm.SetRunMode(0);
+        ItemTrackingForm.SetRunMode(RunMode1);
         // 15800 ItemTrackingForm.SetSource(TrackingSpecification, TODAY);
         ItemTrackingForm.SetSourceSpec(TrackingSpecification, today);
         ItemTrackingForm.SetInbound(TRUE);

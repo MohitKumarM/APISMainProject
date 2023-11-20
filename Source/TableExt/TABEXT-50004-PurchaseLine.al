@@ -189,6 +189,12 @@ tableextension 50004 PurchaseLine extends "Purchase Line"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(70004; "Item Tracking Quantity Other"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Sum("Reservation Entry"."Quantity (Base)" WHERE("Source Type" = FILTER(39), "Source Subtype" = FILTER(1), "Source ID" = FIELD("Document No."), "Source Ref. No." = FIELD("Line No.")));
+
+        }
     }
 
     var

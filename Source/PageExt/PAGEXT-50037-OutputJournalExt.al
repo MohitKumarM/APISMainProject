@@ -61,6 +61,11 @@ pageextension 50037 "Output Journal Ext." extends "Output Journal"
 
     actions
     {
+        modify("P&osting")
+        {
+            Visible = false;
+        }
+
         addafter("&Print")
         {
             action("Submit for QC")

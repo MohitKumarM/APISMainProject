@@ -510,8 +510,10 @@ codeunit 50000 Tble83
                             else begin
                                 TrackingSpecification.SetCurrentKey("Entry No.");
                                 if TrackingSpecification.FindFirst() then
-                                    if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
-                                        Error('MRP Price Should be Same As in First Line in Tracking Specification');
+                                    if TrackingSpecification."MRP Price" <> 0 then begin
+                                        if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
+                                            Error('MRP Price Should be Same As in First Line in Tracking Specification');
+                                    end;
                                 TrackingSpecification.SetRange("Lot No.");
                                 TrackingSpecification.TransferFields(TempTrackingSpecification);
                             end;
@@ -519,8 +521,10 @@ codeunit 50000 Tble83
                     end else begin
                         TrackingSpecification.SetCurrentKey("Entry No.");
                         if TrackingSpecification.FindFirst() then
-                            if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
-                                Error('MRP Price Should be Same As in First Line in Tracking Specification');
+                            if TrackingSpecification."MRP Price" <> 0 then begin
+                                if ItemLedgerEntry."MRP Price" <> TrackingSpecification."MRP Price" then
+                                    Error('MRP Price Should be Same As in First Line in Tracking Specification');
+                            end;
                         TrackingSpecification.SetRange("Lot No.");
                         TrackingSpecification.TransferFields(TempTrackingSpecification);
                         exit;

@@ -34,7 +34,7 @@ page 50032 "Quality Role Centre New"
                     action("Item View")
                     {
                         Image = Item;
-                        // RunObject = Page 16566;
+                        RunObject = Page "Item List";
                     }
                 }
                 group("Production Design")
@@ -43,7 +43,7 @@ page 50032 "Quality Role Centre New"
                     Image = Bank;
                     action("BOM List View")
                     {
-                        // RunObject = Page "Production BOM Lines View";
+                        RunObject = Page "Production BOM Lines View";
                     }
                     action("Quality Process")
                     {
@@ -64,6 +64,25 @@ page 50032 "Quality Role Centre New"
                 {
                     Caption = 'Production / Quality Reports';
                     Image = Ledger;
+
+                    action("Incoming Report")
+                    {
+                        Caption = 'Incoming Report';
+                        Image = Print;
+                        RunObject = Page "Incoming Material Report";
+                    }
+                    action("Plan Book Register")
+                    {
+                        Caption = 'Plan Book Register';
+                        Image = Print;
+                        //RunObject = Report "Plan Book Register";
+                    }
+                    action("Yield Report")
+                    {
+                        Caption = 'Yield Report';
+                        Image = Print;
+                        //RunObject = Report "Yield Reprt";
+                    }
 
                     action("PM Stock with QC Details")
                     {

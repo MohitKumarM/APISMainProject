@@ -62,6 +62,10 @@ tableextension 50027 Customer extends Customer
         field(80006; "Total Group Wise Amount"; Decimal)
         {
         }
+        field(50101; "Customer Type"; Enum "Customer Type")
+        {
+
+        }
     }
     keys
     {

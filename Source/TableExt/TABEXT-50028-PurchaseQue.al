@@ -2,6 +2,16 @@ tableextension 50028 PurhaseQue extends "Purchase Cue"
 {
     fields
     {
+        field(50023; "Material Issue"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Count("Material Requisition Header" WHERE(Status = FILTER(Release)));
+        }
+        field(50037; "Issue Material"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Count("Production Order" WHERE(Status = FILTER(Released), Refreshed = FILTER(True), "Requested Material Issue" = FILTER(true)));
+        }
         field(50024; "Pending Inward Quality"; Integer)
         {
             CalcFormula = Count("Item Ledger Entry" WHERE("Entry Type" = FILTER('Purchase'),

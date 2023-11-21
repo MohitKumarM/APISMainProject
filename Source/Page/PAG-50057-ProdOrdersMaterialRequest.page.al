@@ -74,7 +74,7 @@ page 50057 "Prod. Orders Material Request"
 
     actions
     {
-        area(navigation)
+        area(Creation)
         {
             group("Pro&d. Order")
             {
@@ -158,12 +158,15 @@ page 50057 "Prod. Orders Material Request"
                     ShortCutKey = 'F7';
                 }
             }
+
             action("De-Crystlizer Details")
             {
+                ApplicationArea = All;
                 Caption = 'De-Crystlizer Details';
                 Image = Production;
                 Promoted = true;
-                PromotedCategory = Process;
+                PromotedCategory = New;
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 begin
@@ -194,10 +197,12 @@ page 50057 "Prod. Orders Material Request"
             }
             action("Vacuum Circulation")
             {
+                ApplicationArea = All;
                 Caption = 'Vacuum Circulation';
                 Image = Production;
                 Promoted = true;
-                PromotedCategory = Process;
+                PromotedCategory = New;
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 begin
@@ -226,10 +231,12 @@ page 50057 "Prod. Orders Material Request"
             }
             action("Plan Weight Register")
             {
+                ApplicationArea = All;
                 Caption = 'Plan Weight Register';
                 Image = Production;
                 Promoted = true;
-                PromotedCategory = Process;
+                PromotedCategory = New;
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 begin
@@ -264,15 +271,18 @@ page 50057 "Prod. Orders Material Request"
                 Image = "Action";
                 action("Change &Status")
                 {
+                    ApplicationArea = Manufacturing;
                     Caption = 'Change &Status';
                     Ellipsis = true;
                     Image = ChangeStatus;
                     Promoted = true;
-                    PromotedCategory = Process;
+                    PromotedCategory = New;
+                    PromotedIsBig = true;
                     RunObject = Codeunit "Prod. Order Status Management";
                 }
                 action(Components)
                 {
+                    ApplicationArea = All;
                     Caption = 'Components';
                     Image = Components;
                     Promoted = true;
@@ -290,6 +300,7 @@ page 50057 "Prod. Orders Material Request"
                 }
                 action("Send for Material Issue")
                 {
+                    ApplicationArea = All;
                     Caption = 'Send for Material Issue';
                     Image = SendTo;
                     Promoted = true;

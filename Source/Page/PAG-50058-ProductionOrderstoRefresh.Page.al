@@ -1,11 +1,12 @@
 page 50058 "Production Orders to Refresh"
 {
-    Caption = 'Released Production Orders';
+    Caption = 'Production Orders to Refresh';
     Editable = false;
-    LinksAllowed = false;
     PageType = List;
     SourceTable = "Production Order";
-    SourceTableView = WHERE(Status = CONST(Released), Refreshed = FILTER(false));
+    SourceTableView = WHERE(Status = filter(Released), Refreshed = FILTER(false));
+    ApplicationArea = Manufacturing;
+    UsageCategory = Lists;
 
     layout
     {

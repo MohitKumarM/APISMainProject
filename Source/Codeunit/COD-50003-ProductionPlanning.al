@@ -383,4 +383,10 @@ codeunit 50003 "Production Planning"
                 recPlanningLines.MODIFY;
             UNTIL recPlanningLines.NEXT = 0;
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, codeunit::"System Action Triggers", 'GetNotificationStatus', '', true, false)]
+    procedure GetNotificationStatus(NotificationId: Guid; var IsEnabled: Boolean)
+    begin
+        WorkDate(Today);
+    end;
 }

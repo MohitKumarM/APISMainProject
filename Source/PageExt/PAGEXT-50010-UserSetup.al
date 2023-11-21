@@ -4,6 +4,10 @@ pageextension 50010 UsersSetup extends "User Setup"
     {
         addafter(PhoneNo)
         {
+            field("Default Store Location"; Rec."Default Store Location")
+            {
+                ApplicationArea = all;
+            }
             field("Allow Customer Approval"; Rec."Allow Customer Approval")
             {
                 ApplicationArea = All;
